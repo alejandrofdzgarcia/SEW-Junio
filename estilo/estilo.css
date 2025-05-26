@@ -1,13 +1,13 @@
 /* Estilo general para el sitio web */
 
-/* (0, 0, 1) */
+/* Reset y estilos básicos */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
     color: #333;
+    background-color: #f4f4f4;
 }
 
 /* (0, 0, 1) */
@@ -25,37 +25,14 @@ header h1 a {
 }
 
 /* (0, 0, 1) */
-nav {
-    background: #444;
-    padding: 1rem 0;
-    text-align: center;
-}
-
-/* (0, 0, 2) */
-nav a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 1rem;
-    font-weight: bold;
-}
-
-/* (0, 1, 2) */
-nav a:hover {
-    text-decoration: underline;
-}
-
-/* (0, 1, 2) */
-nav a.active {
-    color: #ff0;
-}
-
-/* (0, 0, 1) */
 main {
     padding: 2rem;
     background: #fff;
     margin: 2rem auto;
     max-width: 50rem;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    border: 2px solid #ddd;
+    border-radius: 8px;
 }
 
 /* (0, 0, 1) */
@@ -72,24 +49,27 @@ table {
 
 /* (0, 0, 1) */
 table, th, td {
-    border: 0.1rem solid #ddd;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
 }
 
 /* (0, 0, 1) */
-th, td {
-    padding: 1rem;
-    text-align: left;
+td, th {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
 }
 
 /* (0, 0, 1) */
 th {
     background: #f4f4f4;
+    font-weight: bold;
 }
 
 /* (0, 0, 1) */
 ul, ol {
-    margin: 1rem 0;
-    padding-left: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 /* (0, 0, 1) */
@@ -108,3 +88,13 @@ footer {
     color: #fff;
     margin-top: 2rem;
 }
+
+a {
+    color: #0066cc;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #003366;
+}
+

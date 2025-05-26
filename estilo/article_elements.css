@@ -1,0 +1,109 @@
+/* Estilos para los artículos de pronóstico del tiempo */
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    max-width: 75rem;
+    margin: 0 auto;
+}
+
+article {
+    background-color: #e4e2e2;
+    border-radius: 0.625rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    padding: 1.25rem;
+    width: calc(20% - 1.25rem);
+    min-width: 12.5rem;
+    flex-grow: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+article:hover {
+    transform: translateY(-0.3125rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+article h3 {
+    color: #2c3e50;
+    text-align: center;
+    font-size: 1.3em;
+    margin-top: 0;
+    text-transform: capitalize;
+    border-bottom: 0.125rem solid #3498db;
+    padding-bottom: 0.625rem;
+    margin-bottom: 0.9375rem;
+}
+
+.icono-tiempo {
+    text-align: center;
+    margin-bottom: 0.625rem;
+}
+
+.icono-tiempo img {
+    width: 5rem;
+    height: 5rem;
+}
+
+.descripcion {
+    text-align: center;
+    font-style: italic;
+    color: #7f8c8d;
+    margin-bottom: 0.9375rem;
+    text-transform: capitalize;
+}
+
+.datos-tiempo {
+    background-color: #ecf0f1;
+    padding: 0.625rem;
+    border-radius: 0.5rem;
+}
+
+.temperatura {
+    margin-bottom: 0.625rem;
+}
+
+.temperatura p {
+    margin: 0.3125rem 0;
+}
+
+.temp-max {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.temp-min {
+    color: #3498db;
+    font-weight: bold;
+}
+
+.humedad, .lluvia {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 0.0625rem solid #bdc3c7;
+}
+
+.humedad span, .lluvia span {
+    font-weight: bold;
+    color: #2980b9;
+}
+
+/* Diseño responsivo */
+@media (max-width: 62.5rem) { /* 1000px */
+    article {
+        width: calc(33% - 1.25rem);
+    }
+}
+
+@media (max-width: 48rem) { /* 768px */
+    article {
+        width: calc(50% - 1.25rem);
+    }
+}
+
+@media (max-width: 30rem) { /* 480px */
+    article {
+        width: 100%;
+    }
+}

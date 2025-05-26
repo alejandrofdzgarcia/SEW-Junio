@@ -1,0 +1,63 @@
+/* General layout and positioning styles for the website */
+
+/* Grid layout for main sections */
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+    margin: 0;
+}
+
+header, footer {
+    grid-column: 1 / -1;
+}
+
+/* (0, 0, 1) */
+nav {
+    background: #444;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+/* (0, 0, 2) */
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: bold;
+}
+
+/* (0, 1, 2) */
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* (0, 1, 2) */
+nav a.active {
+    color: #ff0;
+    text-decoration: underline;
+}
+
+/* Multi-column layout for articles */
+article {
+    column-count: 2;
+    column-gap: 1.5rem;
+    padding: 1rem;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    body {
+        grid-template-rows: auto 1fr auto;
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    article {
+        column-count: 1;
+    }
+}

@@ -9,13 +9,14 @@
     <meta name ="description" content ="Gastronomía de Muros del Nalón" />
     <meta name ="keywords" content ="inicio, menú, principio" /> 
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
+    <link rel="stylesheet" type="text/css" href="estilo/layout.css">
 </head>
 <body>
     <header>
         <h1><a href="index.html" title="Inicio Muros del Nalón">Muros del Nalón</a></h1>
         <nav>
             <a href="index.html" title="Inicio Muros del Nalón">Página principal</a>
-            <a href="gastronomia.html" title="Gastronomía Muros del Nalón">Gastronomía</a>
+            <a href="gastronomia.html" title="Gastronomía Muros del Nalón" class="active">Gastronomía</a>
             <a href="rutas.html" title="Rutas Muros del Nalón">Rutas</a>
             <a href="meteorologia.html" title="Meteorología Muros del Nalón">Meteorología</a>
             <a href="juego.html" title="Juego Muros del Nalón">Juego</a>
@@ -23,43 +24,45 @@
             <a href="ayuda.html" title="Ayuda Muros del Nalón">Ayuda</a>
         </nav>
     </header>
-
+    <p>Estás en: <a href="index.html">Inicio</a> >> Gastronomía</p>
     <main>
         <h1>Gastronomía Típica de Muros del Nalón</h1>
 
         <section>
             <h2>Platos Típicos</h2>
+            <p>La gastronomía de Muros del Nalón destaca por su riqueza y variedad, como toda la gastronomía asturiana, ofreciendo platos tradicionales que combinan productos del mar y de la tierra. A continuación, se presentan algunos de los platos más representativos:</p>
             <ol>
-                <li>Fabas con Almejas</li>
-                <li>Cachopo</li>
-                <li>Arroz con Leche</li>
+                <li><strong>Fabas con Almejas:</strong> Un guiso tradicional que combina las fabas asturianas con almejas frescas, creando un plato lleno de sabor y tradición.</li>
+                <li><strong>Cachopo:</strong> Dos filetes de ternera rellenos de jamón y queso, empanados y fritos, que se han convertido en un emblema de la cocina asturiana.</li>
+                <li><strong>Arroz con Leche:</strong> Un postre típico elaborado con arroz, leche, azúcar y un toque de canela, ideal para cerrar cualquier comida.</li>
             </ol>
         </section>
 
         <section>
             <h2>Alimentos Comunes</h2>
+            <p>Los ingredientes utilizados en la cocina de Muros del Nalón reflejan la riqueza de su entorno natural, desde el mar Cantábrico hasta las montañas asturianas:</p>
             <ul>
-                <li>Fabas</li>
-                <li>Pescados y mariscos frescos
+                <li><strong>Fabas:</strong> Legumbre típica de Asturias, utilizada en platos como la fabada y otros guisos.</li>
+                <li><strong>Pescados y mariscos frescos:</strong> Productos del mar Cantábrico que incluyen:
                     <ul>
-                        <li>Pixin (rape)</li>
-                        <li>Lubina</li>
-                        <li>Percebes</li>
+                        <li><strong>Pixin (rape):</strong> Muy apreciado en la cocina local por su sabor y textura.</li>
+                        <li><strong>Lubina:</strong> Un pescado blanco de gran calidad, ideal para preparar a la parrilla o al horno.</li>
+                        <li><strong>Percebes:</strong> Un marisco exclusivo y delicioso, recolectado en las rocas del litoral.</li>
                     </ul>
                 </li>
-                <li>Sidra</li>
+                <li><strong>Sidra:</strong> Bebida emblemática de Asturias, elaborada a partir de manzanas fermentadas.</li>
             </ul>
         </section>
 
         <section>
             <h2>Términos Gastronómicos</h2>
             <dl>
-                <dt>Fabas con almejas</dt>
-                <dd>Plato tradicional asturiano elaborado con fabas y almejas.</dd>
-                <dt>Cachopo</dt>
-                <dd>Filetes de ternera rellenos de jamón y queso, empanados y fritos.</dd>
-                <dt>Sidra</dt>
-                <dd>Bebida alcohólica elaborada a partir de manzanas fermentadas.</dd>
+                <dt><strong>Fabas con almejas:</strong></dt>
+                <dd>Un plato icónico que combina las fabas asturianas, conocidas por su textura cremosa, con almejas frescas del Cantábrico, creando un guiso lleno de sabor y tradición.</dd>
+                <dt><strong>Cachopo:</strong></dt>
+                <dd>Un plato contundente y delicioso que consiste en dos filetes de ternera rellenos de jamón serrano y queso, empanados y fritos. Es un símbolo de la cocina asturiana y una experiencia gastronómica inolvidable.</dd>
+                <dt><strong>Sidra:</strong></dt>
+                <dd>La bebida por excelencia de Asturias, elaborada a partir de manzanas fermentadas. Su escanciado, una técnica única para servirla, es todo un arte que realza su sabor y aroma.</dd>
             </dl>
         </section>
 
@@ -96,31 +99,35 @@
 
         <section>
             <h2>Recursos Multimedia</h2>
-            <figure>
-                <img src="multimedia/fabas_con_almejas.jpg" alt="Plato de Fabas con Almejas" style="max-width: 100%; height: auto;">
-                <figcaption>Fabas con Almejas</figcaption>
-            </figure>
+            <p>La gastronomía de Muros del Nalón no solo se disfruta a través del paladar, sino también con la vista y el oído. A continuación, se presentan algunos recursos multimedia que ilustran la riqueza culinaria de la región:</p>
+            
+            <picture>
+                <source media="(min-width: 465px)" srcset="multimedia/fabas_con_almejas.jpg">
+                <source media="(min-width: 799px)" srcset="multimedia/fabas_con_almejas.jpg">
+                <source media="(min-width: 800px)" srcset="multimedia/fabas_con_almejas.jpg">
 
-            <figure>
-                <video controls style="max-width: 100%; height: auto;">
-                    <source src="multimedia/fabas_con_almejas.mp4" type="video/mp4">
-                    <source src="multimedia/fabas_con_almejas.webm" type="video/webm">
-                    Tu navegador no soporta el elemento de video.
-                </video>
-            </figure>
+                <img src="multimedia/fabas_con_almejas.jpg" alt="Fabas con Almejas">
+            </picture>
 
-            <figure>
-                <audio controls>
-                    <source src="multimedia/sidra.mp3" type="audio/mpeg">
-                    <source src="multimedia/sidra.ogg" type="audio/ogg">
-                    Tu navegador no soporta el elemento de audio.
-                </audio>
-            </figure>
+            <h4>Preparación de Fabas con Almejas: descubre el proceso detrás de este delicioso plato.</h4>
+            <video controls style="max-width: 100%; height: auto;">
+                <source src="multimedia/fabas_con_almejas.mp4" type="video/mp4">
+                <source src="multimedia/fabas_con_almejas.webm" type="video/webm">
+            </video>
+
+            <h4>Audio de la receta de Fabas con Almejas: sigue los pasos para preparar este plato tradicional gracias a la ayuda del gran Karlos Arguiñano.</h4>
+            <audio controls>
+                <source src="multimedia/fabas_con_almejas_arguinano.mp3" type="audio/mp3">
+                <source src="multimedia/fabas_con_almejas_arguinano.wav" type="audio/wav">
+            </audio>
+            
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Turismo de Muros del Nalón</p>
+        <p>2025 Turismo de Muros del Nalón</p>
+        <p>Universidad de Oviedo - Software y Estándares para la Web</p>
+        <p>Diseñado por Alejandro Fernández García</p>
     </footer>
 </body>
 </html>
