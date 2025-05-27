@@ -36,59 +36,6 @@ article h3 {
     margin-bottom: 0.9375rem;
 }
 
-.icono-tiempo {
-    text-align: center;
-    margin-bottom: 0.625rem;
-}
-
-.icono-tiempo img {
-    width: 5rem;
-    height: 5rem;
-}
-
-.descripcion {
-    text-align: center;
-    font-style: italic;
-    color: #7f8c8d;
-    margin-bottom: 0.9375rem;
-    text-transform: capitalize;
-}
-
-.datos-tiempo {
-    background-color: #ecf0f1;
-    padding: 0.625rem;
-    border-radius: 0.5rem;
-}
-
-.temperatura {
-    margin-bottom: 0.625rem;
-}
-
-.temperatura p {
-    margin: 0.3125rem 0;
-}
-
-.temp-max {
-    color: #e74c3c;
-    font-weight: bold;
-}
-
-.temp-min {
-    color: #3498db;
-    font-weight: bold;
-}
-
-.humedad, .lluvia {
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    border-top: 0.0625rem solid #bdc3c7;
-}
-
-.humedad span, .lluvia span {
-    font-weight: bold;
-    color: #2980b9;
-}
-
 /* Diseño responsivo */
 @media (max-width: 62.5rem) { /* 1000px */
     article {

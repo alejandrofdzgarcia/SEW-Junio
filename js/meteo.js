@@ -1,11 +1,12 @@
 class Meteo {
     constructor() {
-        this.apikey = "8db286c3c29b4989e0782d0d687a41d4";
+        this.apikey = "fc6a080515fd40108aed2600e21950cf";
         this.lat = "43.5426";
         this.lon = "-6.1033";
         this.unidades = "&units=metric";
         this.idioma = "&lang=es";
         this.formato = "&mode=xml";
+        // Usar la API estándar de forecast que sí funciona con planes gratuitos
         this.url = `https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.lon}${this.formato}${this.unidades}${this.idioma}&appid=${this.apikey}`;
     }
 
@@ -16,21 +17,30 @@ class Meteo {
             method: 'GET',
             success: (datos) => {
                 this.procesarDatosPrediccion(datos);
+                console.log("Datos cargados correctamente"); // Para depuración
             },
             error: (error) => {
-                $('section').first().html('<p>Error al cargar el pronóstico del tiempo.</p>');
+                console.error("Error al cargar datos:", error); // Para depuración
+                $('section').first().html('<p>Error al cargar el pronóstico del tiempo: ' + error.statusText + '</p>');
             }
         });
     }
 
     procesarDatosPrediccion(datos) {
+        console.log("Procesando datos:", datos); // Para depuración
+        
         const $seccion = $('section').first();
         $seccion.empty();
         
         const prediccionesPorDia = {};
         
+        // En el XML de la API standard, los pronósticos están en elementos 'time'
         $(datos).find('time').each(function() {
-            const fecha = $(this).attr('from').split('T')[0];
+            // Usamos el atributo 'from' para obtener la fecha y hora
+            const fechaDesde = $(this).attr('from');
+            const fechaObj = new Date(fechaDesde);
+            // Solo queremos la fecha sin la hora para agrupar por día
+            const fecha = fechaObj.toISOString().split('T')[0];
             
             if (!prediccionesPorDia[fecha]) {
                 prediccionesPorDia[fecha] = {
@@ -44,11 +54,17 @@ class Meteo {
                 };
             }
             
+            // Extraer valores de temperatura, humedad, etc.
             const temp = parseFloat($(this).find('temperature').attr('value'));
             const humedad = parseFloat($(this).find('humidity').attr('value'));
-            const lluvia = parseFloat($(this).find('precipitation').attr('value') || 0);
+            // Verificar si hay datos de precipitación
+            let lluvia = 0;
+            if ($(this).find('precipitation').length > 0) {
+                lluvia = parseFloat($(this).find('precipitation').attr('value') || 0);
+            }
             
-            const hora = parseInt($(this).attr('from').split('T')[1].split(':')[0]);
+            // Priorizar la hora del mediodía para el icono
+            const hora = fechaObj.getHours();
             if (!prediccionesPorDia[fecha].icono || (hora >= 12 && hora <= 15)) {
                 prediccionesPorDia[fecha].icono = $(this).find('symbol').attr('var');
                 prediccionesPorDia[fecha].descripcion = $(this).find('symbol').attr('name');
@@ -61,8 +77,15 @@ class Meteo {
             prediccionesPorDia[fecha].contador++;
         });
         
-        const fechas = Object.keys(prediccionesPorDia).sort().slice(0, 5);
+        // Obtener las fechas ordenadas y limitar a 7 días
+        const fechas = Object.keys(prediccionesPorDia).sort().slice(0, 7);
         
+        if (fechas.length === 0) {
+            $seccion.html('<p>No se pudieron cargar datos de pronóstico. La estructura XML puede haber cambiado.</p>');
+            return;
+        }
+        
+        // Crear el HTML para cada día
         fechas.forEach(fecha => {
             const datos = prediccionesPorDia[fecha];
             const humedadMedia = Math.round(datos.humedadTotal / datos.contador);
