@@ -6,26 +6,40 @@ class Carrusel {
 
     crearCarrusel() {
         const $carrusel = $('<section>').attr('title', 'Carrusel de fotos');
-        const $contenedor = $('<div>');
+        const $figure = $('<figure>');
 
         const $img = $('<img>').attr('src', this.imagenes[this.indice]).attr('alt', 'Foto carrusel');
         
-        const $botonPrev = $('<button>').text('Anterior');
-        const $botonNext = $('<button>').text('Siguiente');
+        const $controles = $('<form>');
+        const $botonPrev = $('<button>').attr('type', 'button').text('Anterior');
+        const $botonNext = $('<button>').attr('type', 'button').text('Siguiente');
 
         this.$img = $img;
 
         $botonPrev.on('click', () => this.anterior());
         $botonNext.on('click', () => this.siguiente());
 
-        $contenedor.append($img, $botonPrev, $botonNext);
-        $carrusel.append($contenedor);
+        const $contador = $('<span>');
+        this.$contador = $contador;
+        this.actualizarContador();
+        
+        $controles.append($botonPrev, $contador, $botonNext);
+        $figure.append($img);
+        $carrusel.append($figure, $controles);
 
         $('main').append($carrusel);
+        
+        const $separador = $('<hr>').attr('aria-hidden', 'true');
+        $('main').append($separador);
+    }
+
+    actualizarContador() {
+        this.$contador.text(` ${this.indice + 1} de ${this.imagenes.length} `);
     }
 
     mostrarImagen() {
         this.$img.attr('src', this.imagenes[this.indice]);
+        this.actualizarContador();
     }
 
     anterior() {

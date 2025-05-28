@@ -1,6 +1,4 @@
-/* =========================================
-   ESTILOS GENERALES
-   ========================================= */
+
 body {
     margin: 0;
     padding: 0;
@@ -10,12 +8,10 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Tipografía */
 h1, h2 {
     color: #444;
 }
 
-/* Enlaces generales */
 a {
     color: #0066cc;
     text-decoration: underline;
@@ -25,22 +21,19 @@ a:hover {
     color: #003366;
 }
 
-/* Listas */
 ul, ol {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-/* Multimedia */
 img, video, audio {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 1rem 0;
+    margin: 1rem auto;
 }
 
-/* Tablas */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -60,7 +53,6 @@ th {
     font-weight: bold;
 }
 
-/* Botones */
 button {
     background-color: #0066cc;
     color: #fff;
@@ -89,7 +81,6 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* Contenedores */
 form, div, section, article, main {
     text-align: center;
 }
@@ -104,9 +95,6 @@ main {
     border-radius: 8px;
 }
 
-/* =========================================
-   HEADER Y NAVEGACIÓN
-   ========================================= */
 header {
     background-color: #2c3e50;
     color: #ecf0f1;
@@ -127,7 +115,6 @@ header h1 a:hover {
     color: #3498db;
 }
 
-/* Navegación */
 nav, header nav {
     margin-top: 1rem;
     display: flex;
@@ -177,7 +164,6 @@ nav a.active::after, header nav a.active::after {
     border-radius: 2px;
 }
 
-/* Navegación de rutas (estás en:) */
 body > p {
     background-color: #f8f9fa;
     padding: 0.6rem 1rem;
@@ -198,9 +184,6 @@ body > p a:hover {
     text-decoration: underline;
 }
 
-/* =========================================
-   FOOTER
-   ========================================= */
 footer {
     background-color: #2c3e50;
     color: #ecf0f1;
@@ -226,11 +209,17 @@ footer p:first-child::before {
     content: "© ";
 }
 
-/* =========================================
-   MEDIA QUERIES
-   ========================================= */
+footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 768px) {
-    /* Header responsive */
+    
     header {
         padding: 1rem 0;
     }
@@ -250,7 +239,6 @@ footer p:first-child::before {
         font-size: 1.5rem;
     }
     
-    /* Navegación responsive */
     nav {
         flex-direction: column;
         padding: 0.3rem;
@@ -267,7 +255,6 @@ footer p:first-child::before {
         padding: 0.5rem;
     }
     
-    /* Footer responsive */
     footer {
         padding: 1.5rem 0;
     }
@@ -276,4 +263,3 @@ footer p:first-child::before {
         font-size: 0.8rem;
     }
 }
-
