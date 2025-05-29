@@ -60,7 +60,7 @@ class Noticias {
                         $articulo.append($h3);
                         
                         if (imagen) {
-                            const $figure = $('<figure>');
+                            const $figure = $('<figure>'); // Reemplazado div por figure
                             const $img = $('<img>').attr({
                                 'src': imagen,
                                 'alt': titulo
@@ -68,7 +68,7 @@ class Noticias {
                             $figure.append($img);
                             $articulo.append($figure);
                         } else {
-                            const $figure = $('<figure>');
+                            const $figure = $('<figure>'); // Reemplazado div por figure
                             const $iconoNoticia = $('<span>').text('📢').css({
                                 'font-size': '2em',
                                 'display': 'block',
@@ -81,7 +81,7 @@ class Noticias {
                         const $pDesc = $('<p>').text(descripcion);
                         $articulo.append($pDesc);
                         
-                        const $seccionDatos = $('<section>');
+                        const $seccionDatos = $('<section>'); // Reemplazado div por section
                         
                         const $pFecha = $('<p>');
                         $pFecha.html(`📅 Fecha: <span>${fecha}</span>`);
@@ -114,7 +114,7 @@ class Noticias {
                         minute: '2-digit'
                     });
                     
-                    const $actualizacion = $('<footer>').css({
+                    const $actualizacion = $('<footer>').css({ // Reemplazado p por footer
                         'font-style': 'italic',
                         'margin-top': '30px',
                         'padding-top': '10px',

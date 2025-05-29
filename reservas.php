@@ -1,20 +1,43 @@
-<?php
-session_start();
-$usuarioLogueado = isset($_SESSION['usuario_id']);
-$nombreUsuario = $usuarioLogueado ? $_SESSION['usuario_nombre'] : '';
-?>
 <!DOCTYPE html>
 <html lang="es">
+<?php
+    session_start();
+    
+    // Incluir la clase DBManager
+    require_once 'php/DBManager.php';
+    
+    // Inicializar el gestor de base de datos
+     // Inicializar la base de datos si es necesario
+    $dbManager = new DBManager();
+    $dbManager->createDatabase();
+    $dbManager->importFromCSV("recursos_turisticos", "php/recursos_turisticos.csv");
+    
+    // Intentar establecer la conexión a la base de datos
+    try {
+        $db = $dbManager->getConnection();
+    } catch (Exception $e) {
+        // Si hay un error, mostrar un mensaje
+        $errorDB = "Error de conexión a la base de datos: " . $e->getMessage();
+    }
+    
+    // Comprobar si el usuario está logueado
+    $usuarioLogueado = isset($_SESSION['usuario_id']);
+    $nombreUsuario = $usuarioLogueado ? $_SESSION['usuario_nombre'] : '';
+    
+    // Comprobar si el usuario es administrador (esto podría venir de la base de datos)
+    $esAdministrador = $usuarioLogueado && isset($_SESSION['es_admin']) && $_SESSION['es_admin'];
+?>
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="multimedia/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Muros del Nalón</title>
+    <title>Reservas - Muros del Nalón</title>
     <meta name="author" content="Alejandro Fernández García"/>
     <meta name="description" content="Reservas - Muros del Nalón"/>
-    <meta name="keywords" content="reservas, central"/>
+    <meta name="keywords" content="reservas, central"/>      
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
     <link rel="stylesheet" type="text/css" href="estilo/layout.css">
+    <link rel="stylesheet" type="text/css" href="estilo/reservas.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -35,67 +58,79 @@ $nombreUsuario = $usuarioLogueado ? $_SESSION['usuario_nombre'] : '';
     
     <main>
         <h1>Central de Reservas Turísticas</h1>
+          <?php if(isset($errorDB)): ?>
+            <section>
+                <p><strong>Error de Base de Datos:</strong> <?php echo $errorDB; ?></p>
+                <p>Por favor, contacte con el administrador del sistema.</p>
+            </section>
+        <?php endif; ?>
         
         <!-- Bienvenida y estado de sesión -->
         <section>
             <?php if($usuarioLogueado): ?>
                 <p>Bienvenido/a, <strong><?php echo htmlspecialchars($nombreUsuario); ?></strong></p>
-                <a href="php/logout.php">Cerrar sesión</a>
+                <p><a href="php/logout.php">Cerrar sesión</a></p>
+                  <?php if($esAdministrador): ?>                    <section>
+                        <p><strong>Panel de Administración</strong></p>
+                        <ul>
+                            <li><a href="php/init_database.php">Inicializar Base de Datos</a></li>
+                            <li><a href="php/cargar_recursos.php">Cargar Recursos Turísticos desde CSV</a></li>
+                            <li><a href="php/gestionar_recursos.php">Gestionar Recursos Turísticos</a></li>
+                            <li><a href="php/gestionar_usuarios.php">Gestionar Usuarios</a></li>
+                            <li><a href="php/ver_todas_reservas.php">Ver Todas las Reservas</a></li>
+                        </ul>
+                    </section>
+                <?php endif; ?>
             <?php else: ?>
                 <p>Inicia sesión para gestionar tus reservas</p>
-                <nav>
+                <p>
                     <a href="php/login.php">Iniciar sesión</a>
                     <a href="php/register.php">Registrarse</a>
-                </nav>
+                </p>
+            <?php endif; ?>
+        </section>
+          <!-- Menú principal de la central de reservas -->
+        <section>
+            <!-- Catálogo de recursos turísticos - accesible a todos -->
+            <fieldset>
+                <legend>Catálogo de Recursos</legend>
+                <p>Explora nuestros recursos turísticos disponibles.</p>
+                <p><a href="php/recursos_turisticos.php">Ver recursos</a></p>
+            </fieldset>
+            
+            <?php if($usuarioLogueado): ?>
+                <!-- Opciones solo para usuarios registrados -->
+                <fieldset>
+                    <legend>Hacer una Reserva</legend>
+                    <p>Reserva el recurso turístico que más te interese.</p>
+                    <p><a href="php/realizar_reserva.php">Reservar ahora</a></p>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Mis Reservas</legend>
+                    <p>Consulta y gestiona tus reservas actuales.</p>
+                    <p><a href="php/mis_reservas.php">Ver mis reservas</a></p>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Cancelar Reserva</legend>
+                    <p>Anula reservas que ya no necesites.</p>
+                    <p><a href="php/cancelar_reserva.php">Cancelar reserva</a></p>
+                </fieldset>
+            <?php else: ?>
+                <!-- Mensaje para usuarios no registrados -->
+                <fieldset>
+                    <legend>Información de acceso</legend>
+                    <p>Para realizar reservas, consultar o cancelarlas, debes iniciar sesión.</p>
+                    <p>Si no tienes una cuenta, regístrate para acceder a todos los servicios.</p>
+                </fieldset>
             <?php endif; ?>
         </section>
         
-        <!-- Menú principal de la central de reservas -->
-        <section>
-            <h2>Gestión de Recursos Turísticos</h2>
-            
-            <nav>
-                <!-- Catálogo de recursos turísticos - accesible a todos -->
-                <article>
-                    <h3>Catálogo de Recursos</h3>
-                    <p>Explora nuestros recursos turísticos disponibles.</p>
-                    <a href="php/recursos_turisticos.php">Ver recursos</a>
-                </article>
-                
-                <?php if($usuarioLogueado): ?>
-                    <!-- Opciones solo para usuarios registrados -->
-                    <article>
-                        <h3>Hacer una Reserva</h3>
-                        <p>Reserva el recurso turístico que más te interese.</p>
-                        <a href="php/realizar_reserva.php">Reservar ahora</a>
-                    </article>
-                    
-                    <article>
-                        <h3>Mis Reservas</h3>
-                        <p>Consulta y gestiona tus reservas actuales.</p>
-                        <a href="php/mis_reservas.php">Ver mis reservas</a>
-                    </article>
-                    
-                    <article>
-                        <h3>Cancelar Reserva</h3>
-                        <p>Anula reservas que ya no necesites.</p>
-                        <a href="php/cancelar_reserva.php">Cancelar reserva</a>
-                    </article>
-                <?php else: ?>
-                    <!-- Mensaje para usuarios no registrados -->
-                    <article>
-                        <p>Para realizar reservas, consultar o cancelarlas, debes iniciar sesión.</p>
-                        <p>Si no tienes una cuenta, regístrate para acceder a todos los servicios.</p>
-                    </article>
-                <?php endif; ?>
-            </nav>
-        </section>
-        
         <!-- Información adicional sobre las reservas -->
-        <section>
-            <h2>Información sobre Reservas</h2>
-            <article>
-                <h3>¿Cómo funciona?</h3>
+        <section>            
+            <fieldset>
+                <legend>¿Cómo funciona?</legend>
                 <ol>
                     <li>Regístrate en nuestra plataforma o inicia sesión si ya tienes cuenta.</li>
                     <li>Explora el catálogo de recursos turísticos disponibles.</li>
@@ -103,16 +138,7 @@ $nombreUsuario = $usuarioLogueado ? $_SESSION['usuario_nombre'] : '';
                     <li>Revisa el presupuesto generado automáticamente.</li>
                     <li>Confirma tu reserva.</li>
                 </ol>
-            </article>
-            
-            <article>
-                <h3>Política de cancelación</h3>
-                <ul>
-                    <li>Las cancelaciones con más de 48 horas de antelación tendrán un reembolso del 100%.</li>
-                    <li>Las cancelaciones entre 24 y 48 horas antes tendrán un reembolso del 50%.</li>
-                    <li>Las cancelaciones con menos de 24 horas no tienen reembolso.</li>
-                </ul>
-            </article>
+            </fieldset>
         </section>
     </main>
 
