@@ -1,96 +1,90 @@
 class Meteo {
     constructor() {
-        this.apikey = "fc6a080515fd40108aed2600e21950cf";
         this.lat = "43.5426";
         this.lon = "-6.1033";
-        this.unidades = "&units=metric";
-        this.idioma = "&lang=es";
-        this.formato = "&mode=xml";
-        // Usar la API estándar de forecast que sí funciona con planes gratuitos
-        this.url = `https://api.openweathermap.org/data/2.5/forecast?lat=${this.lat}&lon=${this.lon}${this.formato}${this.unidades}${this.idioma}&appid=${this.apikey}`;
+        this.url = `https://api.open-meteo.com/v1/forecast?latitude=${this.lat}&longitude=${this.lon}&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=auto&forecast_days=7&lang=es`;
     }
 
     cargarPrediccion() {
         $.ajax({
-            dataType: "xml",
+            dataType: "json",
             url: this.url,
             method: 'GET',
             success: (datos) => {
                 this.procesarDatosPrediccion(datos);
-                console.log("Datos cargados correctamente"); // Para depuración
+                console.log("Datos cargados correctamente");
             },
             error: (error) => {
-                console.error("Error al cargar datos:", error); // Para depuración
+                console.error("Error al cargar datos:", error);
                 $('section').first().html('<p>Error al cargar el pronóstico del tiempo: ' + error.statusText + '</p>');
             }
         });
     }
 
     procesarDatosPrediccion(datos) {
-        console.log("Procesando datos:", datos); // Para depuración
+        console.log("Procesando datos:", datos);
         
         const $seccion = $('section').first();
         $seccion.empty();
         
-        const prediccionesPorDia = {};
-        
-        // En el XML de la API standard, los pronósticos están en elementos 'time'
-        $(datos).find('time').each(function() {
-            // Usamos el atributo 'from' para obtener la fecha y hora
-            const fechaDesde = $(this).attr('from');
-            const fechaObj = new Date(fechaDesde);
-            // Solo queremos la fecha sin la hora para agrupar por día
-            const fecha = fechaObj.toISOString().split('T')[0];
-            
-            if (!prediccionesPorDia[fecha]) {
-                prediccionesPorDia[fecha] = {
-                    tempMax: -100,
-                    tempMin: 100,
-                    humedadTotal: 0,
-                    lluviaTotal: 0,
-                    icono: '',
-                    descripcion: '',
-                    contador: 0
-                };
-            }
-            
-            // Extraer valores de temperatura, humedad, etc.
-            const temp = parseFloat($(this).find('temperature').attr('value'));
-            const humedad = parseFloat($(this).find('humidity').attr('value'));
-            // Verificar si hay datos de precipitación
-            let lluvia = 0;
-            if ($(this).find('precipitation').length > 0) {
-                lluvia = parseFloat($(this).find('precipitation').attr('value') || 0);
-            }
-            
-            // Priorizar la hora del mediodía para el icono
-            const hora = fechaObj.getHours();
-            if (!prediccionesPorDia[fecha].icono || (hora >= 12 && hora <= 15)) {
-                prediccionesPorDia[fecha].icono = $(this).find('symbol').attr('var');
-                prediccionesPorDia[fecha].descripcion = $(this).find('symbol').attr('name');
-            }
-            
-            prediccionesPorDia[fecha].tempMax = Math.max(prediccionesPorDia[fecha].tempMax, temp);
-            prediccionesPorDia[fecha].tempMin = Math.min(prediccionesPorDia[fecha].tempMin, temp);
-            prediccionesPorDia[fecha].humedadTotal += humedad;
-            prediccionesPorDia[fecha].lluviaTotal += lluvia;
-            prediccionesPorDia[fecha].contador++;
-        });
-        
-        // Obtener las fechas ordenadas y limitar a 7 días
-        const fechas = Object.keys(prediccionesPorDia).sort().slice(0, 7);
-        
-        if (fechas.length === 0) {
-            $seccion.html('<p>No se pudieron cargar datos de pronóstico. La estructura XML puede haber cambiado.</p>');
+        if (!datos.daily || !datos.daily.time || datos.daily.time.length === 0) {
+            $seccion.html('<p>No se pudieron cargar datos de pronóstico.</p>');
             return;
         }
+
+        // Mapeo de códigos WMO a iconos de OpenWeatherMap
+        const wmoToIcon = {
+            0: '01d', // Clear sky
+            1: '02d', 2: '02d', 3: '03d', // Partly cloudy
+            45: '50d', 48: '50d', // Fog
+            51: '09d', 53: '09d', 55: '09d', // Drizzle
+            56: '13d', 57: '13d', // Freezing Drizzle
+            61: '10d', 63: '10d', 65: '10d', // Rain
+            66: '13d', 67: '13d', // Freezing Rain
+            71: '13d', 73: '13d', 75: '13d', // Snow
+            77: '13d', // Snow grains
+            80: '09d', 81: '09d', 82: '09d', // Rain showers
+            85: '13d', 86: '13d', // Snow showers
+            95: '11d', // Thunderstorm
+            96: '11d', 99: '11d' // Thunderstorm with hail
+        };
+
+        // Mapeo de códigos WMO a descripciones (español)
+        const wmoToDesc = {
+            0: 'Cielo despejado',
+            1: 'Mayormente despejado', 2: 'Parcialmente nublado', 3: 'Nublado',
+            45: 'Niebla', 48: 'Niebla escarcha',
+            51: 'Llovizna ligera', 53: 'Llovizna moderada', 55: 'Llovizna intensa',
+            56: 'Llovizna helada ligera', 57: 'Llovizna helada intensa',
+            61: 'Lluvia ligera', 63: 'Lluvia moderada', 65: 'Lluvia intensa',
+            66: 'Lluvia helada ligera', 67: 'Lluvia helada intensa',
+            71: 'Nevada ligera', 73: 'Nevada moderada', 75: 'Nevada intensa',
+            77: 'Granos de nieve',
+            80: 'Chubascos ligeros', 81: 'Chubascos moderados', 82: 'Chubascos violentos',
+            85: 'Chubascos de nieve ligeros', 86: 'Chubascos de nieve intensos',
+            95: 'Tormenta',
+            96: 'Tormenta con granizo ligero', 99: 'Tormenta con granizo fuerte'
+        };
         
-        // Crear el HTML para cada día
-        fechas.forEach(fecha => {
-            const datos = prediccionesPorDia[fecha];
-            const humedadMedia = Math.round(datos.humedadTotal / datos.contador);
+        for (let i = 0; i < datos.daily.time.length; i++) {
+            const fecha = datos.daily.time[i];
+            const tempMax = datos.daily.temperature_2m_max[i];
+            const tempMin = datos.daily.temperature_2m_min[i];
+            const lluviaTotal = datos.daily.precipitation_sum[i];
+            const codigoTiempo = datos.daily.weather_code[i];
             
-            // Formato de fecha: "lunes, 26 de mayo"
+            let humedadMedia = 0;
+            let contadorHumedad = 0;
+            
+            for (let j = 0; j < datos.hourly.time.length; j++) {
+                if (datos.hourly.time[j].startsWith(fecha)) {
+                    humedadMedia += datos.hourly.relative_humidity_2m[j];
+                    contadorHumedad++;
+                }
+            }
+            
+            humedadMedia = Math.round(humedadMedia / contadorHumedad);
+            
             const fechaObj = new Date(fecha);
             const fechaFormateada = fechaObj.toLocaleDateString('es-ES', { 
                 weekday: 'long', 
@@ -98,41 +92,44 @@ class Meteo {
                 month: 'long' 
             });
             
+            const icono = wmoToIcon[codigoTiempo] || '03d'; // Icono por defecto
+            const descripcion = wmoToDesc[codigoTiempo] || 'Sin datos';
+            
             const $articulo = $('<article>');
             const $h3 = $('<h3>').text(fechaFormateada);
             $articulo.append($h3);
             
-            const $divIcono = $('<div>');
+            const $figure = $('<figure>');
             const $img = $('<img>').attr({
-                'src': `https://openweathermap.org/img/wn/${datos.icono}@2x.png`,
-                'alt': datos.descripcion
+                'src': `https://openweathermap.org/img/wn/${icono}@2x.png`,
+                'alt': descripcion
             });
-            $divIcono.append($img);
-            $articulo.append($divIcono);
+            $figure.append($img);
+            $articulo.append($figure);
             
-            const $pDesc = $('<p>').text(datos.descripcion);
+            const $pDesc = $('<p>').text(descripcion);
             $articulo.append($pDesc);
             
-            const $divDatos = $('<div>');
+            const $section = $('<section>');
             const $pTempMax = $('<p>');
-            $pTempMax.html(`🔥 Máx: <span>${datos.tempMax.toFixed(1)}°C</span>`);
-            $divDatos.append($pTempMax);
+            $pTempMax.html(`🔥 Máx: <strong>${tempMax.toFixed(1)}°C</strong>`);
+            $section.append($pTempMax);
             
             const $pTempMin = $('<p>');
-            $pTempMin.html(`❄️ Mín: <span>${datos.tempMin.toFixed(1)}°C</span>`);
-            $divDatos.append($pTempMin);
+            $pTempMin.html(`❄️ Mín: <strong>${tempMin.toFixed(1)}°C</strong>`);
+            $section.append($pTempMin);
             
             const $pHum = $('<p>');
-            $pHum.html(`💧 Humedad: <span>${humedadMedia}%</span>`);
-            $divDatos.append($pHum);
+            $pHum.html(`💧 Humedad: <strong>${humedadMedia}%</strong>`);
+            $section.append($pHum);
             
             const $pLluvia = $('<p>');
-            $pLluvia.html(`☔ Lluvia: <span>${datos.lluviaTotal.toFixed(1)} mm</span>`);
-            $divDatos.append($pLluvia);
+            $pLluvia.html(`☔ Lluvia: <strong>${lluviaTotal.toFixed(1)} mm</strong>`);
+            $section.append($pLluvia);
             
-            $articulo.append($divDatos);
+            $articulo.append($section);
             $seccion.append($articulo);
-        });
+        }
     }
 }
 

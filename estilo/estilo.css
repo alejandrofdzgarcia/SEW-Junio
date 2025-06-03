@@ -1,46 +1,49 @@
-/* =========================================
-   ESTILOS GENERALES
-   ========================================= */
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: #222;
     background-color: #f4f4f4;
 }
 
-/* Tipografía */
 h1, h2 {
     color: #444;
 }
 
-/* Enlaces generales */
 a {
-    color: #0066cc;
+    color: #004085;
     text-decoration: underline;
+    font-weight: bold;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+    text-decoration: none;
 }
 
 a:hover {
-    color: #003366;
+    color: #002752;
+    border-bottom: 2px solid currentColor;
+    transition: border-bottom 0.2s ease, color 0.3s ease;
 }
 
-/* Listas */
+a:focus {
+    outline: 2px solid #0099ff;
+    outline-offset: 2px;
+}
+
 ul, ol {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-/* Multimedia */
 img, video, audio {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 1rem 0;
+    margin: 1rem auto;
 }
 
-/* Tablas */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -60,7 +63,6 @@ th {
     font-weight: bold;
 }
 
-/* Botones */
 button {
     background-color: #0066cc;
     color: #fff;
@@ -89,7 +91,6 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* Contenedores */
 form, div, section, article, main {
     text-align: center;
 }
@@ -104,9 +105,6 @@ main {
     border-radius: 8px;
 }
 
-/* =========================================
-   HEADER Y NAVEGACIÓN
-   ========================================= */
 header {
     background-color: #2c3e50;
     color: #ecf0f1;
@@ -127,7 +125,6 @@ header h1 a:hover {
     color: #3498db;
 }
 
-/* Navegación */
 nav, header nav {
     margin-top: 1rem;
     display: flex;
@@ -140,7 +137,7 @@ nav, header nav {
 }
 
 nav a, header nav a {
-    color: #ecf0f1;
+    color: #ffffff;
     text-decoration: none;
     padding: 0.7rem 1.2rem;
     margin: 0.2rem 0.3rem;
@@ -149,13 +146,16 @@ nav a, header nav a {
     font-weight: 500;
     letter-spacing: 0.5px;
     position: relative;
+    color: #ffffff;
+    border-bottom: 2px solid transparent;
 }
 
 nav a:hover, header nav a:hover {
-    background-color: #3498db;
+    background-color: #2980b9;
     color: #fff;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #fff;
 }
 
 nav a.active, header nav a.active {
@@ -177,33 +177,33 @@ nav a.active::after, header nav a.active::after {
     border-radius: 2px;
 }
 
-/* Navegación de rutas (estás en:) */
+p {
+    color: #222;
+}
+
 body > p {
     background-color: #f8f9fa;
     padding: 0.6rem 1rem;
     margin: 0;
     border-bottom: 1px solid #e0e0e0;
     font-size: 0.9rem;
-    color: #666;
+    color: #444;
 }
 
 body > p a {
-    color: #3498db;
+    color: #0056b3;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 body > p a:hover {
-    color: #2980b9;
+    color: #003d7a;
     text-decoration: underline;
 }
 
-/* =========================================
-   FOOTER
-   ========================================= */
 footer {
     background-color: #2c3e50;
-    color: #ecf0f1;
+    color: #ffffff;
     padding: 2rem 0;
     margin-top: 2rem;
     text-align: center;
@@ -215,6 +215,7 @@ footer p {
     margin: 0.5rem 0;
     font-size: 0.9rem;
     line-height: 1.4;
+    color: #ffffff;
 }
 
 footer p:first-child {
@@ -226,11 +227,18 @@ footer p:first-child::before {
     content: "© ";
 }
 
-/* =========================================
-   MEDIA QUERIES
-   ========================================= */
+footer a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+footer a:hover {
+    color: #8ed5ff;
+    text-decoration: underline;
+}
+
 @media (max-width: 768px) {
-    /* Header responsive */
+    
     header {
         padding: 1rem 0;
     }
@@ -250,7 +258,6 @@ footer p:first-child::before {
         font-size: 1.5rem;
     }
     
-    /* Navegación responsive */
     nav {
         flex-direction: column;
         padding: 0.3rem;
@@ -267,7 +274,6 @@ footer p:first-child::before {
         padding: 0.5rem;
     }
     
-    /* Footer responsive */
     footer {
         padding: 1.5rem 0;
     }
@@ -276,4 +282,3 @@ footer p:first-child::before {
         font-size: 0.8rem;
     }
 }
-

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rutas SYSTEM "rutas.dtd">
+<rutas xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <ruta>
+        <nombre>Senda Costera de Muros del Nalón</nombre>
+        <tipo>Paisajística</tipo>
+        <transporte>A pie</transporte>
+        <fechaInicio xsi:type="optional">2025-06-15</fechaInicio>
+        <horaInicio xsi:type="optional">10:00</horaInicio>
+        <duracion>3 horas</duracion>
+        <agencia>Sin agencia</agencia>
+        <descripcion>
+            La Senda Costera de Muros del Nalón es un recorrido espectacular que discurre por los acantilados 
+            de la costa asturiana. Durante el camino podrás disfrutar de impresionantes vistas al Mar Cantábrico, 
+            descubrir calas escondidas y admirar la rica vegetación de la zona. Es uno de los tramos más 
+            bellos del Camino de Santiago del Norte.
+        </descripcion>
+        <personasAdecuadas>Se puede ir con niños</personasAdecuadas>
+        <puntoInicio>
+            <lugar>Puerto de San Esteban de Pravia</lugar>
+            <direccion>Paseo Marítimo Marq Santulla</direccion>
+            <coordenadas>
+                <longitud>-6.079167</longitud>
+                <latitud>43.564444</latitud>
+                <altitud>5</altitud>
+            </coordenadas>
+        </puntoInicio>
+        <hitos>
+            <hito>
+                <nombre>Mirador del Espíritu Santo</nombre>
+                <descripcion>
+                    Un impresionante mirador sobre un acantilado que ofrece vistas panorámicas del Mar Cantábrico. 
+                    Es un lugar ideal para comenzar la ruta con una primera toma de contacto con el paisaje costero.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.0816667</longitud>
+                    <latitud>43.5630556</latitud>
+                    <altitud>100</altitud>
+                </coordenadas>
+                <distancia unidad="m">0</distancia>
+                <fotografias>
+                    <fotografia>miradorEspirituSanto.png</fotografia>
+                </fotografias>
+            </hito>
+            
+            <hito>
+                <nombre>Mirador de la Atalaya</nombre>
+                <descripcion>
+                    Situado cerca del núcleo urbano, este mirador permite contemplar el puerto de San Esteban y los 
+                    acantilados cercanos. Su baja altitud lo hace fácilmente accesible y perfecto para una parada breve.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.089722</longitud>
+                    <latitud>43.557222</latitud>
+                    <altitud>5</altitud>
+                </coordenadas>
+                <distancia unidad="m">1000</distancia>
+                <fotografias>
+                    <fotografia>atala1.png</fotografia>
+                    <fotografia>atala2.png</fotografia>
+                </fotografias>
+            </hito>
+            
+            <hito>
+                <nombre>Mirador de los Glayos</nombre>
+                <descripcion>
+                    Un punto elevado desde el que se aprecia una panorámica única de la costa escarpada y la vegetación 
+                    típica asturiana. Ideal para los amantes de la fotografía de naturaleza.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.0950</longitud>
+                    <latitud>43.5750</latitud>
+                    <altitud>71</altitud>
+                </coordenadas>
+                <distancia unidad="m">2100</distancia>
+                <fotografias>
+                    <fotografia>glayos1.png</fotografia>
+                </fotografias>
+            </hito>
+            
+            <hito>
+                <nombre>Playas de Xan-Xún y Las Llanas</nombre>
+                <descripcion>
+                    Dos playas salvajes y poco frecuentadas, rodeadas de naturaleza virgen. 
+                    Son un excelente lugar para descansar o refrescarse durante el recorrido.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.105278</longitud>
+                    <latitud>43.557778</latitud>
+                    <altitud>1</altitud>
+                </coordenadas>
+                <distancia unidad="m">422</distancia>
+                <fotografias>
+                    <fotografia>playaXanXun1.png</fotografia>
+                </fotografias>
+            </hito>
+            
+            <hito>
+                <nombre>Mirador Punta del Campón</nombre>
+                <descripcion>
+                    Uno de los puntos más altos del recorrido, desde donde se puede disfrutar de una vista extensa 
+                    de la costa asturiana y del horizonte marino. Perfecto para cerrar la ruta con una vista inolvidable.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.110278</longitud>
+                    <latitud>43.555556</latitud>
+                    <altitud>108</altitud>
+                </coordenadas>
+                <distancia unidad="m">1350</distancia>
+                <fotografias>
+                    <fotografia>campon1.png</fotografia>
+                    <fotografia>campon2.png</fotografia>
+                </fotografias>
+            </hito>
+        </hitos>
+        <referencias>
+            <referencia>https://www.turismoasturias.es/es/descubre/naturaleza/rutas/senderismo/senda-costera-san-esteban-de-pravia-playa-del-aguilar</referencia>
+            <referencia>https://asturias.com/senda-de-los-miradores/</referencia>
+            <referencia>https://www.murosdenalon.es/que-visitar/-/asset_publisher/6277037ba107/content/turismo-visitar-senda-costera</referencia>
+        </referencias>
+        <recomendacion>9</recomendacion>
+    </ruta>
+    <ruta>
+        <nombre></nombre>
+        <tipo>Paisajística</tipo>
+        <transporte>A pie</transporte>
+        <fechaInicio xsi:type="optional">2025-06-02</fechaInicio>
+        <horaInicio xsi:type="optional">15:30</horaInicio>
+        <duracion>X horas</duracion>
+        <agencia>Nombre de la agencia o "Sin agencia"</agencia>
+        <descripcion>
+            Descripción detallada de la ruta. Incluye información sobre el paisaje,
+            características particulares, historia del lugar, dificultad, etc.
+        </descripcion>
+        <personasAdecuadas>Para quién es adecuada esta ruta</personasAdecuadas>
+        <puntoInicio>
+            <lugar>Nombre del lugar de inicio</lugar>
+            <direccion>Dirección específica</direccion>
+            <coordenadas>
+                <longitud>-X.XXXXXX</longitud>
+                <latitud>XX.XXXXXX</latitud>
+                <altitud>XXX</altitud>
+            </coordenadas>
+        </puntoInicio>
+        <hitos>
+            <hito>
+                <nombre>Nombre del hito 1</nombre>
+                <descripcion>
+                    Descripción detallada del hito, incluyendo sus características,
+                    importancia, historia, y lo que los visitantes pueden ver o hacer allí.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-X.XXXXXX</longitud>
+                    <latitud>XX.XXXXXX</latitud>
+                    <altitud>XXX</altitud>
+                </coordenadas>
+                <distancia unidad="m">XXX</distancia>
+                <fotografias>
+                    <fotografia>nombre_archivo1.png</fotografia>
+                    <fotografia>nombre_archivo2.png</fotografia>
+                </fotografias>
+            </hito>
+            <!-- Añadir más hitos siguiendo la misma estructura -->
+        </hitos>
+        <referencias>
+            <referencia>https://ejemplo1.com/informacion-sobre-la-ruta</referencia>
+            <referencia>https://ejemplo2.com/mas-informacion</referencia>
+            <!-- Añadir más referencias según sea necesario -->
+        </referencias>
+        <recomendacion>X</recomendacion>
+    </ruta>
+</rutas>

@@ -1,0 +1,38 @@
+<!ELEMENT rutas (ruta+)>
+<!ATTLIST rutas xmlns:xsi CDATA #IMPLIED>
+
+<!ELEMENT ruta (nombre, tipo, transporte, fechaInicio?, horaInicio?, duracion, agencia, descripcion, personasAdecuadas, puntoInicio, hitos, referencias, recomendacion)>
+
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT tipo (#PCDATA)>
+<!ELEMENT transporte (#PCDATA)>
+<!ELEMENT fechaInicio (#PCDATA)>
+<!ATTLIST fechaInicio xsi:type CDATA #IMPLIED>
+<!ELEMENT horaInicio (#PCDATA)>
+<!ATTLIST horaInicio xsi:type CDATA #IMPLIED>
+<!ELEMENT duracion (#PCDATA)>
+<!ELEMENT agencia (#PCDATA)>
+<!ELEMENT descripcion (#PCDATA)>
+<!ELEMENT personasAdecuadas (#PCDATA)>
+
+<!ELEMENT puntoInicio (lugar, direccion, coordenadas)>
+<!ELEMENT lugar (#PCDATA)>
+<!ELEMENT direccion (#PCDATA)>
+
+<!ELEMENT coordenadas (longitud, latitud, altitud)>
+<!ELEMENT longitud (#PCDATA)>
+<!ELEMENT latitud (#PCDATA)>
+<!ELEMENT altitud (#PCDATA)>
+
+<!ELEMENT hitos (hito+)>
+<!ELEMENT hito (nombre, descripcion, coordenadas, distancia, fotografias)>
+<!ELEMENT distancia (#PCDATA)>
+<!ATTLIST distancia unidad CDATA #REQUIRED>
+
+<!ELEMENT fotografias (fotografia+)>
+<!ELEMENT fotografia (#PCDATA)>
+
+<!ELEMENT referencias (referencia+)>
+<!ELEMENT referencia (#PCDATA)>
+
+<!ELEMENT recomendacion (#PCDATA)>

@@ -1,0 +1,11 @@
+nombre,limite_ocupacion,fecha_hora_inicio,fecha_hora_fin,precio,descripcion
+Museo Marítimo de San Esteban,50,2025-06-01 10:00:00,2025-06-01 18:00:00,5.00,"Museo dedicado a la historia marítima de la zona, exposiciones y actividades para toda la familia."
+Ruta de los Miradores,20,2025-06-01 09:00:00,2025-06-01 13:00:00,0.00,"Ruta senderista guiada por los acantilados de Muros del Nalón, con vistas al mar Cantábrico."
+Restaurante El Puerto,60,2025-06-01 13:00:00,2025-06-01 23:00:00,25.00,"Restaurante especializado en pescados y mariscos frescos, menú degustación disponible."
+Hotel Playa de Aguilar,40,2025-06-01 15:00:00,2025-06-02 12:00:00,80.00,"Hotel frente a la playa de Aguilar, habitaciones con vistas al mar y servicios de spa."
+Casa Rural La Quintana,12,2025-06-01 16:00:00,2025-06-02 11:00:00,60.00,"Alojamiento rural típico asturiano, ideal para familias y grupos pequeños."
+Visita a la Iglesia de Santa María,30,2025-06-01 11:00:00,2025-06-01 13:00:00,2.00,"Visita guiada a la iglesia románica de Santa María, patrimonio histórico del concejo."
+Ruta en Bicicleta por la Senda Fluvial,15,2025-06-01 10:00:00,2025-06-01 14:00:00,10.00,"Ruta en bicicleta por la senda fluvial del río Nalón, incluye alquiler de bicicleta."
+Apartamentos Turísticos El Faro,24,2025-06-01 17:00:00,2025-06-02 11:00:00,55.00,"Apartamentos con cocina propia y terraza, a pocos minutos del faro de San Esteban."
+Bar de Tapas La Plaza,40,2025-06-01 12:00:00,2025-06-01 22:00:00,18.00,"Bar tradicional con amplia variedad de tapas y vinos asturianos."
+Excursión en Kayak por la Ría,10,2025-06-01 09:00:00,2025-06-01 12:00:00,20.00,"Excursión guiada en kayak por la ría de San Esteban, incluye seguro y material."

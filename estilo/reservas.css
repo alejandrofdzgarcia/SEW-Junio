@@ -1,0 +1,132 @@
+main {
+	padding: 2rem;
+	max-width: 65rem;
+}
+
+main h1 {
+	text-align: center;
+	color: #2c3e50;
+	border-bottom: 0.2rem solid #3498db;
+	padding-bottom: 1rem;
+	margin-bottom: 2rem;
+}
+
+main h2 {
+	color: #2c3e50;
+	border-left: 0.3rem solid #3498db;
+	padding-left: 1rem;
+	margin-top: 2.5rem;
+}
+
+section > p, section > a {
+	text-align: center;
+	margin: 1rem 0;
+}
+
+section {
+	margin-bottom: 2.5rem;
+}
+
+section:last-of-type {
+	margin-bottom: 0;
+}
+        
+        main a {
+	display: inline-block;
+	background-color: #0066cc;
+	color: #fff;
+	padding: 0.6rem 1.2rem;
+	border-radius: 4px;
+	text-decoration: none;
+	margin: 0.5rem;
+	transition: background-color 0.3s ease;
+}
+
+main a:hover {
+	background-color: #003366;
+	transform: translateY(-0.2rem);
+}
+
+article h3 {
+	color: #2c3e50;
+}
+
+article p {
+	text-align: left;
+	margin-bottom: 1rem;
+}
+
+fieldset {
+	border: 2px solid #3498db;
+	border-radius: 8px;
+	padding: 1.5rem;
+	margin: 1.5rem 0;
+	background-color: #f8f9fa;
+	box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+fieldset:hover {
+	transform: translateY(-0.3125rem);
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+	border-color: #2980b9;
+}
+
+legend {
+	color: #2c3e50;
+	font-weight: bold;
+	font-size: 1.2rem;
+	padding: 0 1rem;
+	background-color: #fff;
+	border: 2px solid #3498db;
+	border-radius: 4px;
+}
+
+p:has(a[href="php/logout.php"]) {
+	text-align: right;
+}
+
+p:has(> strong) {
+	font-size: 1.2rem;
+	color: #2c3e50;
+}
+
+fieldset ol, fieldset ul {
+	text-align: left;
+	margin-left: 2rem;
+	margin-top: 1rem;
+	list-style-position: outside;
+}
+
+fieldset ol {
+	list-style-type: decimal;
+}
+
+fieldset ul {
+	list-style-type: disc;
+}
+
+fieldset li {
+	margin-bottom: 0.8rem;
+	line-height: 1.5;
+	padding-left: 0.5rem;
+}
+
+fieldset li:hover {
+	background-color: rgba(52, 152, 219, 0.1);
+	border-radius: 4px;
+}
+
+.error {
+    background-color: #ffecec;
+    border-left: 4px solid #f44336;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .recursos-catalogo {
+        grid-template-columns: 1fr;
+    }
+}

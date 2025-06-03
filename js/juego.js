@@ -121,7 +121,7 @@ function barajar(array) {
 function crearJuego() {
     const footer = document.getElementsByTagName('footer')[0];
     const form = document.createElement('form');
-    // Copia y baraja las preguntas para no modificar el array original
+    
     const preguntasBarajadas = preguntas.slice();
     barajar(preguntasBarajadas);
 
@@ -171,18 +171,36 @@ function crearJuego() {
 }
 
 function mostrarResultado(puntos, form, footer) {
-    // Elimina el formulario
     form.remove();
-    // Muestra el resultado
+    
     const resultado = document.createElement('section');
-    resultado.innerHTML = '<h2>¡Juego finalizado!</h2>' +
-        '<p>Has obtenido una puntuación de <strong>' + puntos + '</strong> sobre 10.</p>' +
-        '<button type="button">Volver a jugar</button>';
-    // Botón para reiniciar
-    resultado.querySelector('button').onclick = function() {
+    
+    // Crear elementos de forma individual en lugar de usar innerHTML
+    const titulo = document.createElement('h2');
+    titulo.textContent = '¡Juego finalizado!';
+    
+    const texto = document.createElement('p');
+    texto.textContent = 'Has obtenido una puntuación de ';
+    
+    const puntuacion = document.createElement('strong');
+    puntuacion.textContent = puntos;
+    texto.appendChild(puntuacion);
+    
+    texto.appendChild(document.createTextNode(' sobre 10.'));
+    
+    const boton = document.createElement('button');
+    boton.type = 'button';
+    boton.textContent = 'Volver a jugar';
+    boton.onclick = function() {
         resultado.remove();
         crearJuego();
     };
+    
+    // Añadir todos los elementos al section
+    resultado.appendChild(titulo);
+    resultado.appendChild(texto);
+    resultado.appendChild(boton);
+    
     footer.parentNode.insertBefore(resultado, footer);
 }
 
