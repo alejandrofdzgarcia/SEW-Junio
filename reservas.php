@@ -90,6 +90,13 @@
                     <p><a href="php/mis_reservas.php">Ver mis reservas</a></p>
                 </fieldset>
             <?php else: ?>
+                
+                <fieldset>
+                    <legend>Cancelar Reserva</legend>
+                    <p>Anula reservas que ya no necesites.</p>
+                    <p><a href="php/cancelar_reserva.php">Cancelar reserva</a></p>
+                </fieldset>
+            <?php else: ?>
                 <fieldset>
                     <legend>Información de acceso</legend>
                     <p>Para realizar reservas, consultar o cancelarlas, debes iniciar sesión.</p>
@@ -97,7 +104,6 @@
                 </fieldset>
             <?php endif; ?>
         </section>
-        
         
         <section>            
             <fieldset>

@@ -22,7 +22,6 @@ class Noticias {
 
     cargarNoticias() {
         this.$seccion.append('<p>Cargando noticias...</p>');
-
         fetch(this.apiUrl)
             .then(response => {
                 if (!response.ok) {
@@ -96,7 +95,7 @@ class Noticias {
                             $pAutor.html(`✍️ Autor: <span>${article.author}</span>`);
                             $seccionDatos.append($pAutor);
                         }
-                        
+
                         $articulo.append($seccionDatos);
                         
                         $articulo.css({

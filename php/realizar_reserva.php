@@ -1,12 +1,34 @@
 <?php
+<<<<<<< HEAD
 session_start();
 
 if (!isset($_SESSION['usuario_id'])) {
+=======
+/**
+ * Script para realizar reservas de recursos turísticos
+ * 
+ * @author Alejandro Fernández García - UO295813
+ * @version 1.0
+ */
+
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['usuario_id'])) {
+    // Si no está logueado, redirigir a la página de login
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
     header('Location: login.php');
     exit;
 }
 
+<<<<<<< HEAD
 require_once 'DBManager.php';
+=======
+// Incluir la clase DBManager
+require_once 'DBManager.php';
+
+// Inicializar el gestor de base de datos
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
 $dbManager = new DBManager();
 $db = $dbManager->getConnection();
 
@@ -16,6 +38,10 @@ $error = '';
 $recursos = [];
 $presupuesto = null;
 
+<<<<<<< HEAD
+=======
+// Obtener todos los recursos turísticos disponibles
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
 try {
     $query = "SELECT id, nombre, descripcion, precio, limite_ocupacion FROM recursos_turisticos";
     $resultado = $db->query($query);
@@ -29,14 +55,26 @@ try {
     $error = "Error al obtener recursos: " . $e->getMessage();
 }
 
+<<<<<<< HEAD
+=======
+// Procesar la generación de presupuesto
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generar_presupuesto'])) {
     $recurso_id = (int)$_POST['recurso_id'];
     $numero_personas = (int)$_POST['numero_personas'];
     
+<<<<<<< HEAD
+=======
+    // Validar número de personas
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
     if ($numero_personas <= 0) {
         $error = "El número de personas debe ser mayor que cero.";
     } else {
         try {
+<<<<<<< HEAD
+=======
+            // Obtener información del recurso
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
             $query = "SELECT nombre, precio, limite_ocupacion FROM recursos_turisticos WHERE id = ?";
             $stmt = $db->prepare($query);
             $stmt->bind_param('i', $recurso_id);
@@ -44,11 +82,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generar_presupuesto']
             $result = $stmt->get_result();
             $recurso = $result->fetch_assoc();
             
+<<<<<<< HEAD
             if ($numero_personas > $recurso['limite_ocupacion']) {
                 $error = "El número de personas excede el límite de ocupación del recurso (" . $recurso['limite_ocupacion'] . " personas).";
             } else {
                 $precio_total = $recurso['precio'] * $numero_personas;
                 
+=======
+            // Verificar límite de ocupación
+            if ($numero_personas > $recurso['limite_ocupacion']) {
+                $error = "El número de personas excede el límite de ocupación del recurso (" . $recurso['limite_ocupacion'] . " personas).";
+            } else {
+                // Calcular el precio total
+                $precio_total = $recurso['precio'] * $numero_personas;
+                
+                // Generar presupuesto
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
                 $presupuesto = [
                     'recurso_id' => $recurso_id,
                     'recurso_nombre' => $recurso['nombre'],
@@ -63,12 +112,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generar_presupuesto']
     }
 }
 
+<<<<<<< HEAD
+=======
+// Procesar el formulario de reserva
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar_reserva'])) {
     $recurso_id = (int)$_POST['recurso_id'];
     $numero_personas = (int)$_POST['numero_personas'];
     $precio_total = (float)$_POST['precio_total'];
     
     try {
+<<<<<<< HEAD
+=======
+        // Verificar disponibilidad del recurso
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
         $query = "SELECT limite_ocupacion FROM recursos_turisticos WHERE id = ?";
         $stmt = $db->prepare($query);
         $stmt->bind_param('i', $recurso_id);
@@ -79,6 +136,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar_reserva']))
         if ($numero_personas > $recurso['limite_ocupacion']) {
             $error = "El número de personas excede el límite de ocupación del recurso.";
         } else {
+<<<<<<< HEAD
+=======
+            // Realizar la reserva
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
             $query = "INSERT INTO reservas (usuario_id, recurso_id, numero_personas, precio_total, estado) 
                      VALUES (?, ?, ?, ?, 'confirmada')";
             $stmt = $db->prepare($query);
@@ -95,6 +156,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirmar_reserva']))
     }
 }
 
+<<<<<<< HEAD
+=======
+// Cerrar la conexión
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
 $dbManager->closeConnection();
 ?>
 
@@ -113,6 +178,10 @@ $dbManager->closeConnection();
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+<<<<<<< HEAD
+=======
+            // Actualizar el precio total cuando cambie la selección de recurso o fechas
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
             function actualizarPrecio() {
                 const recursoId = document.querySelector('select[name="recurso_id"]').value;
                 const numeroPersonas = document.querySelector('input[name="numero_personas"]').value;
@@ -164,6 +233,10 @@ $dbManager->closeConnection();
             <h2>Formulario de Reserva</h2>            <section>
                 <h3>Información de Reservas</h3>
                 <ul>
+<<<<<<< HEAD
+=======
+                    <li>Las reservas deben realizarse con al menos 24 horas de anticipación.</li>
+>>>>>>> 83776fc979782181856940c1059d88f87d4916a7
                     <li>El precio se calcula por día completo, incluyendo el día de inicio y fin.</li>
                 </ul>
             </section>

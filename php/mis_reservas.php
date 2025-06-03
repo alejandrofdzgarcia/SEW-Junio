@@ -104,46 +104,50 @@ $dbManager->closeConnection();
             <h2>Listado de Reservas</h2>
             
             <?php if (empty($reservas)): ?>
-                <p>No tienes reservas activas en este momento.</p>
-                <p><a href="realizar_reserva.php">Realizar una reserva</a></p>
+                <div class="info-box">
+                    <p>No tienes reservas activas en este momento.</p>
+                    <p><a href="realizar_reserva.php" class="button">Realizar una reserva</a></p>
+                </div>
             <?php else: ?>
-                <?php foreach ($reservas as $reserva): ?>
-                    <fieldset>
-                        <legend><?php echo htmlspecialchars($reserva['recurso_nombre']); ?></legend>
-                        
-                        <p>
-                            <strong>Fechas:</strong> 
-                            <?php echo date('d/m/Y H:i', strtotime($reserva['fecha_hora_inicio'])); ?> - 
-                            <?php echo date('d/m/Y H:i', strtotime($reserva['fecha_hora_fin'])); ?>
-                        </p>
-                        <p>
-                            <strong>Personas:</strong> 
-                            <?php echo $reserva['numero_personas']; ?>
-                        </p>
-                        <p>
-                            <strong>Precio Total:</strong> 
-                            <?php echo number_format($reserva['precio_total'], 2); ?>€
-                        </p>
-                        <p>
-                            <strong>Estado:</strong> 
-                            <span style="<?php echo ($reserva['estado'] == 'cancelada') ? 'color: red;' : ''; ?>">
+                <div class="reservas-grid">
+                    <?php foreach ($reservas as $reserva): ?>
+                        <div class="reserva-card">                            <h3><?php echo htmlspecialchars($reserva['recurso_nombre']); ?></h3>
+                            <p class="reserva-fechas">
+                                <strong>Fechas:</strong> 
+                                <?php echo date('d/m/Y H:i', strtotime($reserva['fecha_hora_inicio'])); ?> - 
+                                <?php echo date('d/m/Y H:i', strtotime($reserva['fecha_hora_fin'])); ?>
+                            </p>
+                            <p class="reserva-personas">
+                                <strong>Personas:</strong> 
+                                <?php echo $reserva['numero_personas']; ?>
+                            </p>
+                            <p class="reserva-precio">
+                                <strong>Precio Total:</strong> 
+                                <?php echo number_format($reserva['precio_total'], 2); ?>€
+                            </p>
+                            <p class="reserva-estado">
+                                <strong>Estado:</strong> 
                                 <?php echo htmlspecialchars($reserva['estado']); ?>
-                            </span>
-                        </p>
-                        <span>
-                            Reservado el: <?php echo date('d/m/Y', strtotime($reserva['fecha_reserva'])); ?>
-                        </span>
-                        
-                        <?php if ($reserva['estado'] != 'cancelada'): ?>
-                            <p><a href="cancelar_reserva.php?id=<?php echo $reserva['id']; ?>">Cancelar</a></p>
-                        <?php endif; ?>
-                    </fieldset>
-                    <hr>
-                <?php endforeach; ?>
+                            </p>
+                            <p class="reserva-descripcion">
+                                <?php echo htmlspecialchars($reserva['recurso_descripcion']); ?>
+                            </p>
+                            <div class="reserva-footer">
+                                <span class="reserva-id">ID: <?php echo $reserva['id']; ?></span>
+                                <span class="reserva-fecha">
+                                    Reservado el: <?php echo date('d/m/Y', strtotime($reserva['fecha_reserva'])); ?>
+                                </span>
+                            </div>
+                            <div class="reserva-actions">
+                                <a href="cancelar_reserva.php?id=<?php echo $reserva['id']; ?>" class="button">Cancelar</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
                 
-                <p>
-                    <a href="realizar_reserva.php">Realizar otra reserva</a>
-                    <a href="../reservas.php">Volver a Reservas</a>
+                <p class="actions-footer">
+                    <a href="realizar_reserva.php" class="button">Realizar otra reserva</a>
+                    <a href="../reservas.php" class="button secondary">Volver a Reservas</a>
                 </p>
             <?php endif; ?>
         </section>
