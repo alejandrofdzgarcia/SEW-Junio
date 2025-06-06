@@ -40,9 +40,10 @@ if (isset($_SESSION['form_data'])) {
         <nav>
             <a href="../index.html" title="Inicio Muros del Nalón">Página principal</a>
             <a href="../gastronomia.html" title="Gastronomía Muros del Nalón">Gastronomía</a>
-            <a href="../rutas.html" title="Rutas Muros del Nalón">Rutas</a>            <a href="../meteorologia.html" title="Meteorología Muros del Nalón">Meteorología</a>
+            <a href="../rutas.html" title="Rutas Muros del Nalón">Rutas</a>
+            <a href="../meteorologia.html" title="Meteorología Muros del Nalón">Meteorología</a>
             <a href="../juego.html" title="Juego Muros del Nalón">Juego</a>
-            <a href="../reservas.php" title="Reservas Muros del Nalón" style="font-weight: bold; text-decoration: underline;">Reservas</a>
+            <a href="../reservas.php" title="Reservas Muros del Nalón">Reservas</a>
             <a href="../ayuda.html" title="Ayuda Muros del Nalón">Ayuda</a>
         </nav>
     </header>

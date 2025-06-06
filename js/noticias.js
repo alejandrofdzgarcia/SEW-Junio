@@ -68,11 +68,7 @@ class Noticias {
                             $articulo.append($figure);
                         } else {
                             const $figure = $('<figure>');
-                            const $iconoNoticia = $('<span>').text('📢').css({
-                                'font-size': '2em',
-                                'display': 'block',
-                                'text-align': 'center'
-                            });
+                            const $iconoNoticia = $('<span>').text('📢');
                             $figure.append($iconoNoticia);
                             $articulo.append($figure);
                         }
@@ -98,16 +94,6 @@ class Noticias {
 
                         $articulo.append($seccionDatos);
                         
-                        $articulo.css({
-                            'border-bottom': '1px solid #ccc',
-                            'padding-bottom': '20px',
-                            'margin-bottom': '20px'
-                        });
-                        
-                        if (index === data.articles.length - 1) {
-                            $articulo.css('border-bottom', 'none');
-                        }
-                        
                         this.$seccion.append($articulo);
                     });
                     
@@ -119,12 +105,8 @@ class Noticias {
                         minute: '2-digit'
                     });
                     
-                    const $actualizacion = $('<footer>').css({
-                        'font-style': 'italic',
-                        'margin-top': '30px',
-                        'padding-top': '10px',
-                        'border-top': '1px solid #eee'
-                    }).html(`<strong>Última actualización:</strong> ${fechaActualizacion}`);
+                    const $actualizacion = $('<footer>')
+                        .html(`<strong>Última actualización:</strong> ${fechaActualizacion}`);
                     
                     this.$seccion.append($actualizacion);
                     
