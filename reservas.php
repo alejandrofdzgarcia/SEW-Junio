@@ -7,7 +7,7 @@
     
     $dbManager = new DBManager();
     $dbManager->createDatabase();
-    $dbManager->importFromCSV("recursos_turisticos", "php/recursos_turisticos.csv");
+    $dbManager->importFromCSV("php/recursos_turisticos.csv");
     
     try {
         $db = $dbManager->getConnection();
@@ -88,6 +88,12 @@
                     <legend>Mis Reservas</legend>
                     <p>Consulta y gestiona tus reservas actuales.</p>
                     <p><a href="php/mis_reservas.php">Ver mis reservas</a></p>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Importar/exportar CSV</legend>
+                    <p>Importe o exporte datos en la base de datos.</p>
+                    <p><a href="php/importar_exportar_csv.php">Ver importar/exportar CSV</a></p>
                 </fieldset>
             <?php else: ?>
                 <fieldset>
