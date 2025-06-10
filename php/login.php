@@ -1,105 +1,47 @@
 <?php
 session_start();
-require_once 'DBManager.php';
+require_once 'UserManager.php';
 
-class LoginManager {
-    private $error = '';
-    private $email = '';
-    private $pdo;
-    
-    public function __construct() {
-        if (isset($_SESSION['usuario_id'])) {
-            header('Location: ../reservas.php');
-            exit;
-        }
-        
-        $this->loadSessionData();
-        
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->processLoginForm();
-        }
-    }
-    
-    private function loadSessionData() {
-        $this->error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
-        if (isset($_SESSION['error'])) {
-            unset($_SESSION['error']);
-        }
-        
-        $this->email = isset($_SESSION['form_data']['email']) ? $_SESSION['form_data']['email'] : '';
-        if (isset($_SESSION['form_data'])) {
-            unset($_SESSION['form_data']);
-        }
-    }
-    
-    private function connectToDatabase() {
-        try {
-            $dsn = 'mysql:host=localhost;dbname=muros_nalon;charset=utf8mb4';
-            $usuario_db = 'DBUSER2025';
-            $password_db = 'DBPWD2025';
+// Crear instancia del gestor de usuarios
+$userManager = new UserManager();
 
-            $opciones = [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-            ];
-            
-            $this->pdo = new PDO($dsn, $usuario_db, $password_db, $opciones);
-            return true;
-        } catch (PDOException $e) {
-            $this->error = 'Error de conexión a la base de datos: ' . $e->getMessage();
-            return false;
-        }
-    }
-    
-    private function processLoginForm() {
-        $this->email = isset($_POST['email']) ? trim($_POST['email']) : '';
-        $password = isset($_POST['password']) ? $_POST['password'] : '';
-        
-        if (empty($this->email) || empty($password)) {
-            $this->error = 'Todos los campos son obligatorios';
-            return;
-        }
-        
-        if (!$this->connectToDatabase()) {
-            return;
-        }
-        
-        try {
-            $stmt = $this->pdo->prepare("SELECT id, nombre, email, password FROM usuarios WHERE email = ?");
-            $stmt->execute([$this->email]);
-            $usuario = $stmt->fetch();
-            
-            if ($usuario && password_verify($password, $usuario['password'])) {
-                $this->authenticateUser($usuario);
-            } else {
-                $this->error = 'Email o contraseña incorrectos';
-            }
-        } catch (PDOException $e) {
-            $this->error = 'Error al iniciar sesión: ' . $e->getMessage();
-        }
-    }
-    
-    private function authenticateUser($usuario) {
-        $_SESSION['usuario_id'] = $usuario['id'];
-        $_SESSION['usuario_nombre'] = $usuario['nombre'];
-        $_SESSION['usuario_email'] = $usuario['email'];
-        
-        header('Location: ../reservas.php');
-        exit;
-    }
-    
-    public function getError() {
-        return $this->error;
-    }
-    
-    public function getEmail() {
-        return $this->email;
-    }
+// Si ya hay una sesión activa, redirigir a la página de reservas
+if ($userManager->hayUsuarioLogueado()) {
+    header('Location: ../reservas.php');
+    exit;
 }
 
-$loginManager = new LoginManager();
-$error = $loginManager->getError();
-$email = $loginManager->getEmail();
+// Variables para el formulario
+$error = '';
+$email = '';
+
+// Cargar datos de sesión (si hay error previo)
+if (isset($_SESSION['error'])) {
+    $error = $_SESSION['error'];
+    unset($_SESSION['error']);
+}
+
+if (isset($_SESSION['form_data'])) {
+    $email = isset($_SESSION['form_data']['email']) ? $_SESSION['form_data']['email'] : '';
+    unset($_SESSION['form_data']);
+}
+
+// Procesar formulario de login
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+    
+    if ($userManager->iniciarSesion($email, $password)) {
+        // Login exitoso, redirigir a la página de reservas
+        header('Location: ../reservas.php');
+        exit;
+    } else {
+        // Login fallido, obtener error y datos del formulario
+        $error = $userManager->getError();
+        $formData = $userManager->getFormData();
+        $email = isset($formData['email']) ? $formData['email'] : '';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -161,10 +103,10 @@ $email = $loginManager->getEmail();
     </main>
 
     <footer>
-        <p>2025 Turismo de Muros del Nalón</p>
-        <p><a href="https://www.uniovi.es">Universidad de Oviedo</a> 
-            - <a href="https://www.uniovi.es/estudia/grados/ingenieria/informaticasoftware/-/fof/asignatura/GIISOF01-3-002">Software y Estándares para la Web</a></p>
-        <p><a href="https://github.com/alejandrofdzgarcia">Diseñado por Alejandro Fernández García</a></p>
+        <p>2025 Turismo de Muros del Nalón</p>  <p>2025 Turismo de Muros del Nalón</p>
+        <p><a href="https://www.uniovi.es">Universidad de Oviedo</a> //www.uniovi.es">Universidad de Oviedo</a> 
+            - <a href="https://www.uniovi.es/estudia/grados/ingenieria/informaticasoftware/-/fof/asignatura/GIISOF01-3-002">Software y Estándares para la Web</a></p>informaticasoftware/-/fof/asignatura/GIISOF01-3-002">Software y Estándares para la Web</a></p>
+        <p><a href="https://github.com/alejandrofdzgarcia">Diseñado por Alejandro Fernández García</a></p>jandro Fernández García</a></p>
     </footer>
 </body>
 </html>

@@ -1,9 +1,10 @@
 <?php
 /**
  * Script para visualizar las reservas del usuario actual
+ * utilizando el paradigma orientado a objetos
  * 
  * @author Alejandro Fernández García - UO295813
- * @version 1.0
+ * @version 2.1
  */
 
 session_start();
@@ -15,42 +16,31 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 
-// Incluir la clase DBManager
-require_once 'DBManager.php';
+// Incluir la clase ReservasManager
+require_once 'ReservasManager.php';
 
-// Inicializar el gestor de base de datos
-$dbManager = new DBManager();
-$db = $dbManager->getConnection();
+// Inicializar el gestor de reservas con el ID del usuario actual
+$reservasManager = new ReservasManager($_SESSION['usuario_id']);
 
-$usuario_id = $_SESSION['usuario_id'];
-$reservas = [];
+// Obtener las reservas del usuario actual
+$reservas = $reservasManager->obtenerReservasUsuario();
+
+// Obtener mensajes de error o éxito
 $error = '';
+$mensaje = '';
 
-// Obtener las reservas del usuario
-try {
-    $query = "SELECT r.id, r.fecha_reserva, r.numero_personas, r.precio_total, r.estado,
-                     rt.nombre as recurso_nombre, rt.descripcion as recurso_descripcion,
-                     rt.fecha_hora_inicio, rt.fecha_hora_fin
-              FROM reservas r
-              JOIN recursos_turisticos rt ON r.recurso_id = rt.id
-              WHERE r.usuario_id = ?
-              ORDER BY r.fecha_reserva DESC";
-              
-    $stmt = $db->prepare($query);
-    $stmt->bind_param('i', $usuario_id);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-    
-    if ($resultado && $resultado->num_rows > 0) {
-        while ($fila = $resultado->fetch_assoc()) {
-            $reservas[] = $fila;
-        }
-    }
-} catch (Exception $e) {
-    $error = "Error al obtener reservas: " . $e->getMessage();
+if (isset($_GET['success'])) {
+    $mensaje = $_GET['success'];
 }
 
-$dbManager->closeConnection();
+if (isset($_GET['error'])) {
+    $error = $_GET['error'];
+}
+
+// Si hay error en el gestor, mostrarlo
+if (empty($error) && $reservasManager->getError()) {
+    $error = $reservasManager->getError();
+}
 ?>
 
 <!DOCTYPE html>
@@ -85,69 +75,70 @@ $dbManager->closeConnection();
     <main>
         <h1>Mis Reservas</h1>
         
-        <?php if (isset($_GET['success'])): ?>
-            <p style="color: green; font-weight: bold;"><?php echo htmlspecialchars($_GET['success']); ?></p>
+        <?php if (!empty($mensaje)): ?>
+            <p style="color: green; font-weight: bold;"><?php echo htmlspecialchars($mensaje); ?></p>
         <?php endif; ?>
 
-        <?php if (isset($_GET['error'])): ?>
-            <p style="color: red; font-weight: bold;"><?php echo htmlspecialchars($_GET['error']); ?></p>
-        <?php endif; ?>
-        
         <?php if (!empty($error)): ?>
-            <section>
-                <p><?php echo htmlspecialchars($error); ?></p>
-            </section>
+            <p style="color: red; font-weight: bold;"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
         
         <section>
             <h2>Listado de Reservas</h2>
             
             <?php if (empty($reservas)): ?>
-                <div class="info-box">
+                <section>
                     <p>No tienes reservas activas en este momento.</p>
-                    <p><a href="realizar_reserva.php" class="button">Realizar una reserva</a></p>
-                </div>
+                    <p><a href="realizar_reserva.php">Realizar una reserva</a></p>
+                </section>
             <?php else: ?>
-                <div class="reservas-grid">
+                <section>
                     <?php foreach ($reservas as $reserva): ?>
-                        <div class="reserva-card">                            <h3><?php echo htmlspecialchars($reserva['recurso_nombre']); ?></h3>
-                            <p class="reserva-fechas">
+                        <article>
+                            <h3><?php echo htmlspecialchars($reserva['recurso_nombre']); ?></h3>
+                            <p>
                                 <strong>Fechas:</strong> 
                                 <?php echo date('d/m/Y H:i', strtotime($reserva['fecha_hora_inicio'])); ?> - 
                                 <?php echo date('d/m/Y H:i', strtotime($reserva['fecha_hora_fin'])); ?>
                             </p>
-                            <p class="reserva-personas">
+                            <p>
                                 <strong>Personas:</strong> 
                                 <?php echo $reserva['numero_personas']; ?>
                             </p>
-                            <p class="reserva-precio">
+                            <p>
                                 <strong>Precio Total:</strong> 
                                 <?php echo number_format($reserva['precio_total'], 2); ?>€
                             </p>
-                            <p class="reserva-estado">
+                            <p>
                                 <strong>Estado:</strong> 
                                 <?php echo htmlspecialchars($reserva['estado']); ?>
                             </p>
-                            <p class="reserva-descripcion">
+                            <p>
+                                <strong>Descripción:</strong>
                                 <?php echo htmlspecialchars($reserva['recurso_descripcion']); ?>
                             </p>
-                            <div class="reserva-footer">
-                                <span class="reserva-id">ID: <?php echo $reserva['id']; ?></span>
-                                <span class="reserva-fecha">
-                                    Reservado el: <?php echo date('d/m/Y', strtotime($reserva['fecha_reserva'])); ?>
-                                </span>
-                            </div>
-                            <div class="reserva-actions">
-                                <a href="cancelar_reserva.php?id=<?php echo $reserva['id']; ?>" class="button">Cancelar</a>
-                            </div>
-                        </div>
+                            <section>
+                                <p>
+                                    <span>
+                                        Reservado el: <?php echo date('d/m/Y', strtotime($reserva['fecha_reserva'])); ?>
+                                    </span>
+                                </p>
+                                <?php if (strtolower($reserva['estado']) !== 'cancelada'): ?>
+                                <p>
+                                    <a href="cancelar_reserva.php?id=<?php echo $reserva['id']; ?>">Cancelar</a>
+                                </p>
+                                <?php endif; ?>
+                            </section>
+                        </article>
                     <?php endforeach; ?>
-                </div>
+                </section>
                 
-                <p class="actions-footer">
-                    <a href="realizar_reserva.php" class="button">Realizar otra reserva</a>
-                    <a href="../reservas.php" class="button secondary">Volver a Reservas</a>
-                </p>
+                <section>
+                    <p>
+                        <a href="realizar_reserva.php">Realizar otra reserva</a>
+                        <a href="../reservas.php">Volver a Reservas</a>
+                    </p>
+                </section>
             <?php endif; ?>
         </section>
     </main>

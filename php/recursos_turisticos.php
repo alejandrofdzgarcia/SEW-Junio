@@ -1,33 +1,18 @@
 <?php
 session_start();
 
-require_once 'DBManager.php';
-$dbManager = new DBManager();
-$dbManager->createDatabase();
+require_once 'ReservasManager.php';
 
 $usuarioLogueado = isset($_SESSION['usuario_id']);
 $nombreUsuario = $usuarioLogueado ? $_SESSION['usuario_nombre'] : '';
+$usuario_id = $usuarioLogueado ? $_SESSION['usuario_id'] : null;
 
-try {
-    $db = $dbManager->getConnection();
-    
-    $query = "SELECT * FROM recursos_turisticos ORDER BY nombre";
-    $result = $db->query($query);
-    
-    if (!$result) {
-        throw new Exception("Error al consultar recursos turísticos: " . $db->error);
-    }
-    
-    $recursos = [];
-    while ($row = $result->fetch_assoc()) {
-        $recursos[] = $row;
-    }
-    
-} catch (Exception $e) {
-    $errorDB = "Error: " . $e->getMessage();
-}
+// Instanciar el ReservasManager con el ID del usuario si está logueado
+$reservasManager = new ReservasManager($usuario_id);
 
-$dbManager->closeConnection();
+// Obtener los recursos turísticos
+$recursos = $reservasManager->getRecursos();
+$errorDB = $reservasManager->getError();
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +46,7 @@ $dbManager->closeConnection();
     
     <main>
         <h1>Catálogo de Recursos Turísticos</h1>
-          <?php if(isset($errorDB)): ?>
+          <?php if(!empty($errorDB)): ?>
             <section>
                 <p><?php echo $errorDB; ?></p>
                 <p>Por favor, inténtelo de nuevo más tarde o contacte con el administrador.</p>
@@ -92,11 +77,11 @@ $dbManager->closeConnection();
                         <p><strong>Límite de ocupación:</strong> <?php echo htmlspecialchars($recurso['limite_ocupacion']); ?> personas</p>
                         
                         <p><strong>Fecha y hora de inicio:</strong> 
-                            <?php echo date('d/m/Y H:i', strtotime($recurso['fecha_hora_inicio'])); ?>
+                            <?php echo isset($recurso['fecha_hora_inicio']) ? date('d/m/Y H:i', strtotime($recurso['fecha_hora_inicio'])) : 'No disponible'; ?>
                         </p>
                         
                         <p><strong>Fecha y hora de fin:</strong> 
-                            <?php echo date('d/m/Y H:i', strtotime($recurso['fecha_hora_fin'])); ?>
+                            <?php echo isset($recurso['fecha_hora_fin']) ? date('d/m/Y H:i', strtotime($recurso['fecha_hora_fin'])) : 'No disponible'; ?>
                         </p>
                         
                         <p><strong>Precio:</strong> 

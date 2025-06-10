@@ -4,7 +4,25 @@
     session_start();
     
     require_once 'php/DBManager.php';
+    require_once 'php/UserManager.php';
     
+    // Crear instancia del gestor de usuarios
+    $userManager = new UserManager();
+    
+    // Gestionar acciones de usuario (si existen)
+    $mensaje = '';
+    $error = '';
+    
+    // Manejar posibles mensajes enviados desde otras páginas
+    if (isset($_GET['mensaje'])) {
+        $mensaje = $_GET['mensaje'];
+    }
+    
+    if (isset($_GET['error'])) {
+        $error = $_GET['error'];
+    }
+    
+    // Crear la base de datos e importar datos
     $dbManager = new DBManager();
     $dbManager->createDatabase();
     $dbManager->importFromCSV("php/recursos_turisticos.csv");
@@ -15,6 +33,7 @@
         $errorDB = "Error de conexión a la base de datos: " . $e->getMessage();
     }
     
+    // Comprobar si hay usuario logueado
     $usuarioLogueado = isset($_SESSION['usuario_id']);
     $nombreUsuario = $usuarioLogueado ? $_SESSION['usuario_nombre'] : '';
     
@@ -50,7 +69,20 @@
     
     <main>
         <h1>Central de Reservas Turísticas</h1>
-          <?php if(isset($errorDB)): ?>
+        
+        <?php if (!empty($mensaje)): ?>
+            <section>
+                <p><?php echo htmlspecialchars($mensaje); ?></p>
+            </section>
+        <?php endif; ?>
+        
+        <?php if (!empty($error)): ?>
+            <section>
+                <p><?php echo htmlspecialchars($error); ?></p>
+            </section>
+        <?php endif; ?>
+        
+        <?php if(isset($errorDB)): ?>
             <section>
                 <p><strong>Error de Base de Datos:</strong> <?php echo $errorDB; ?></p>
                 <p>Por favor, contacte con el administrador del sistema.</p>
@@ -60,7 +92,9 @@
         <section>
             <?php if($usuarioLogueado): ?>
                 <p>Bienvenido/a, <strong><?php echo htmlspecialchars($nombreUsuario); ?></strong></p>
-                <p><a href="php/logout.php">Cerrar sesión</a></p>
+                <form action="php/logout.php" method="POST">
+                    <button type="submit">Cerrar sesión</button>
+                </form>
             <?php else: ?>
                 <p>Inicia sesión para gestionar tus reservas</p>
                 <p>
