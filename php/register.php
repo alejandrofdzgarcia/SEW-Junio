@@ -32,7 +32,6 @@ if (isset($_SESSION['form_data'])) {
     <meta name="keywords" content="registro, usuario, reservas"/>    
     <link rel="stylesheet" type="text/css" href="../estilo/estilo.css">
     <link rel="stylesheet" type="text/css" href="../estilo/layout.css">
-    <link rel="stylesheet" type="text/css" href="../estilo/reservas.css">
 </head>
 <body>
     <header>

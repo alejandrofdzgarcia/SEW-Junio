@@ -42,7 +42,6 @@ $dbManager->closeConnection();
     <meta name="keywords" content="recursos, turismo, catálogo"/>      
     <link rel="stylesheet" type="text/css" href="../estilo/estilo.css">
     <link rel="stylesheet" type="text/css" href="../estilo/layout.css">
-    <link rel="stylesheet" type="text/css" href="../estilo/reservas.css">
 </head>
 <body>
     <header>

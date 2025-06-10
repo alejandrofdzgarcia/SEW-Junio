@@ -1,3 +1,4 @@
+TABLA: recursos_turisticos
 nombre,limite_ocupacion,fecha_hora_inicio,fecha_hora_fin,precio,descripcion
 Museo Marítimo de San Esteban,50,2025-06-01 10:00:00,2025-06-01 18:00:00,5.00,"Museo dedicado a la historia marítima de la zona, exposiciones y actividades para toda la familia."
 Ruta de los Miradores,20,2025-06-01 09:00:00,2025-06-01 13:00:00,0.00,"Ruta senderista guiada por los acantilados de Muros del Nalón, con vistas al mar Cantábrico."

@@ -2,32 +2,37 @@
 session_start();
 require_once 'DBManager.php';
 
-// si usuario logueado, redirigir a reservas
-if (isset($_SESSION['usuario_id'])) {
-    header('Location: ../reservas.php');
-    exit;
-}
-
-// Verificar si hay mensajes de error
-$error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
-if (isset($_SESSION['error'])) {
-    unset($_SESSION['error']);
-}
-
-// Verificar si hay datos de formulario previos
-$email = isset($_SESSION['form_data']['email']) ? $_SESSION['form_data']['email'] : '';
-if (isset($_SESSION['form_data'])) {
-    unset($_SESSION['form_data']); // limpiar datos formulario
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
-    $password = isset($_POST['password']) ? $_POST['password'] : '';
+class LoginManager {
+    private $error = '';
+    private $email = '';
+    private $pdo;
     
-    // todos los campos deben de estar completos
-    if (empty($email) || empty($password)) {
-        $error = 'Todos los campos son obligatorios';
-    } else {
+    public function __construct() {
+        if (isset($_SESSION['usuario_id'])) {
+            header('Location: ../reservas.php');
+            exit;
+        }
+        
+        $this->loadSessionData();
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->processLoginForm();
+        }
+    }
+    
+    private function loadSessionData() {
+        $this->error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
+        if (isset($_SESSION['error'])) {
+            unset($_SESSION['error']);
+        }
+        
+        $this->email = isset($_SESSION['form_data']['email']) ? $_SESSION['form_data']['email'] : '';
+        if (isset($_SESSION['form_data'])) {
+            unset($_SESSION['form_data']);
+        }
+    }
+    
+    private function connectToDatabase() {
         try {
             $dsn = 'mysql:host=localhost;dbname=muros_nalon;charset=utf8mb4';
             $usuario_db = 'DBUSER2025';
@@ -38,28 +43,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             ];
             
-            $pdo = new PDO($dsn, $usuario_db, $password_db, $opciones);
-            
-            $stmt = $pdo->prepare("SELECT id, nombre, email, password FROM usuarios WHERE email = ?");
-            $stmt->execute([$email]);
+            $this->pdo = new PDO($dsn, $usuario_db, $password_db, $opciones);
+            return true;
+        } catch (PDOException $e) {
+            $this->error = 'Error de conexión a la base de datos: ' . $e->getMessage();
+            return false;
+        }
+    }
+    
+    private function processLoginForm() {
+        $this->email = isset($_POST['email']) ? trim($_POST['email']) : '';
+        $password = isset($_POST['password']) ? $_POST['password'] : '';
+        
+        if (empty($this->email) || empty($password)) {
+            $this->error = 'Todos los campos son obligatorios';
+            return;
+        }
+        
+        if (!$this->connectToDatabase()) {
+            return;
+        }
+        
+        try {
+            $stmt = $this->pdo->prepare("SELECT id, nombre, email, password FROM usuarios WHERE email = ?");
+            $stmt->execute([$this->email]);
             $usuario = $stmt->fetch();
             
             if ($usuario && password_verify($password, $usuario['password'])) {
-                $_SESSION['usuario_id'] = $usuario['id'];
-                $_SESSION['usuario_nombre'] = $usuario['nombre'];
-                $_SESSION['usuario_email'] = $usuario['email'];
-                
-                header('Location: ../reservas.php');
-                exit;
+                $this->authenticateUser($usuario);
             } else {
-                $error = 'Email o contraseña incorrectos';
+                $this->error = 'Email o contraseña incorrectos';
             }
-            
         } catch (PDOException $e) {
-            $error = 'Error al iniciar sesión: ' . $e->getMessage();
+            $this->error = 'Error al iniciar sesión: ' . $e->getMessage();
         }
     }
+    
+    private function authenticateUser($usuario) {
+        $_SESSION['usuario_id'] = $usuario['id'];
+        $_SESSION['usuario_nombre'] = $usuario['nombre'];
+        $_SESSION['usuario_email'] = $usuario['email'];
+        
+        header('Location: ../reservas.php');
+        exit;
+    }
+    
+    public function getError() {
+        return $this->error;
+    }
+    
+    public function getEmail() {
+        return $this->email;
+    }
 }
+
+$loginManager = new LoginManager();
+$error = $loginManager->getError();
+$email = $loginManager->getEmail();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -73,7 +113,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="keywords" content="login, usuario, reservas"/> 
     <link rel="stylesheet" type="text/css" href="../estilo/estilo.css">
     <link rel="stylesheet" type="text/css" href="../estilo/layout.css">
-    <link rel="stylesheet" type="text/css" href="../estilo/reservas.css">
 </head>
 <body>
     <header>

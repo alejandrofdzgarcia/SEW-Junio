@@ -1,4 +1,4 @@
-
+/* Base Styles */
 body {
     margin: 0;
     padding: 0;
@@ -14,22 +14,21 @@ h1, h2 {
 
 a {
     color: #004085;
-    text-decoration: underline;
-    font-weight: bold;
-    border-bottom: 1px solid currentColor;
-    padding-bottom: 1px;
     text-decoration: none;
+    font-weight: bold;
+    border-bottom: 0.0625rem solid currentColor; /* 1px */
+    padding-bottom: 0.0625rem; /* 1px */
+    transition: border-bottom 0.2s ease, color 0.3s ease;
 }
 
 a:hover {
     color: #002752;
-    border-bottom: 2px solid currentColor;
-    transition: border-bottom 0.2s ease, color 0.3s ease;
+    border-bottom: 0.125rem solid currentColor; /* 2px */
 }
 
 a:focus {
-    outline: 2px solid #0099ff;
-    outline-offset: 2px;
+    outline: 0.125rem solid #0099ff; /* 2px */
+    outline-offset: 0.125rem; /* 2px */
 }
 
 ul, ol {
@@ -45,6 +44,11 @@ img, video, audio {
     margin: 1rem auto;
 }
 
+p {
+    color: #222;
+}
+
+/* Table Styles */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -52,10 +56,10 @@ table {
 }
 
 table, th, td {
-    border: 1px solid #ddd;
+    border: 0.0625rem solid #ddd; /* 1px */
 }
 
-td, th {
+th, td {
     padding: 0.5rem;
 }
 
@@ -64,12 +68,13 @@ th {
     font-weight: bold;
 }
 
+/* Form Elements */
 button {
     background-color: #0066cc;
     color: #fff;
     border: none;
     padding: 0.6rem 1.2rem;
-    border-radius: 4px;
+    border-radius: 0.25rem; /* 4px */
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
@@ -82,8 +87,8 @@ button:hover {
 }
 
 button:focus {
-    outline: 2px solid #0099ff;
-    outline-offset: 2px;
+    outline: 0.125rem solid #0099ff; /* 2px */
+    outline-offset: 0.125rem; /* 2px */
 }
 
 button:disabled {
@@ -92,27 +97,40 @@ button:disabled {
     cursor: not-allowed;
 }
 
-form, div, section, article, main {
-    text-align: center;
+fieldset {
+    border: 0.125rem solid #3498db; /* 2px */
+    border-radius: 0.5rem; /* 8px */
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    background-color: #f8f9fa;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-main {
-    padding: 2rem;
-    background: #fff;
-    margin: 2rem auto;
-    max-width: 50rem;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-    border: 2px solid #ddd;
-    border-radius: 8px;
+fieldset:hover {
+    transform: translateY(-0.3125rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    border-color: #2980b9;
 }
 
+legend {
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    background-color: #fff;
+    border: 0.125rem solid #3498db; /* 2px */
+    border-radius: 0.25rem; /* 4px */
+}
+
+/* Layout Components */
 header {
     background-color: #2c3e50;
     color: #ecf0f1;
     padding: 1.5rem 0;
     text-align: center;
-    border-bottom: 3px solid #3498db;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 0.1875rem solid #3498db; /* 3px */
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1); /* 0 2px 10px */
 }
 
 header h1 a {
@@ -120,6 +138,7 @@ header h1 a {
     text-decoration: none;
     font-size: 1.8rem;
     transition: color 0.3s ease;
+    border-bottom: none;
 }
 
 header h1 a:hover {
@@ -132,9 +151,9 @@ nav, header nav {
     justify-content: center;
     flex-wrap: wrap;
     background-color: #34495e;
-    border-radius: 6px;
+    border-radius: 0.375rem; /* 6px */
     padding: 0.5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1); /* 0 2px 5px */
 }
 
 nav a, header nav a {
@@ -142,64 +161,143 @@ nav a, header nav a {
     text-decoration: none;
     padding: 0.7rem 1.2rem;
     margin: 0.2rem 0.3rem;
-    border-radius: 4px;
+    border-radius: 0.25rem; /* 4px */
     transition: all 0.3s ease;
     font-weight: 500;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.03125rem; /* 0.5px */
     position: relative;
-    color: #ffffff;
-    border-bottom: 2px solid transparent;
+    border-bottom: 0.125rem solid transparent; /* 2px */
 }
 
 nav a:hover, header nav a:hover {
     background-color: #2980b9;
     color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-bottom: 2px solid #fff;
+    transform: translateY(-0.125rem); /* -2px */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* 0 4px 8px */
+    border-bottom: 0.125rem solid #fff; /* 2px */
 }
 
 nav a.active, header nav a.active {
     background-color: #3498db;
     color: #fff;
     font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2); /* 0 2px 4px */
 }
 
 nav a.active::after, header nav a.active::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -0.3125rem; /* -5px */
     left: 50%;
     transform: translateX(-50%);
     width: 30%;
-    height: 3px;
+    height: 0.1875rem; /* 3px */
     background-color: #2ecc71;
-    border-radius: 2px;
+    border-radius: 0.125rem; /* 2px */
 }
 
-p {
-    color: #222;
+main {
+    padding: 2rem;
+    background: #fff;
+    margin: 2rem auto;
+    max-width: 50rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    border: 0.125rem solid #ddd; /* 2px */
+    border-radius: 0.5rem; /* 8px */
 }
 
-body > p {
-    background-color: #f8f9fa;
-    padding: 0.6rem 1rem;
-    margin: 0;
-    border-bottom: 1px solid #e0e0e0;
-    font-size: 0.9rem;
-    color: #444;
+main.reservas {
+    max-width: 65rem;
 }
 
-body > p a {
-    color: #0056b3;
+main h1 {
+    text-align: center;
+    color: #2c3e50;
+    border-bottom: 0.2rem solid #3498db;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+main h2 {
+    color: #2c3e50;
+    border-left: 0.3rem solid #3498db;
+    padding-left: 1rem;
+    margin-top: 2.5rem;
+}
+
+main a {
+    display: inline-block;
+    background-color: #0066cc;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.25rem; /* 4px */
     text-decoration: none;
-    transition: color 0.2s ease;
+    margin: 0.5rem;
+    transition: background-color 0.3s ease;
+    border-bottom: none;
 }
 
-body > p a:hover {
-    color: #003d7a;
-    text-decoration: underline;
+main a:hover {
+    background-color: #003366;
+    transform: translateY(-0.2rem);
+    border-bottom: none;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    max-width: 75rem;
+    align-items: center;
+    margin: 0 auto 2.5rem auto; /* Centrar horizontalmente */
+    text-align: center;
+}
+
+section:last-of-type {
+    margin-bottom: 0;
+}
+
+section > p, section > a {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+article {
+    background-color: #fff;
+    border-radius: 0.625rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    padding: 1.25rem;
+    width: calc(20% - 1.25rem);
+    min-width: 12.5rem;
+    flex-grow: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 0.125rem solid #ddd; /* 2px */
+    text-align: center;
+}
+
+article:hover {
+    transform: translateY(-0.3125rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    border-color: #3498db;
+}
+
+article h3 {
+    color: #2c3e50;
+    text-align: center;
+    font-size: 1.3em;
+    margin-top: 0;
+    text-transform: capitalize;
+    border-bottom: 0.125rem solid #3498db;
+    padding-bottom: 0.625rem;
+    margin-bottom: 0.9375rem;
+}
+
+article p {
+    color: #333;
+    text-align: center;
+    margin: 0.5rem 0;
 }
 
 footer {
@@ -208,8 +306,8 @@ footer {
     padding: 2rem 0;
     margin-top: 2rem;
     text-align: center;
-    border-top: 3px solid #3498db;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    border-top: 0.1875rem solid #3498db; /* 3px */
+    box-shadow: 0 -0.125rem 0.625rem rgba(0, 0, 0, 0.1); /* 0 -2px 10px */
 }
 
 footer p {
@@ -231,6 +329,7 @@ footer p:first-child::before {
 footer a {
     color: #ffffff;
     text-decoration: underline;
+    border-bottom: none;
 }
 
 footer a:hover {
@@ -238,32 +337,88 @@ footer a:hover {
     text-decoration: underline;
 }
 
-@media (max-width: 768px) {
+/* Special Selectors */
+form, div, section, article, main {
+    text-align: center;
+}
+
+body > p {
+    background-color: #f8f9fa;
+    padding: 0.6rem 1rem;
+    margin: 0;
+    border-bottom: 0.0625rem solid #e0e0e0; /* 1px */
+    font-size: 0.9rem;
+    color: #444;
+}
+
+body > p a {
+    color: #0056b3;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    border-bottom: none;
+}
+
+body > p a:hover {
+    color: #003d7a;
+    text-decoration: underline;
+}
+
+p:has(a[href="php/logout.php"]) {
+    text-align: right;
+}
+
+p:has(> strong) {
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
+
+fieldset ol, fieldset ul {
+    text-align: left;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    list-style-position: outside;
+}
+
+fieldset ol {
+    list-style-type: decimal;
+}
+
+fieldset ul {
+    list-style-type: disc;
+}
+
+fieldset li {
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+    padding-left: 0.5rem;
+}
+
+fieldset li:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    border-radius: 0.25rem; /* 4px */
+}
+
+/* Responsive Styles */
+@media (max-width: 48rem) { /* 768px */
+    .recursos-catalogo {
+        grid-template-columns: 1fr;
+    }
     
     header {
         padding: 1rem 0;
-    }
-    
-    header nav {
-        flex-direction: column;
-        padding: 0.3rem;
-    }
-    
-    header nav a {
-        margin: 0.15rem;
-        padding: 0.5rem 1rem;
-        width: 90%;
     }
     
     header h1 a {
         font-size: 1.5rem;
     }
     
+    header nav,
     nav {
         flex-direction: column;
         padding: 0.3rem;
     }
     
+    header nav a,
     nav a {
         margin: 0.15rem;
         padding: 0.5rem 1rem;
