@@ -207,7 +207,7 @@ def generate_altimetry_svgs(xml_file, output_dir):
             }
             
             # Generar un SVG individual para esta ruta con su propio rango de distancias
-            route_name_safe = normalize_filename(route["name"])
+            route_name_safe = normalize_filename(route_data["name"])
             individual_svg_file = os.path.join(output_dir, f"altimetria_{route_name_safe}.svg")
             generate_individual_svg(route_data, individual_svg_file)
 
