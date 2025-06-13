@@ -322,10 +322,6 @@ footer p:first-child {
     font-size: 1rem;
 }
 
-footer p:first-child::before {
-    content: "© ";
-}
-
 footer a {
     color: #ffffff;
     text-decoration: underline;

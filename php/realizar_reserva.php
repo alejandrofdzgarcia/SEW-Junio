@@ -127,13 +127,13 @@ if (empty($error) && $reservasManager->getError()) {
         
         <?php if (!empty($mensaje)): ?>
             <section>
-                <p class="mensaje-exito"><?php echo htmlspecialchars($mensaje); ?></p>
+                <p><?php echo htmlspecialchars($mensaje); ?></p>
                 <p><a href="mis_reservas.php" class="button">Ver mis reservas</a></p>
-                <p><a href="../reservas.php" class="button secondary">Volver a Reservas</a></p>
+                <p><a href="../reservas.php" class="button">Volver a Reservas</a></p>
             </section>
         <?php elseif (!empty($error)): ?>
             <section>
-                <p class="mensaje-error"><?php echo htmlspecialchars($error); ?></p>
+                <p><?php echo htmlspecialchars($error); ?></p>
             </section>
         <?php endif; ?>
         

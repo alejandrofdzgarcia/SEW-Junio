@@ -54,7 +54,7 @@
                         $importResults = $dbManager->importFromCSV($tmpFile);
                         
                         if (!empty($importResults)) {
-                            echo '<div class="success-message">';
+                            echo '<div>';
                             echo '<p>Datos importados correctamente:</p>';
                             echo '<ul>';
                             foreach ($importResults as $table => $count) {
@@ -66,10 +66,10 @@
                             echo '<p>No se encontraron datos para importar en el archivo CSV.</p>';
                         }
                     } catch (Exception $e) {
-                        echo '<p class="error-message">Error al importar datos: ' . htmlspecialchars($e->getMessage()) . '</p>';
+                        echo '<p>Error al importar datos: ' . htmlspecialchars($e->getMessage()) . '</p>';
                     }
                 } else {
-                    echo '<p class="error-message">No se ha podido procesar el archivo</p>';
+                    echo '<p>No se ha podido procesar el archivo</p>';
                 }
             }
             ?>
@@ -99,7 +99,7 @@
                     $dbManager->exportToCSV($tabla);
                     // Nota: el código de descarga no se ejecutará porque exportToCSV ya realiza un exit()
                 } catch (Exception $e) {
-                    echo '<p class="error-message">Error al exportar datos: ' . htmlspecialchars($e->getMessage()) . '</p>';
+                    echo '<p>Error al exportar datos: ' . htmlspecialchars($e->getMessage()) . '</p>';
                 }
             }
             ?>
