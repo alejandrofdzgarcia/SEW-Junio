@@ -58,10 +58,10 @@ class Rutas {
         
         this.rutas.forEach(ruta => {
             const rutaHTML = `
-                <article class="ruta">
+                <article>
                     <h3>${ruta.nombre}</h3>
                     <p>${ruta.descripcion}</p>
-                    <div class="detalles-ruta">
+                    <div>
                         <p><strong>Distancia:</strong> ${ruta.distancia}</p>
                         <p><strong>Duración estimada:</strong> ${ruta.duracion}</p>
                         <p><strong>Dificultad:</strong> ${ruta.dificultad}</p>
@@ -78,7 +78,7 @@ class Rutas {
     generarGaleriaImagenes(imagenes) {
         if (imagenes.length === 0) return '';
         
-        let galeriaHTML = '<div class="galeria-imagenes">';
+        let galeriaHTML = '<div>';
         imagenes.forEach(img => {
             galeriaHTML += `<img src="${img}" alt="Imagen de la ruta" />`;
         });
@@ -92,8 +92,9 @@ class Rutas {
     }
 }
 
-// Inicialización cuando el documento esté listo
-$(document).ready(function() {
+// Wrap initialization in DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize FilterContent here
     const rutasApp = new Rutas();
     
     $("#processFile").on("click", function() {
@@ -199,9 +200,9 @@ $(document).ready(function() {
     function cargarAltimetria(nombreRuta) {
         const nombreArchivo = normalizarNombre(nombreRuta);
         
-        return `<div class="altimetria-container">
+        return `<div>
             <h4>Altimetría de la Ruta</h4>
-            <object data="xml/altimetria_${nombreArchivo}.svg" type="image/svg+xml" class="altimetria-svg">
+            <object data="xml/altimetria_${nombreArchivo}.svg" type="image/svg+xml"">
                 Tu navegador no soporta SVG
             </object>
         </div>`;
@@ -211,14 +212,26 @@ $(document).ready(function() {
     function cargarMapa(nombreRuta, index) {
         const mapId = `mapa-${index}`;
         
-        return `<div class="mapa-container">
+        return `<div>
             <h4>Mapa de la Ruta</h4>
-            <div id="${mapId}" class="mapa-ol"></div>
+            <div id="${mapId}"></div>
         </div>`;
     }
     
     // Función para inicializar el mapa con OpenLayers
     function inicializarMapa(id, kmlUrl) {
+        const container = document.getElementById(id);
+        if (!container) {
+            console.error(`Map container with id ${id} not found`);
+            return null;
+        }
+        
+        // Force container to have dimensions
+        if (container.offsetWidth === 0 || container.offsetHeight === 0) {
+            container.style.width = '100%';
+            container.style.height = '400px';
+        }
+        
         const map = new ol.Map({
             target: id,
             layers: [
@@ -242,6 +255,11 @@ $(document).ready(function() {
         });
         
         map.addLayer(vectorLayer);
+        
+        // Force map to update its size
+        setTimeout(() => {
+            map.updateSize();
+        }, 200);
         
         // Ajustar vista cuando se carga el KML
         vectorLayer.getSource().on('addfeature', function() {
@@ -320,9 +338,19 @@ $(document).ready(function() {
             setTimeout(() => {
                 const nombreArchivo = normalizarNombre(ruta.nombre);
                 const kmlUrl = `xml/${nombreArchivo}.kml`;
-                const mapa = inicializarMapa(`mapa-${index}`, kmlUrl);
-                mapas.push(mapa);
-            }, 100);
+                const mapElement = document.getElementById(`mapa-${index}`);
+                
+                if (mapElement) {
+                    // Make sure container has dimensions before initializing
+                    if (mapElement.offsetWidth === 0 || mapElement.offsetHeight === 0) {
+                        mapElement.style.width = '100%';
+                        mapElement.style.height = '400px';
+                    }
+                    
+                    const mapa = inicializarMapa(`mapa-${index}`, kmlUrl);
+                    mapas.push(mapa);
+                }
+            }, 300); // Longer timeout to ensure DOM is ready
         });
         
         // Añadir información sobre el XML

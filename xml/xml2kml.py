@@ -1,6 +1,21 @@
 import xml.etree.ElementTree as ET
 import os
 import re
+import unicodedata
+
+def normalize_filename(name):
+    """
+    Normaliza un nombre para usarlo como nombre de archivo eliminando acentos y caracteres especiales.
+    """
+    # Normalizar unicode y eliminar diacríticos (acentos)
+    normalized = unicodedata.normalize('NFD', name)
+    normalized = ''.join(c for c in normalized if not unicodedata.combining(c))
+    
+    # Reemplazar espacios por guiones bajos y eliminar caracteres no deseados
+    normalized = normalized.replace(" ", "_").replace("/", "_").lower()
+    normalized = ''.join(c for c in normalized if c.isalnum() or c == '_' or c == '-')
+    
+    return normalized
 
 def create_kml_for_route(ruta, kml_file):
     """
@@ -136,9 +151,9 @@ def create_kml_from_xml(xml_file, output_dir):
     for i, ruta in enumerate(rutas, 1):
         nombre_ruta = ruta.find('nombre').text
         
-        # Create a safe filename from the route name
-        safe_name = re.sub(r'[^\w\-_]', '_', nombre_ruta)
-        kml_file = os.path.join(output_dir, f'{safe_name}.kml')
+        # Usar el mismo método de normalización que xml2perfil.py
+        normalized_name = normalize_filename(nombre_ruta)
+        kml_file = os.path.join(output_dir, f'{normalized_name}.kml')
         
         # Create KML for this route
         create_kml_for_route(ruta, kml_file)

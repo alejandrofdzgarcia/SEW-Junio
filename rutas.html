@@ -10,7 +10,9 @@
     <meta name="keywords" content="rutas, senderismo, naturaleza"/> 
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
     <link rel="stylesheet" type="text/css" href="estilo/layout.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@7.4.0/ol.css" type="text/css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ol@7.4.0/dist/ol.js"></script>
     <script src="js/rutas.js"></script>
 </head>
 <body>
@@ -29,20 +31,18 @@
     
     <p>Estás en: <a href="index.html">Inicio</a> >> Rutas</p>
     
-    <main>
+    <section>
         <section>
-            <section>
-                <h3>Cargar rutas desde archivo XML</h3>
-                <p>Selecciona un archivo XML con rutas para visualizarlas en esta página:</p>
-                <input type="file" name="fileInput" accept=".xml" />
-                <button name="processFile">Cargar rutas</button>
-            </section>
-            
-            <section name="rutasContainer">
-                <p>Aún no se han cargado rutas. Por favor, sube un archivo XML.</p>
-            </section>
+            <h3>Cargar rutas desde archivo XML</h3>
+            <p>Selecciona un archivo XML con rutas para visualizarlas en esta página:</p>
+            <input type="file" name="fileInput" accept=".xml" />
+            <button name="processFile">Cargar rutas</button>
         </section>
-    </main>
+        
+        <section name="rutasContainer">
+            <p>Aún no se han cargado rutas. Por favor, sube un archivo XML.</p>
+        </section>
+    </section>
 
     <footer>
         <p>2025 Turismo de Muros del Nalón</p>
