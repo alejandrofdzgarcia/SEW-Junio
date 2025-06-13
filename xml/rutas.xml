@@ -136,7 +136,7 @@
         <personasAdecuadas>Se puede ir con niños</personasAdecuadas>
         <puntoInicio>
             <lugar>Estación de FEVE Muros del Nalón</lugar>
-            <direccion>Muros de Nalón, 33138 Muros de Nalón, Asturias</direccion>
+            <direccion>C/ Villar S/N, Muros de Nalón, 33138 Muros de Nalón</direccion>
             <coordenadas>
                 <longitud>-6.1108</longitud>
                 <latitud>43.5427</latitud>
@@ -226,5 +226,116 @@
             <referencia>https://alojaweb.educastur.es/web/cphumbelinamuros/contacto1</referencia>
         </referencias>
         <recomendacion>8</recomendacion>
+    </ruta>
+
+    <ruta>
+        <nombre>Senda Norte</nombre>
+        <tipo>Paisajística</tipo>
+        <transporte>A pie</transporte>
+        <fechaInicio xsi:type="optional">2025-06-05</fechaInicio>
+        <horaInicio xsi:type="optional">16:30</horaInicio>
+        <duracion>0.5 horas</duracion>
+        <agencia>Sin agencia</agencia>
+        <descripcion>
+            Ruta que transcurre por la "antigua vía de ferrocarril" utilizada para llevar el carbón 
+            a las Tolvas y Cargaderos, iniciándose al lado de la estación de FEVE de S. Esteban y 
+            siguiendo la misma, va pasando por encima del puerto y los "Cargaderos" de carbón 
+            rehabilitados como parte del  "Museo Histórico Industrial del Puerto de San Esteban". 
+            Se pueden contemplar dichos cargaderos y al final de la Senda se encuentra el Mirador 
+            de las Tolvas y dichas Tolvas parcialmente rehabilitadas, desde donde se puede disfrutar 
+            de una impresionante panorámica del Puerto de San Esteban y la ría del Nalón, así como la 
+            localidad de "San Juan de la Arena" en el margen contrario de la desembocadura.
+        </descripcion>
+        <personasAdecuadas>Se puede ir con niños</personasAdecuadas>
+        <puntoInicio>
+            <lugar>Estación de FEVE San Esteban de Pravia</lugar>
+            <direccion>C/ Casto Plasencia S/N, San Esteban de Pravia 33130</direccion>
+            <coordenadas>
+                <longitud>-6.0875</longitud>
+                <latitud>43.5514</latitud>
+                <altitud>5</altitud>
+            </coordenadas>
+        </puntoInicio>
+        <hitos>
+            <hito>
+                <nombre>Gran Hotel Brillante</nombre>
+                <descripcion>
+                    Un hotel emblemático que ofrece vistas al puerto y un ambiente acogedor.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.1081</longitud>
+                    <latitud>43.5422</latitud>
+                    <altitud>6</altitud>
+                </coordenadas>
+                <distancia unidad="m">130</distancia>
+                <fotografias>
+                    <fotografia>hotel_brillante.png</fotografia>
+                </fotografias>
+            </hito>
+            <hito>
+                <nombre>Hotel Kerala</nombre>
+                <descripcion>
+                    Un hotel con encanto que ofrece una experiencia única en la costa asturiana.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.0864</longitud>
+                    <latitud>43.5536</latitud>
+                    <altitud>9</altitud>
+                </coordenadas>
+                <distancia unidad="m">129</distancia>
+                <fotografias>
+                    <fotografia>hotel_kerala.png</fotografia>
+                </fotografias>
+            </hito>
+            <hito>
+                <nombre>Club Naútico</nombre>
+                <descripcion>
+                    Un lugar ideal para los amantes de la navegación y los deportes acuáticos, con instalaciones modernas.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.0844</longitud>
+                    <latitud>43.5553</latitud>
+                    <altitud>14</altitud>
+                </coordenadas>
+                <distancia unidad="m">230</distancia>
+                <fotografias>
+                    <fotografia>club_nautico.png</fotografia>
+                </fotografias>
+            </hito>
+            <hito>
+                <nombre>Oficina de Información</nombre>
+                <descripcion>
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6,0833288</longitud>
+                    <latitud>43,5555967</latitud>
+                    <altitud>15</altitud>
+                </coordenadas>
+                <distancia unidad="m">138</distancia>
+                <fotografias>
+                    <fotografia>oficina_informacion.png</fotografia>
+                </fotografias>
+            </hito>
+            <hito>
+                <nombre>Antiguas Tolvas</nombre>
+                <descripcion>
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6,0816401</longitud>
+                    <latitud>43,5563066</latitud>
+                    <altitud>19</altitud>
+                </coordenadas>
+                <distancia unidad="m">155</distancia>
+                <fotografias>
+                    <fotografia>tolvas.png</fotografia>
+                </fotografias>
+            </hito>
+        </hitos>
+        <referencias>
+            <referencia>https://www.murosdenalon.es/que-visitar/-/asset_publisher/6277037ba107/content/turismo-visitar-senda-norte</referencia>
+            <referencia>https://www.turismoasturias.es/es/organiza-tu-viaje/oficinas-de-turismo/oficina-de-turismo-de-muros-de-nalon</referencia>
+            <referencia>https://www.granhotelbrillante.com/es/</referencia>
+        </referencias>
+        <recomendacion>7.5</recomendacion>
     </ruta>
 </rutas>
