@@ -1,47 +1,185 @@
+/* Layout principal y posicionamiento */
 body {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
 }
 
 header, footer {
-    grid-column: 1 / -1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-nav {
-    background: #444;
-    padding: 1rem 0;
+img, video, audio {
+    display: block;
+    margin: 1rem auto;
+}
+
+/* Navegación */
+nav, header nav {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90%;
+    max-width: 75rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Layout principal */
+main {
+    margin: 2rem auto;
+    max-width: 50rem;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+main.reservas {
+    max-width: 65rem;
+}
+
+main h2 {
+    width: 100%;
+    align-self: flex-start;
+}
+
+main h1 {
+    width: 100%;
+}
+
+/* Estructura de elementos del formulario */
+form, div, section, main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
-nav a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 1rem;
-    font-weight: bold;
+fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-nav a:hover {
-    text-decoration: underline;
+fieldset ol, fieldset ul {
+    align-self: flex-start;
 }
 
-nav a.active {
-    color: #ff0;
-    text-decoration: underline;
+/* Estructura de artículos */
+article {
+    min-height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-@media (max-width: 768px) {
-    body {
-        grid-template-rows: auto 1fr auto;
-        grid-template-columns: 1fr;
-    }
+article h3 {
+    width: 100%;
+}
 
+article dl, article ul, article ol {
+    align-self: flex-start;
+    width: 100%;
+}
+
+article figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section {
+    width: 100%;
+    max-width: 75rem;
+}
+
+/* Elementos de información del usuario */
+p:has(a[href="php/logout.php"]) {
+    display: flex;
+    justify-content: flex-end;
+}
+
+body > p {
+    width: 100%;
+}
+
+/* Media Queries */
+@media (max-width: 48rem) {
+    header nav,
     nav {
         flex-direction: column;
+        padding: 0.3rem;
+    }
+    
+    header nav a,
+    nav a {
+        margin: 0.15rem;
+        padding: 0.5rem 1rem;
+        width: 90%;
+    }
+    
+    body > p {
+        text-align: center;
+        padding: 0.5rem;
+    }
+    
+    table {
+        width: 100%;
+        table-layout: fixed;
+    }
+    
+    tr {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-bottom: 1.5rem;
+    }
+    
+    td {
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+    
+    article {
+        margin: 0.5rem 0;
+        padding: 1rem;
+        width: auto;
+    }
+}
+
+@media (min-width: 30rem) and (max-width: 48rem) {
+    main {
+        width: 90%;
+        max-width: 45rem;
+    }
+}
+
+@media (min-width: 64rem) {
+    main {
+        max-width: 60rem;
+    }
+    
+    main.reservas {
+        max-width: 75rem;
     }
 
-    article {
-        column-count: 1;
+    /* Multi-column layout para pantallas anchas */
+    article.multi-column {
+        column-count: 2;
+        column-gap: 2rem;
+    }
+    
+    /* Grid layout para colecciones de elementos */
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+        gap: 1.5rem;
+        width: 100%;
     }
 }
