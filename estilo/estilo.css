@@ -455,4 +455,56 @@ article dd {
     footer p {
         font-size: 0.8rem;
     }
+
+    /* Estilos responsivos para la tabla meteorológica */
+    table {
+        width: 100%;
+        table-layout: fixed;
+    }
+    
+    tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.5rem;
+    }
+    
+    td {
+        width: 100%;
+        display: block;
+        padding: 0.5rem 0;
+    }
+    
+    article {
+        margin: 0.5rem 0;
+        padding: 1rem;
+        width: auto;
+    }
+    
+    article dl {
+        margin: 0.5rem 0;
+    }
+    
+    article dt, article dd {
+        font-size: 0.9rem;
+    }
+}
+
+/* Media query adicional para tabletas */
+@media (min-width: 30rem) and (max-width: 48rem) {
+    tr {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    
+    td {
+        width: 50%;
+        box-sizing: border-box;
+        padding: 0.5rem;
+    }
+    
+    article {
+        height: 100%;
+        margin: 0;
+    }
 }
