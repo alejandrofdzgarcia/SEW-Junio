@@ -1,8 +1,8 @@
 class Noticias {
     constructor() {
-        this.apiKey = "02e2c3f6c0674428b86d20ad11d1d514";
+        this.apiKey = "pub_ac0aea91c526429e9e97857e80c835e0";
         this.query = "Asturias";
-        this.apiUrl = `https://newsapi.org/v2/everything?q=${encodeURIComponent(this.query)}&from=2025-04-30&sortBy=publishedAt&language=es&apiKey=${this.apiKey}`;
+        this.apiUrl = `https://newsdata.io/api/1/latest?apikey=${this.apiKey}&q=${encodeURIComponent(this.query)}&language=es`;
     }
 
     crearSeccionNoticias() {
@@ -36,17 +36,29 @@ class Noticias {
                 $titulo.prepend($icono);
                 this.$seccion.append($titulo);
                 
-                if (data.articles && data.articles.length > 0) {
-                    data.articles.forEach((article, index) => {
+                if (data.results && data.results.length > 0) {
+                    data.results.forEach((article, index) => {
                         const titulo = article.title;
-                        const enlace = article.url;
+                        const enlace = article.link;
                         const descripcion = article.description;
-                        const imagen = article.urlToImage || '';
-                        const fecha = new Date(article.publishedAt).toLocaleDateString('es-ES', { 
+                        const imagen = article.image_url || '';
+                        
+                        // Convertir la fecha de pubDate al formato local
+                        const fechaHora = new Date(article.pubDate);
+                        const fecha = fechaHora.toLocaleDateString('es-ES', { 
                             weekday: 'long', 
                             day: 'numeric', 
-                            month: 'long' 
+                            month: 'long',
+                            year: 'numeric'
                         });
+                        const hora = fechaHora.toLocaleTimeString('es-ES', {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                        
+                        // Obtener la categoría
+                        const categoria = article.category && article.category.length > 0 ? 
+                            article.category.join(', ') : 'Sin categoría';
                         
                         const $articulo = $('<article>');
                         
@@ -82,15 +94,17 @@ class Noticias {
                         $pFecha.html(`📅 Fecha: <span>${fecha}</span>`);
                         $seccionDatos.append($pFecha);
                         
-                        const $pFuente = $('<p>');
-                        $pFuente.html(`🔍 Fuente: <span>${article.source.name}</span>`);
-                        $seccionDatos.append($pFuente);
+                        const $pHora = $('<p>');
+                        $pHora.html(`🕒 Hora: <span>${hora}</span>`);
+                        $seccionDatos.append($pHora);
                         
-                        if (article.author) {
-                            const $pAutor = $('<p>');
-                            $pAutor.html(`✍️ Autor: <span>${article.author}</span>`);
-                            $seccionDatos.append($pAutor);
-                        }
+                        const $pCategoria = $('<p>');
+                        $pCategoria.html(`📂 Categoría: <span>${categoria}</span>`);
+                        $seccionDatos.append($pCategoria);
+                        
+                        const $pFuente = $('<p>');
+                        $pFuente.html(`🔍 Fuente: <span>${article.source_name || 'Desconocida'}</span>`);
+                        $seccionDatos.append($pFuente);
 
                         $articulo.append($seccionDatos);
                         
