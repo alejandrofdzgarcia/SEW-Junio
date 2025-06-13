@@ -121,52 +121,110 @@
         <recomendacion>9</recomendacion>
     </ruta>
     <ruta>
-        <nombre></nombre>
+        <nombre>Rutas por la Villa de Muros</nombre>
         <tipo>Paisajística</tipo>
         <transporte>A pie</transporte>
         <fechaInicio xsi:type="optional">2025-06-02</fechaInicio>
         <horaInicio xsi:type="optional">15:30</horaInicio>
-        <duracion>X horas</duracion>
-        <agencia>Nombre de la agencia o "Sin agencia"</agencia>
+        <duracion>0.5 horas</duracion>
+        <agencia>Sin agencia</agencia>
         <descripcion>
-            Descripción detallada de la ruta. Incluye información sobre el paisaje,
-            características particulares, historia del lugar, dificultad, etc.
+            Rápida y tranquila ruta por la Villa de Muros del Nalón, ideal para conocer su historia y
+            disfrutar de su arquitectura tradicional. Esta ruta es perfecta para quienes buscan una
+            experiencia cultural sin complicaciones, con un recorrido que se puede realizar en poco tiempo.
         </descripcion>
-        <personasAdecuadas>Para quién es adecuada esta ruta</personasAdecuadas>
+        <personasAdecuadas>Se puede ir con niños</personasAdecuadas>
         <puntoInicio>
-            <lugar>Nombre del lugar de inicio</lugar>
-            <direccion>Dirección específica</direccion>
+            <lugar>Estación de FEVE Muros del Nalón</lugar>
+            <direccion>Muros de Nalón, 33138 Muros de Nalón, Asturias</direccion>
             <coordenadas>
-                <longitud>-X.XXXXXX</longitud>
-                <latitud>XX.XXXXXX</latitud>
-                <altitud>XXX</altitud>
+                <longitud>-6.1108</longitud>
+                <latitud>43.5427</latitud>
+                <altitud>131</altitud>
             </coordenadas>
         </puntoInicio>
         <hitos>
             <hito>
-                <nombre>Nombre del hito 1</nombre>
+                <nombre>Parque Infantil</nombre>
                 <descripcion>
-                    Descripción detallada del hito, incluyendo sus características,
-                    importancia, historia, y lo que los visitantes pueden ver o hacer allí.
+                    Un espacio recreativo para niños, con áreas de juego y zonas verdes.
                 </descripcion>
                 <coordenadas>
-                    <longitud>-X.XXXXXX</longitud>
-                    <latitud>XX.XXXXXX</latitud>
-                    <altitud>XXX</altitud>
+                    <longitud>-6.1081</longitud>
+                    <latitud>43.5422</latitud>
+                    <altitud>133</altitud>
                 </coordenadas>
-                <distancia unidad="m">XXX</distancia>
+                <distancia unidad="m">260</distancia>
                 <fotografias>
-                    <fotografia>nombre_archivo1.png</fotografia>
-                    <fotografia>nombre_archivo2.png</fotografia>
+                    <fotografia>parque_infantil.png</fotografia>
                 </fotografias>
             </hito>
-            <!-- Añadir más hitos siguiendo la misma estructura -->
+            <hito>
+                <nombre>Iglesia Santa María</nombre>
+                <descripcion>
+                    Un hermoso ejemplo de arquitectura religiosa, con detalles artísticos y un ambiente tranquilo.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.1050</longitud>
+                    <latitud>43.5425</latitud>
+                    <altitud>129</altitud>
+                </coordenadas>
+                <distancia unidad="m">190</distancia>
+                <fotografias>
+                    <fotografia>iglesia_santa_maria.png</fotografia>
+                </fotografias>
+            </hito>
+            <hito>
+                <nombre>Consulta Veterinaria Vidal</nombre>
+                <descripcion>
+                    Un centro de salud animal con servicios de calidad y atención profesional.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.1053</longitud>
+                    <latitud>43.5436</latitud>
+                    <altitud>125</altitud>
+                </coordenadas>
+                <distancia unidad="m">159</distancia>
+                <fotografias>
+                    <fotografia>consulta_veterinaria_vidal.png</fotografia>
+                </fotografias>
+            </hito>
+            <hito>
+                <nombre>Colegio Público Maestra Humbelina Alonso Carreño</nombre>
+                <descripcion>
+                    Un centro educativo público de educación infantil y primaria.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.1031</longitud>
+                    <latitud>43.5452</latitud>
+                    <altitud>130</altitud>
+                </coordenadas>
+                <distancia unidad="m">215</distancia>
+                <fotografias>
+                    <fotografia>colegio.png</fotografia>
+                </fotografias>
+            </hito>
+            <hito>
+                <nombre>Hotel Boutique Villa del Marqués</nombre>
+                <descripcion>
+                    Un acogedor hotel con encanto, ideal para disfrutar de una estancia relajante.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.1006</longitud>
+                    <latitud>43.5455</latitud>
+                    <altitud>130</altitud>
+                </coordenadas>
+                <distancia unidad="m">224</distancia>
+                <fotografias>
+                    <fotografia>hotel_boutique.png</fotografia>
+                </fotografias>
+            </hito>
         </hitos>
         <referencias>
-            <referencia>https://ejemplo1.com/informacion-sobre-la-ruta</referencia>
-            <referencia>https://ejemplo2.com/mas-informacion</referencia>
-            <!-- Añadir más referencias según sea necesario -->
+            <referencia>https://www.murosdenalon.es</referencia>
+            <referencia>https://es.wikipedia.org/wiki/Estación_de_Muros_de_Nalón</referencia>
+            <referencia>https://alojaweb.educastur.es/web/cphumbelinamuros/contacto1</referencia>
         </referencias>
-        <recomendacion>X</recomendacion>
+        <recomendacion>8</recomendacion>
     </ruta>
 </rutas>
