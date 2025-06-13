@@ -6,6 +6,9 @@ body {
     color: #222;
     background-color: #f4f4f4;
     font-size: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 h1, h2 {
@@ -104,6 +107,9 @@ fieldset {
     background-color: #f8f9fa;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 fieldset:hover {
@@ -130,6 +136,9 @@ header {
     border-bottom: 0.1875rem solid #3498db;
     box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header h1 a {
@@ -209,6 +218,10 @@ main {
     border: 0.125rem solid #ddd;
     border-radius: 0.5rem;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
 }
 
 main.reservas {
@@ -221,6 +234,7 @@ main h1 {
     border-bottom: 0.2rem solid #3498db;
     padding-bottom: 1rem;
     margin-bottom: 2rem;
+    width: 100%;
 }
 
 main h2 {
@@ -228,6 +242,8 @@ main h2 {
     border-left: 0.3rem solid #3498db;
     padding-left: 1rem;
     margin-top: 2.5rem;
+    width: 100%;
+    align-self: flex-start;
 }
 
 main a {
@@ -249,11 +265,14 @@ main a:hover {
 }
 
 section {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 1.25rem;
     max-width: 75rem;
     margin: 0 auto 2.5rem auto;
     text-align: center;
+    width: 100%;
 }
 
 section:last-of-type {
@@ -274,6 +293,9 @@ footer {
     border-top: 0.1875rem solid #3498db;
     box-shadow: 0 -0.125rem 0.625rem rgba(0, 0, 0, 0.1);
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 footer p {
@@ -300,6 +322,9 @@ footer a:hover {
 }
 
 form, div, section, main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
@@ -310,6 +335,8 @@ body > p {
     border-bottom: 0.0625rem solid #e0e0e0;
     font-size: 0.9rem;
     color: #444;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 body > p a {
@@ -325,7 +352,8 @@ body > p a:hover {
 }
 
 p:has(a[href="php/logout.php"]) {
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
 }
 
 p:has(> strong) {
@@ -338,6 +366,7 @@ fieldset ol, fieldset ul {
     margin-left: 2rem;
     margin-top: 1rem;
     list-style-position: outside;
+    align-self: flex-start;
 }
 
 fieldset ol {
@@ -369,11 +398,11 @@ article {
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     min-height: auto;
     width: 100%;
-    text-align: center;
-    display: block;
-    column-count: 1;
     box-sizing: border-box;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 article:hover {
@@ -390,6 +419,7 @@ article h3 {
     padding-bottom: 0.5rem;
     border-bottom: 0.0625rem solid #3498db;
     text-align: center;
+    width: 100%;
 }
 
 article p {
@@ -400,6 +430,9 @@ article p {
 article figure {
     margin: 1rem auto;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 article img {
@@ -412,6 +445,8 @@ article img {
 article dl, article ul, article ol {
     text-align: left;
     margin: 1rem 0;
+    align-self: flex-start;
+    width: 100%;
 }
 
 article dt {
@@ -478,14 +513,13 @@ svg {
     }
     
     tr {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr;
         margin-bottom: 1.5rem;
     }
     
     td {
         width: 100%;
-        display: block;
         padding: 0.5rem 0;
     }
     
@@ -526,5 +560,19 @@ svg {
     
     main.reservas {
         max-width: 75rem;
+    }
+
+    /* Add multi-column layout for wide screens */
+    article.multi-column {
+        column-count: 2;
+        column-gap: 2rem;
+    }
+    
+    /* Grid layout for collections of items */
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+        gap: 1.5rem;
+        width: 100%;
     }
 }
