@@ -37,7 +37,7 @@
                     <latitud>43.5630556</latitud>
                     <altitud>100</altitud>
                 </coordenadas>
-                <distancia unidad="m">0</distancia>
+                <distancia unidad="m">303</distancia>
                 <fotografias>
                     <fotografia>multimedia/miradorEspirituSanto.png</fotografia>
                 </fotografias>
@@ -52,9 +52,9 @@
                 <coordenadas>
                     <longitud>-6.089722</longitud>
                     <latitud>43.557222</latitud>
-                    <altitud>5</altitud>
+                    <altitud>114</altitud>
                 </coordenadas>
-                <distancia unidad="m">1000</distancia>
+                <distancia unidad="m">960</distancia>
                 <fotografias>
                     <fotografia>multimedia/atalaya1.png</fotografia>
                     <fotografia>multimedia/atalaya2.png</fotografia>
@@ -110,6 +110,22 @@
                 <fotografias>
                     <fotografia>multimedia/campon1.png</fotografia>
                     <fotografia>multimedia/campon2.png</fotografia>
+                </fotografias>
+            </hito>
+
+            <hito>
+                <nombre>Area Recreativa Playa del Aguila</nombre>
+                <descripcion>
+                    Un espacio natural, ideal para disfrutar de la playa y la naturaleza en estado puro.
+                </descripcion>
+                <coordenadas>
+                    <longitud>-6.1136374</longitud>
+                    <latitud>43.5537005</latitud>
+                    <altitud>10</altitud>
+                </coordenadas>
+                <distancia unidad="m">474</distancia>
+                <fotografias>
+                    <fotografia>multimedia/area_recreativa.png</fotografia>
                 </fotografias>
             </hito>
         </hitos>

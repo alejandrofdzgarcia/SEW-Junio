@@ -38,7 +38,7 @@
                     acantilados cercanos. Su baja altitud lo hace fácilmente accesible y perfecto para una parada breve.]]></description>
       <styleUrl>#hitoStyle</styleUrl>
       <Point>
-        <coordinates>-6.089722,43.557222,5</coordinates>
+        <coordinates>-6.089722,43.557222,114</coordinates>
       </Point>
     </Placemark>
     <Placemark>
@@ -69,6 +69,14 @@
       </Point>
     </Placemark>
     <Placemark>
+      <name>Area Recreativa Playa del Aguila</name>
+      <description><![CDATA[Un espacio natural, ideal para disfrutar de la playa y la naturaleza en estado puro.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.1136374,43.5537005,10</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
       <name>Recorrido: Senda Costera de Muros del Nalón</name>
       <styleUrl>#routeStyle</styleUrl>
       <LineString>
@@ -76,10 +84,11 @@
         <coordinates>
           -6.079167,43.564444,5
           -6.0816667,43.5630556,100
-          -6.089722,43.557222,5
+          -6.089722,43.557222,114
           -6.1032711,43.5586238,71
           -6.1058180,43.5569878,1
           -6.110278,43.555556,108
+          -6.1136374,43.5537005,10
         </coordinates>
       </LineString>
     </Placemark>

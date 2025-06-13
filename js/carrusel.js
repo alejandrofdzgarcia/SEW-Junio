@@ -59,6 +59,7 @@ $(function() {
         'multimedia/muros2.jpg',
         'multimedia/muros3.jpg',
         'multimedia/muros4.jpg', 
+        'multimedia/muros5.jpg', 
         'multimedia/mapaMuros.jpg'
     ];
 
