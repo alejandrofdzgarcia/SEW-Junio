@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400">
+    <rect width="100%" height="100%" fill="#f0f0f0"/>
+    <text x="400.0" y="30" font-family="Arial" font-size="20" text-anchor="middle" fill="#333">Altimetría: Rutas por la Villa de Muros</text>
+    <text x="400.0" y="55" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">Distancia total: 1048m</text>
+
+    <!-- Eje X -->
+    <line x1="50" y1="350" x2="750" y2="350" stroke="#333" stroke-width="2"/>
+    <text x="400.0" y="390" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Distancia (m)</text>
+    
+    <!-- Eje Y -->
+    <line x1="50" y1="350" x2="50" y2="50" stroke="#333" stroke-width="2"/>
+    <text x="15" y="200.0" font-family="Arial" font-size="12" text-anchor="middle" fill="#333" transform="rotate(270, 15, 200.0)">Altitud (m)</text>
+
+    <line x1="50.0" y1="350" x2="50.0" y2="355" stroke="#333" stroke-width="1"/>
+    <text x="50.0" y="370" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">0</text>
+
+    <line x1="225.0" y1="350" x2="225.0" y2="355" stroke="#333" stroke-width="1"/>
+    <text x="225.0" y="370" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">262</text>
+
+    <line x1="400.0" y1="350" x2="400.0" y2="355" stroke="#333" stroke-width="1"/>
+    <text x="400.0" y="370" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">524</text>
+
+    <line x1="575.0" y1="350" x2="575.0" y2="355" stroke="#333" stroke-width="1"/>
+    <text x="575.0" y="370" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">786</text>
+
+    <line x1="750.0" y1="350" x2="750.0" y2="355" stroke="#333" stroke-width="1"/>
+    <text x="750.0" y="370" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">1048</text>
+
+    <line x1="50" y1="350.0" x2="45" y2="350.0" stroke="#333" stroke-width="1"/>
+    <text x="40" y="355.0" font-family="Arial" font-size="10" text-anchor="end" fill="#333">124</text>
+
+    <line x1="50" y1="275.0" x2="45" y2="275.0" stroke="#333" stroke-width="1"/>
+    <text x="40" y="280.0" font-family="Arial" font-size="10" text-anchor="end" fill="#333">126</text>
+
+    <line x1="50" y1="200.0" x2="45" y2="200.0" stroke="#333" stroke-width="1"/>
+    <text x="40" y="205.0" font-family="Arial" font-size="10" text-anchor="end" fill="#333">129</text>
+
+    <line x1="50" y1="125.0" x2="45" y2="125.0" stroke="#333" stroke-width="1"/>
+    <text x="40" y="130.0" font-family="Arial" font-size="10" text-anchor="end" fill="#333">131</text>
+
+    <line x1="50" y1="50.0" x2="45" y2="50.0" stroke="#333" stroke-width="1"/>
+    <text x="40" y="55.0" font-family="Arial" font-size="10" text-anchor="end" fill="#333">133</text>
+
+    <polygon points="50.0,137.50000000000028 223.66412213740458,75.00000000000034 350.5725190839695,200.00000000000023 456.7748091603053,325.0000000000001 600.3816793893129,168.75000000000026 750.0,168.75000000000026 750.0,350 50.0,350" fill="#DB4437" fill-opacity="0.2" stroke="none"/>
+
+    <polyline points="50.0,137.50000000000028 223.66412213740458,75.00000000000034 350.5725190839695,200.00000000000023 456.7748091603053,325.0000000000001 600.3816793893129,168.75000000000026 750.0,168.75000000000026" fill="none" stroke="#DB4437" stroke-width="3"/>
+
+    <circle cx="50.0" cy="137.50000000000028" r="4" fill="#DB4437" stroke="#fff" stroke-width="1"/>
+    <text x="50.0" y="127.50000000000028" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">131m</text>
+
+    <text x="50.0" y="157.50000000000028" font-family="Arial" font-size="9" text-anchor="middle" fill="#333" transform="rotate(45, 50.0, 157.50000000000028)">Estación de FEVE Muros del Nalón</text>
+
+    <circle cx="223.66412213740458" cy="75.00000000000034" r="4" fill="#DB4437" stroke="#fff" stroke-width="1"/>
+    <text x="223.66412213740458" y="65.00000000000034" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">133m</text>
+
+    <text x="223.66412213740458" y="95.00000000000034" font-family="Arial" font-size="9" text-anchor="middle" fill="#333" transform="rotate(45, 223.66412213740458, 95.00000000000034)">Parque Infantil</text>
+
+    <circle cx="350.5725190839695" cy="200.00000000000023" r="4" fill="#DB4437" stroke="#fff" stroke-width="1"/>
+    <text x="350.5725190839695" y="190.00000000000023" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">129m</text>
+
+    <text x="350.5725190839695" y="220.00000000000023" font-family="Arial" font-size="9" text-anchor="middle" fill="#333" transform="rotate(45, 350.5725190839695, 220.00000000000023)">Iglesia Santa María</text>
+
+    <circle cx="456.7748091603053" cy="325.0000000000001" r="4" fill="#DB4437" stroke="#fff" stroke-width="1"/>
+    <text x="456.7748091603053" y="315.0000000000001" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">125m</text>
+
+    <text x="456.7748091603053" y="345.0000000000001" font-family="Arial" font-size="9" text-anchor="middle" fill="#333" transform="rotate(45, 456.7748091603053, 345.0000000000001)">Consulta Veterinaria Vidal</text>
+
+    <circle cx="600.3816793893129" cy="168.75000000000026" r="4" fill="#DB4437" stroke="#fff" stroke-width="1"/>
+    <text x="600.3816793893129" y="158.75000000000026" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">130m</text>
+
+    <text x="600.3816793893129" y="188.75000000000026" font-family="Arial" font-size="9" text-anchor="middle" fill="#333" transform="rotate(45, 600.3816793893129, 188.75000000000026)">Colegio Público Maestra Humbelina Alonso Carreño</text>
+
+    <circle cx="750.0" cy="168.75000000000026" r="4" fill="#DB4437" stroke="#fff" stroke-width="1"/>
+    <text x="750.0" y="158.75000000000026" font-family="Arial" font-size="10" text-anchor="middle" fill="#333">130m</text>
+
+    <text x="750.0" y="188.75000000000026" font-family="Arial" font-size="9" text-anchor="middle" fill="#333" transform="rotate(45, 750.0, 188.75000000000026)">Hotel Boutique Villa del Marqués</text>
+
+</svg>

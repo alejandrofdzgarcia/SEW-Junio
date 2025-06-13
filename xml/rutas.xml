@@ -39,7 +39,7 @@
                 </coordenadas>
                 <distancia unidad="m">0</distancia>
                 <fotografias>
-                    <fotografia>miradorEspirituSanto.png</fotografia>
+                    <fotografia>multimedia/miradorEspirituSanto.png</fotografia>
                 </fotografias>
             </hito>
             
@@ -56,8 +56,8 @@
                 </coordenadas>
                 <distancia unidad="m">1000</distancia>
                 <fotografias>
-                    <fotografia>atala1.png</fotografia>
-                    <fotografia>atala2.png</fotografia>
+                    <fotografia>multimedia/atalaya1.png</fotografia>
+                    <fotografia>multimedia/atalaya2.png</fotografia>
                 </fotografias>
             </hito>
             
@@ -68,13 +68,13 @@
                     típica asturiana. Ideal para los amantes de la fotografía de naturaleza.
                 </descripcion>
                 <coordenadas>
-                    <longitud>-6.0950</longitud>
-                    <latitud>43.5750</latitud>
+                    <longitud>-6.1032711</longitud>
+                    <latitud>43.5586238</latitud>
                     <altitud>71</altitud>
                 </coordenadas>
                 <distancia unidad="m">2100</distancia>
                 <fotografias>
-                    <fotografia>glayos1.png</fotografia>
+                    <fotografia>multimedia/glayos1.png</fotografia>
                 </fotografias>
             </hito>
             
@@ -85,13 +85,13 @@
                     Son un excelente lugar para descansar o refrescarse durante el recorrido.
                 </descripcion>
                 <coordenadas>
-                    <longitud>-6.105278</longitud>
-                    <latitud>43.557778</latitud>
+                    <longitud>-6.1058180</longitud>
+                    <latitud>43.5569878</latitud>
                     <altitud>1</altitud>
                 </coordenadas>
                 <distancia unidad="m">422</distancia>
                 <fotografias>
-                    <fotografia>playaXanXun1.png</fotografia>
+                    <fotografia>multimedia/playaXanXun1.png</fotografia>
                 </fotografias>
             </hito>
             
@@ -108,8 +108,8 @@
                 </coordenadas>
                 <distancia unidad="m">1350</distancia>
                 <fotografias>
-                    <fotografia>campon1.png</fotografia>
-                    <fotografia>campon2.png</fotografia>
+                    <fotografia>multimedia/campon1.png</fotografia>
+                    <fotografia>multimedia/campon2.png</fotografia>
                 </fotografias>
             </hito>
         </hitos>
@@ -156,7 +156,7 @@
                 </coordenadas>
                 <distancia unidad="m">260</distancia>
                 <fotografias>
-                    <fotografia>parque_infantil.png</fotografia>
+                    <fotografia>multimedia/parque_infantil.png</fotografia>
                 </fotografias>
             </hito>
             <hito>
@@ -171,7 +171,7 @@
                 </coordenadas>
                 <distancia unidad="m">190</distancia>
                 <fotografias>
-                    <fotografia>iglesia_santa_maria.png</fotografia>
+                    <fotografia>multimedia/iglesia_santa_maria.png</fotografia>
                 </fotografias>
             </hito>
             <hito>
@@ -186,7 +186,7 @@
                 </coordenadas>
                 <distancia unidad="m">159</distancia>
                 <fotografias>
-                    <fotografia>consulta_veterinaria_vidal.png</fotografia>
+                    <fotografia>multimedia/consulta_veterinaria_vidal.png</fotografia>
                 </fotografias>
             </hito>
             <hito>
@@ -201,7 +201,7 @@
                 </coordenadas>
                 <distancia unidad="m">215</distancia>
                 <fotografias>
-                    <fotografia>colegio.png</fotografia>
+                    <fotografia>multimedia/colegio.png</fotografia>
                 </fotografias>
             </hito>
             <hito>
@@ -216,7 +216,7 @@
                 </coordenadas>
                 <distancia unidad="m">224</distancia>
                 <fotografias>
-                    <fotografia>hotel_boutique.png</fotografia>
+                    <fotografia>multimedia/hotel_boutique.png</fotografia>
                 </fotografias>
             </hito>
         </hitos>
@@ -263,13 +263,13 @@
                     Un hotel emblemático que ofrece vistas al puerto y un ambiente acogedor.
                 </descripcion>
                 <coordenadas>
-                    <longitud>-6.1081</longitud>
-                    <latitud>43.5422</latitud>
+                    <longitud>-6.0873201</longitud>
+                    <latitud>43.5526018</latitud>
                     <altitud>6</altitud>
                 </coordenadas>
                 <distancia unidad="m">130</distancia>
                 <fotografias>
-                    <fotografia>hotel_brillante.png</fotografia>
+                    <fotografia>multimedia/hotel_brillante.png</fotografia>
                 </fotografias>
             </hito>
             <hito>
@@ -284,7 +284,7 @@
                 </coordenadas>
                 <distancia unidad="m">129</distancia>
                 <fotografias>
-                    <fotografia>hotel_kerala.png</fotografia>
+                    <fotografia>multimedia/hotel_kerala.png</fotografia>
                 </fotografias>
             </hito>
             <hito>
@@ -299,7 +299,7 @@
                 </coordenadas>
                 <distancia unidad="m">230</distancia>
                 <fotografias>
-                    <fotografia>club_nautico.png</fotografia>
+                    <fotografia>multimedia/club_nautico.png</fotografia>
                 </fotografias>
             </hito>
             <hito>
@@ -314,7 +314,7 @@
                 </coordenadas>
                 <distancia unidad="m">138</distancia>
                 <fotografias>
-                    <fotografia>oficina_informacion.png</fotografia>
+                    <fotografia>multimedia/oficina_informacion.png</fotografia>
                 </fotografias>
             </hito>
             <hito>
@@ -330,7 +330,7 @@
                 </coordenadas>
                 <distancia unidad="m">155</distancia>
                 <fotografias>
-                    <fotografia>tolvas.png</fotografia>
+                    <fotografia>multimedia/tolvas.png</fotografia>
                 </fotografias>
             </hito>
         </hitos>

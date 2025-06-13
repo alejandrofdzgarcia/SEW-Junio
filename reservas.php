@@ -104,13 +104,14 @@
             <?php endif; ?>
         </section>
         <section>
-            <article>
-                <h2>Catálogo de Recursos</h2>
-                <p>Explora nuestros recursos turísticos disponibles.</p>
-                <p><a href="php/recursos_turisticos.php">Ver recursos</a></p>
-            </article>
-            
             <?php if($usuarioLogueado): ?>
+                
+                <article>
+                    <h2>Catálogo de Recursos</h2>
+                    <p>Explora nuestros recursos turísticos disponibles.</p>
+                    <p><a href="php/recursos_turisticos.php">Ver recursos</a></p>
+                </article>
+
                 <article>
                     <h2>Hacer una Reserva</h2>
                     <p>Reserva el recurso turístico que más te interese.</p>

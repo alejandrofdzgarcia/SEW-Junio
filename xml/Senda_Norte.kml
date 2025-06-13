@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Senda Norte</name>
+    <description>Planimetría de la ruta</description>
+    <Style id="routeStyle">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="hitoStyle">
+      <IconStyle>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Placemark>
+      <name>Inicio: Estación de FEVE San Esteban de Pravia</name>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.0875,43.5514,5</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Gran Hotel Brillante</name>
+      <description><![CDATA[Un hotel emblemático que ofrece vistas al puerto y un ambiente acogedor.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.0873201,43.5526018,6</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Hotel Kerala</name>
+      <description><![CDATA[Un hotel con encanto que ofrece una experiencia única en la costa asturiana.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.0864,43.5536,9</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Club Naútico</name>
+      <description><![CDATA[Un lugar ideal para los amantes de la navegación y los deportes acuáticos, con instalaciones modernas.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.0844,43.5553,14</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Oficina de Información</name>
+      <description><![CDATA[Oficina de turismo local donde puedes obtener información sobre la ruta y otros puntos de interés en la zona.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.0833288,43.5555967,15</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Antiguas Tolvas</name>
+      <description><![CDATA[Estructuras históricas utilizadas para almacenar carbón, ahora rehabilitadas como parte del patrimonio industrial. 
+                    Desde aquí se puede disfrutar de una vista panorámica del puerto y la ría del Nalón.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.0816401,43.5563066,19</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Recorrido: Senda Norte</name>
+      <styleUrl>#routeStyle</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          -6.0875,43.5514,5
+          -6.0873201,43.5526018,6
+          -6.0864,43.5536,9
+          -6.0844,43.5553,14
+          -6.0833288,43.5555967,15
+          -6.0816401,43.5563066,19
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>

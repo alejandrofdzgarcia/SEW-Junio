@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Rutas - Muros del Nalón</title>
     <meta name="author" content="Alejandro Fernández García"/>
-    <meta name="description" content="Meteorología - Muros del Nalón"/>
-    <meta name="keywords" content="meteorología, tiempo, temperatura"/> 
+    <meta name="description" content="Rutas - Muros del Nalón"/>
+    <meta name="keywords" content="rutas, senderismo, naturaleza"/> 
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
     <link rel="stylesheet" type="text/css" href="estilo/layout.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/meteo.js"></script>
+    <script src="js/rutas.js"></script>
 </head>
 <body>
     <header>
@@ -26,8 +26,23 @@
             <a href="ayuda.html" title="Ayuda Muros del Nalón">Ayuda</a>
         </nav>
     </header>
-	
-	<p>Estás en: <a href="index.html">Inicio</a> >> Rutas</p>
+    
+    <p>Estás en: <a href="index.html">Inicio</a> >> Rutas</p>
+    
+    <main>
+        <section>
+            <section>
+                <h3>Cargar rutas desde archivo XML</h3>
+                <p>Selecciona un archivo XML con rutas para visualizarlas en esta página:</p>
+                <input type="file" name="fileInput" accept=".xml" />
+                <button name="processFile">Cargar rutas</button>
+            </section>
+            
+            <section name="rutasContainer">
+                <p>Aún no se han cargado rutas. Por favor, sube un archivo XML.</p>
+            </section>
+        </section>
+    </main>
 
     <footer>
         <p>2025 Turismo de Muros del Nalón</p>

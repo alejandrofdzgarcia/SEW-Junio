@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Rutas por la Villa de Muros</name>
+    <description>Planimetría de la ruta</description>
+    <Style id="routeStyle">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="hitoStyle">
+      <IconStyle>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Placemark>
+      <name>Inicio: Estación de FEVE Muros del Nalón</name>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.1108,43.5427,131</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Parque Infantil</name>
+      <description><![CDATA[Un espacio recreativo para niños, con áreas de juego y zonas verdes.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.1081,43.5422,133</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Iglesia Santa María</name>
+      <description><![CDATA[Un hermoso ejemplo de arquitectura religiosa, con detalles artísticos y un ambiente tranquilo.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.1050,43.5425,129</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Consulta Veterinaria Vidal</name>
+      <description><![CDATA[Un centro de salud animal con servicios de calidad y atención profesional.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.1053,43.5436,125</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Colegio Público Maestra Humbelina Alonso Carreño</name>
+      <description><![CDATA[Un centro educativo público de educación infantil y primaria.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.1031,43.5452,130</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Hotel Boutique Villa del Marqués</name>
+      <description><![CDATA[Un acogedor hotel con encanto, ideal para disfrutar de una estancia relajante.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.1006,43.5455,130</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Recorrido: Rutas por la Villa de Muros</name>
+      <styleUrl>#routeStyle</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          -6.1108,43.5427,131
+          -6.1081,43.5422,133
+          -6.1050,43.5425,129
+          -6.1053,43.5436,125
+          -6.1031,43.5452,130
+          -6.1006,43.5455,130
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>

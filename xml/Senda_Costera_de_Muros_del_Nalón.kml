@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Senda Costera de Muros del Nalón</name>
+    <description>Planimetría de la ruta</description>
+    <Style id="routeStyle">
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="hitoStyle">
+      <IconStyle>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+    <Placemark>
+      <name>Inicio: Puerto de San Esteban de Pravia</name>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.079167,43.564444,5</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Mirador del Espíritu Santo</name>
+      <description><![CDATA[Un impresionante mirador sobre un acantilado que ofrece vistas panorámicas del Mar Cantábrico. 
+                    Es un lugar ideal para comenzar la ruta con una primera toma de contacto con el paisaje costero.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.0816667,43.5630556,100</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Mirador de la Atalaya</name>
+      <description><![CDATA[Situado cerca del núcleo urbano, este mirador permite contemplar el puerto de San Esteban y los 
+                    acantilados cercanos. Su baja altitud lo hace fácilmente accesible y perfecto para una parada breve.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.089722,43.557222,5</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Mirador de los Glayos</name>
+      <description><![CDATA[Un punto elevado desde el que se aprecia una panorámica única de la costa escarpada y la vegetación 
+                    típica asturiana. Ideal para los amantes de la fotografía de naturaleza.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.1032711,43.5586238,71</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Playas de Xan-Xún y Las Llanas</name>
+      <description><![CDATA[Dos playas salvajes y poco frecuentadas, rodeadas de naturaleza virgen. 
+                    Son un excelente lugar para descansar o refrescarse durante el recorrido.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.1058180,43.5569878,1</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Mirador Punta del Campón</name>
+      <description><![CDATA[Uno de los puntos más altos del recorrido, desde donde se puede disfrutar de una vista extensa 
+                    de la costa asturiana y del horizonte marino. Perfecto para cerrar la ruta con una vista inolvidable.]]></description>
+      <styleUrl>#hitoStyle</styleUrl>
+      <Point>
+        <coordinates>-6.110278,43.555556,108</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Recorrido: Senda Costera de Muros del Nalón</name>
+      <styleUrl>#routeStyle</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          -6.079167,43.564444,5
+          -6.0816667,43.5630556,100
+          -6.089722,43.557222,5
+          -6.1032711,43.5586238,71
+          -6.1058180,43.5569878,1
+          -6.110278,43.555556,108
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>
