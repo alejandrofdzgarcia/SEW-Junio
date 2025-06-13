@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
             
             <form action="login.php" method="POST">
-                <fieldset>
+                <article>
                     <legend>Datos de acceso</legend>
                       <p>
                         <label>Correo Electrónico:
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </p>
                     
                     <button type="submit">Iniciar Sesión</button>
-                </fieldset>
+                </article>
             </form>
             
             <p>¿No tienes una cuenta? <a href="register.php">Regístrate aquí</a></p>

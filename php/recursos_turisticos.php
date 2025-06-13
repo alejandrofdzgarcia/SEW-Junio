@@ -69,7 +69,7 @@ $errorDB = $reservasManager->getError();
                 <p>No hay recursos turísticos disponibles en este momento.</p>
             <?php else: ?>
                 <?php foreach($recursos as $recurso): ?>
-                    <fieldset>
+                    <article>
                         <legend><?php echo htmlspecialchars($recurso['nombre']); ?></legend>
                         
                         <p><strong>Descripción:</strong> <?php echo htmlspecialchars($recurso['descripcion']); ?></p>
@@ -93,7 +93,7 @@ $errorDB = $reservasManager->getError();
                                 <a href="realizar_reserva.php?id=<?php echo $recurso['id']; ?>">Reservar</a>
                             </p>
                         <?php endif; ?>
-                    </fieldset>
+                    </article>
                     <hr>
                 <?php endforeach; ?>
             <?php endif; ?>

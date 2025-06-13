@@ -1,28 +1,20 @@
-/* General layout and positioning styles for the website */
-/* Estos estilos tienen mayor especificidad que estilo.css */
-
-/* Grid layout for main sections - sobrescribe parcialmente body en estilo.css */
 body {
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-columns: 1fr;
     min-height: 100vh;
-    /* Mantenemos el margin: 0 de estilo.css */
 }
 
-/* Estructuras principales del layout - sobrescribe header y footer de estilo.css cuando sea necesario */
 header, footer {
     grid-column: 1 / -1;
 }
 
-/* Navegación principal - mayor especificidad (0, 0, 1) */
 nav {
-    background: #444; /* Este estilo sobrescribe el background-color de estilo.css */
+    background: #444;
     padding: 1rem 0;
     text-align: center;
 }
 
-/* Enlaces de navegación - mayor especificidad (0, 0, 2) */
 nav a {
     color: #fff;
     text-decoration: none;
@@ -30,25 +22,21 @@ nav a {
     font-weight: bold;
 }
 
-/* Estados de hover - mayor especificidad (0, 1, 2) */
 nav a:hover {
     text-decoration: underline;
 }
 
-/* Estado activo - mayor especificidad (0, 1, 2) */
 nav a.active {
     color: #ff0;
     text-decoration: underline;
 }
-
-/* Multi-column layout for articles - mayor especificidad que estilo.css */
+/*
 article {
     column-count: 2;
     column-gap: 1.5rem;
     padding: 1rem;
-}
+}*/
 
-/* Media queries for responsiveness - complementan los de estilo.css */
 @media (max-width: 768px) {
     body {
         grid-template-rows: auto 1fr auto;

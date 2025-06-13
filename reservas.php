@@ -104,42 +104,42 @@
             <?php endif; ?>
         </section>
         <section>
-            <fieldset>
-                <legend>Catálogo de Recursos</legend>
+            <article>
+                <h2>Catálogo de Recursos</h2>
                 <p>Explora nuestros recursos turísticos disponibles.</p>
                 <p><a href="php/recursos_turisticos.php">Ver recursos</a></p>
-            </fieldset>
+            </article>
             
             <?php if($usuarioLogueado): ?>
-                <fieldset>
-                    <legend>Hacer una Reserva</legend>
+                <article>
+                    <h2>Hacer una Reserva</h2>
                     <p>Reserva el recurso turístico que más te interese.</p>
                     <p><a href="php/realizar_reserva.php">Reservar ahora</a></p>
-                </fieldset>
+                </article>
                 
-                <fieldset>
-                    <legend>Mis Reservas</legend>
+                <article>
+                    <h2>Mis Reservas</h2>
                     <p>Consulta y gestiona tus reservas actuales.</p>
                     <p><a href="php/mis_reservas.php">Ver mis reservas</a></p>
-                </fieldset>
+                </article>
 
-                <fieldset>
-                    <legend>Importar/exportar CSV</legend>
+                <article>
+                    <h2>Importar/exportar CSV</h2>
                     <p>Importe o exporte datos en la base de datos.</p>
                     <p><a href="php/importar_exportar_csv.php">Ver importar/exportar CSV</a></p>
-                </fieldset>
+                </article>
             <?php else: ?>
-                <fieldset>
-                    <legend>Información de acceso</legend>
+                <article>
+                    <h2>Información de acceso</h2>
                     <p>Para realizar reservas, consultar o cancelarlas, debes iniciar sesión.</p>
                     <p>Si no tienes una cuenta, regístrate para acceder a todos los servicios.</p>
-                </fieldset>
+                </article>
             <?php endif; ?>
         </section>
         
         <section>            
-            <fieldset>
-                <legend>¿Cómo funciona?</legend>
+            <article>
+                <h2>¿Cómo funciona?</h2>
                 <ol>
                     <li>Regístrate en nuestra plataforma o inicia sesión si ya tienes cuenta.</li>
                     <li>Explora el catálogo de recursos turísticos disponibles.</li>
@@ -147,7 +147,7 @@
                     <li>Revisa el presupuesto generado automáticamente.</li>
                     <li>Confirma tu reserva.</li>
                 </ol>
-            </fieldset>
+            </article>
         </section>
     </main>
 

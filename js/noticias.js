@@ -1,7 +1,7 @@
 class Noticias {
     constructor() {
         this.apiKey = "02e2c3f6c0674428b86d20ad11d1d514";
-        this.query = "\"Muros del Nalón\" OR \"Soto del Barco\" OR \"Pravia\" OR \"Cudillero\" OR \"Candamo\"";
+        this.query = "Asturias";
         this.apiUrl = `https://newsapi.org/v2/everything?q=${encodeURIComponent(this.query)}&from=2025-04-30&sortBy=publishedAt&language=es&apiKey=${this.apiKey}`;
     }
 

@@ -32,7 +32,6 @@ class Meteo {
             return;
         }
 
-        // Mapeo de códigos WMO a iconos de OpenWeatherMap
         const wmoToIcon = {
             0: '01d', // Clear sky
             1: '02d', 2: '02d', 3: '03d', // Partly cloudy
@@ -49,7 +48,6 @@ class Meteo {
             96: '11d', 99: '11d' // Thunderstorm with hail
         };
 
-        // Mapeo de códigos WMO a descripciones (español)
         const wmoToDesc = {
             0: 'Cielo despejado',
             1: 'Mayormente despejado', 2: 'Parcialmente nublado', 3: 'Nublado',
@@ -66,70 +64,96 @@ class Meteo {
             96: 'Tormenta con granizo ligero', 99: 'Tormenta con granizo fuerte'
         };
         
-        for (let i = 0; i < datos.daily.time.length; i++) {
-            const fecha = datos.daily.time[i];
-            const tempMax = datos.daily.temperature_2m_max[i];
-            const tempMin = datos.daily.temperature_2m_min[i];
-            const lluviaTotal = datos.daily.precipitation_sum[i];
-            const codigoTiempo = datos.daily.weather_code[i];
+        const $h2 = $('<h2>').text('Pronóstico del Tiempo para Muros del Nalón');
+        $seccion.append($h2);
+        
+        const $tabla = $('<table>');
+        const $tbody = $('<tbody>');
+        
+        const totalDias = datos.daily.time.length;
+        const diasPorFila = 4;
+        const numFilas = Math.ceil(totalDias / diasPorFila);
+        
+        for (let fila = 0; fila < numFilas; fila++) {
+            const $tr = $('<tr>');
             
-            let humedadMedia = 0;
-            let contadorHumedad = 0;
-            
-            for (let j = 0; j < datos.hourly.time.length; j++) {
-                if (datos.hourly.time[j].startsWith(fecha)) {
-                    humedadMedia += datos.hourly.relative_humidity_2m[j];
-                    contadorHumedad++;
+            for (let col = 0; col < diasPorFila; col++) {
+                const indice = fila * diasPorFila + col;
+                
+                if (indice >= totalDias) {
+                    break;
                 }
+                
+                const fecha = datos.daily.time[indice];
+                const tempMax = datos.daily.temperature_2m_max[indice];
+                const tempMin = datos.daily.temperature_2m_min[indice];
+                const lluviaTotal = datos.daily.precipitation_sum[indice];
+                const codigoTiempo = datos.daily.weather_code[indice];
+                
+                let humedadMedia = 0;
+                let contadorHumedad = 0;
+                
+                for (let j = 0; j < datos.hourly.time.length; j++) {
+                    if (datos.hourly.time[j].startsWith(fecha)) {
+                        humedadMedia += datos.hourly.relative_humidity_2m[j];
+                        contadorHumedad++;
+                    }
+                }
+                
+                humedadMedia = Math.round(humedadMedia / contadorHumedad);
+                
+                const fechaObj = new Date(fecha);
+                const fechaFormateada = fechaObj.toLocaleDateString('es-ES', { 
+                    weekday: 'long', 
+                    day: 'numeric', 
+                    month: 'long' 
+                });
+                
+                const icono = wmoToIcon[codigoTiempo] || '03d';
+                const descripcion = wmoToDesc[codigoTiempo] || 'Sin datos';
+                
+                const $td = $('<td>');
+                
+                const $articulo = $('<article>');
+                
+                const $h3 = $('<h3>').text(fechaFormateada);
+                $articulo.append($h3);
+                
+                const $figure = $('<figure>');
+                const $img = $('<img>').attr({
+                    'src': `https://openweathermap.org/img/wn/${icono}@2x.png`,
+                    'alt': descripcion
+                });
+                $figure.append($img);
+                $articulo.append($figure);
+                
+                const $pDesc = $('<p>').text(descripcion);
+                $articulo.append($pDesc);
+                
+                const $dl = $('<dl>');
+                
+                $dl.append($('<dt>').text('🔥 Temperatura máxima:'));
+                $dl.append($('<dd>').html(`<strong>${tempMax.toFixed(1)}°C</strong>`));
+                
+                $dl.append($('<dt>').text('❄️ Temperatura mínima:'));
+                $dl.append($('<dd>').html(`<strong>${tempMin.toFixed(1)}°C</strong>`));
+                
+                $dl.append($('<dt>').text('💧 Humedad:'));
+                $dl.append($('<dd>').html(`<strong>${humedadMedia}%</strong>`));
+                
+                $dl.append($('<dt>').text('☔ Lluvia:'));
+                $dl.append($('<dd>').html(`<strong>${lluviaTotal.toFixed(1)} mm</strong>`));
+                
+                $articulo.append($dl);
+                $td.append($articulo);
+                $tr.append($td);
             }
             
-            humedadMedia = Math.round(humedadMedia / contadorHumedad);
-            
-            const fechaObj = new Date(fecha);
-            const fechaFormateada = fechaObj.toLocaleDateString('es-ES', { 
-                weekday: 'long', 
-                day: 'numeric', 
-                month: 'long' 
-            });
-            
-            const icono = wmoToIcon[codigoTiempo] || '03d'; // Icono por defecto
-            const descripcion = wmoToDesc[codigoTiempo] || 'Sin datos';
-            
-            const $articulo = $('<article>');
-            const $h3 = $('<h3>').text(fechaFormateada);
-            $articulo.append($h3);
-            
-            const $figure = $('<figure>');
-            const $img = $('<img>').attr({
-                'src': `https://openweathermap.org/img/wn/${icono}@2x.png`,
-                'alt': descripcion
-            });
-            $figure.append($img);
-            $articulo.append($figure);
-            
-            const $pDesc = $('<p>').text(descripcion);
-            $articulo.append($pDesc);
-            
-            const $section = $('<section>');
-            const $pTempMax = $('<p>');
-            $pTempMax.html(`🔥 Máx: <strong>${tempMax.toFixed(1)}°C</strong>`);
-            $section.append($pTempMax);
-            
-            const $pTempMin = $('<p>');
-            $pTempMin.html(`❄️ Mín: <strong>${tempMin.toFixed(1)}°C</strong>`);
-            $section.append($pTempMin);
-            
-            const $pHum = $('<p>');
-            $pHum.html(`💧 Humedad: <strong>${humedadMedia}%</strong>`);
-            $section.append($pHum);
-            
-            const $pLluvia = $('<p>');
-            $pLluvia.html(`☔ Lluvia: <strong>${lluviaTotal.toFixed(1)} mm</strong>`);
-            $section.append($pLluvia);
-            
-            $articulo.append($section);
-            $seccion.append($articulo);
+            $tbody.append($tr);
         }
+        
+        $tabla.append($tbody);
+        $seccion.append($tabla);
     }
 }
 

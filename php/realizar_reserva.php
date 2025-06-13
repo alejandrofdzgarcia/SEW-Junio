@@ -150,7 +150,7 @@ if (empty($error) && $reservasManager->getError()) {
 
             <?php if (empty($mensaje)): ?>
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-                <fieldset>
+                <article>
                     <legend>Datos de la reserva</legend>
                     
                     <label for="recurso_id">Recurso turístico:</label>
@@ -170,7 +170,7 @@ if (empty($error) && $reservasManager->getError()) {
                     <p>Precio total estimado: <output name="precio_total">0.00€</output></p>
                     
                     <button type="submit" name="generar_presupuesto" class="button">Generar Presupuesto</button>
-                </fieldset>
+                </article>
             </form>
             <?php endif; ?>
         </section>

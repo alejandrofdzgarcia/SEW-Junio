@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
             
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                <fieldset>
+                <article>
                     <legend>Datos personales</legend>
                     <p>
                         <label>Nombre:
@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </p>
                     
                     <button type="submit">Registrar</button>
-                </fieldset>
+                </article>
             </form>
             
             <p>¿Ya tienes una cuenta? <a href="login.php">Inicia sesión aquí</a></p>

@@ -244,13 +244,9 @@ main a:hover {
 }
 
 section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.25rem;
+    display: block;
     padding: 1.25rem;
     max-width: 75rem;
-    align-items: center;
     margin: 0 auto 2.5rem auto; /* Centrar horizontalmente */
     text-align: center;
 }
@@ -262,42 +258,6 @@ section:last-of-type {
 section > p, section > a {
     text-align: center;
     margin: 1rem 0;
-}
-
-article {
-    background-color: #fff;
-    border-radius: 0.625rem;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-    padding: 1.25rem;
-    width: calc(20% - 1.25rem);
-    min-width: 12.5rem;
-    flex-grow: 1;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 0.125rem solid #ddd; /* 2px */
-    text-align: center;
-}
-
-article:hover {
-    transform: translateY(-0.3125rem);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-    border-color: #3498db;
-}
-
-article h3 {
-    color: #2c3e50;
-    text-align: center;
-    font-size: 1.3em;
-    margin-top: 0;
-    text-transform: capitalize;
-    border-bottom: 0.125rem solid #3498db;
-    padding-bottom: 0.625rem;
-    margin-bottom: 0.9375rem;
-}
-
-article p {
-    color: #333;
-    text-align: center;
-    margin: 0.5rem 0;
 }
 
 footer {
@@ -334,7 +294,7 @@ footer a:hover {
 }
 
 /* Special Selectors */
-form, div, section, article, main {
+form, div, section, main {
     text-align: center;
 }
 
@@ -391,14 +351,76 @@ fieldset li {
 
 fieldset li:hover {
     background-color: rgba(52, 152, 219, 0.1);
-    border-radius: 0.25rem; /* 4px */
+    border-radius: 0.25rem;
 }
 
-/* Responsive Styles */
-@media (max-width: 48rem) { /* 768px */
-    .recursos-catalogo {
-        grid-template-columns: 1fr;
-    }
+article {
+    background-color: #ffffff;
+    border-radius: 0.625rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    border: 0.125rem solid #e0e0e0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    min-height: auto;
+    width: 100%;
+    text-align: center;
+    display: block;
+    column-count: 1;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+article:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-color: #3498db;
+}
+
+article h3 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.0625rem solid #3498db;
+    text-align: center;
+}
+
+article p {
+    margin: 0.8rem 0;
+    line-height: 1.5;
+}
+
+article figure {
+    margin: 1rem auto;
+    text-align: center;
+}
+
+article img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+article dl, article ul, article ol {
+    text-align: left;
+    margin: 1rem 0;
+}
+
+article dt {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 0.5rem;
+}
+
+article dd {
+    margin-left: 0;
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 48rem) {
     
     header {
         padding: 1rem 0;
