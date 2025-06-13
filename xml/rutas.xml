@@ -305,10 +305,11 @@
             <hito>
                 <nombre>Oficina de Información</nombre>
                 <descripcion>
+                    Oficina de turismo local donde puedes obtener información sobre la ruta y otros puntos de interés en la zona.
                 </descripcion>
                 <coordenadas>
-                    <longitud>-6,0833288</longitud>
-                    <latitud>43,5555967</latitud>
+                    <longitud>-6.0833288</longitud>
+                    <latitud>43.5555967</latitud>
                     <altitud>15</altitud>
                 </coordenadas>
                 <distancia unidad="m">138</distancia>
@@ -319,10 +320,12 @@
             <hito>
                 <nombre>Antiguas Tolvas</nombre>
                 <descripcion>
+                    Estructuras históricas utilizadas para almacenar carbón, ahora rehabilitadas como parte del patrimonio industrial. 
+                    Desde aquí se puede disfrutar de una vista panorámica del puerto y la ría del Nalón.
                 </descripcion>
                 <coordenadas>
-                    <longitud>-6,0816401</longitud>
-                    <latitud>43,5563066</latitud>
+                    <longitud>-6.0816401</longitud>
+                    <latitud>43.5563066</latitud>
                     <altitud>19</altitud>
                 </coordenadas>
                 <distancia unidad="m">155</distancia>

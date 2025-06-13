@@ -30,12 +30,6 @@ nav a.active {
     color: #ff0;
     text-decoration: underline;
 }
-/*
-article {
-    column-count: 2;
-    column-gap: 1.5rem;
-    padding: 1rem;
-}*/
 
 @media (max-width: 768px) {
     body {
