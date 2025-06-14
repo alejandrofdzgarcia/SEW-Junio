@@ -1,44 +1,68 @@
-<!DOCTYPE html>
-<html lang="es">
 <?php
-    session_start();
-    
+
     require_once 'php/DBManager.php';
     require_once 'php/UserManager.php';
-    
-    // Crear instancia del gestor de usuarios
-    $userManager = new UserManager();
-    
-    // Gestionar acciones de usuario (si existen)
-    $mensaje = '';
-    $error = '';
-    
-    // Manejar posibles mensajes enviados desde otras páginas
-    if (isset($_GET['mensaje'])) {
-        $mensaje = $_GET['mensaje'];
+
+    class ControladorReservas
+    {
+        private $dbManager;
+        public $mensaje = '';
+        public $error = '';
+        public $errorDB = '';
+        public $usuarioLogueado = false;
+        public $nombreUsuario = '';
+        public $esAdministrador = false;
+
+        public function __construct()
+        {
+            session_start();
+
+            // Gestores
+            $this->dbManager = new DBManager();
+            new UserManager(); // por si se requiere futura gestión de sesión
+
+            // Mensajes desde otras páginas
+            $this->mensaje = $_GET['mensaje'] ?? '';
+            $this->error = $_GET['error'] ?? '';
+
+            // Inicializar BD e importar recursos
+            $this->inicializarBD();
+
+            // Información del usuario
+            $this->usuarioLogueado = isset($_SESSION['usuario_id']);
+            $this->nombreUsuario = $this->usuarioLogueado ? $_SESSION['usuario_nombre'] : '';
+            $this->esAdministrador = $this->usuarioLogueado && !empty($_SESSION['es_admin']);
+        }
+
+        private function inicializarBD()
+        {
+            try {
+                $this->dbManager->createDatabase();
+                $this->dbManager->importFromCSV("php/recursos_turisticos.csv");
+                $conn = $this->dbManager->getConnection(); // probar conexión
+                
+                // Verificar si la conexión es válida
+                if ($conn) {
+                    $this->errorDB = ''; // Limpiar error si la conexión es exitosa
+                }
+            } catch (Exception $e) {
+                $this->errorDB = "Error de conexión a la base de datos: " . $e->getMessage();
+            }
+        }
     }
-    
-    if (isset($_GET['error'])) {
-        $error = $_GET['error'];
-    }
-    
-    // Crear la base de datos e importar datos
-    $dbManager = new DBManager();
-    $dbManager->createDatabase();
-    $dbManager->importFromCSV("php/recursos_turisticos.csv");
-    
-    try {
-        $db = $dbManager->getConnection();
-    } catch (Exception $e) {
-        $errorDB = "Error de conexión a la base de datos: " . $e->getMessage();
-    }
-    
-    // Comprobar si hay usuario logueado
-    $usuarioLogueado = isset($_SESSION['usuario_id']);
-    $nombreUsuario = $usuarioLogueado ? $_SESSION['usuario_nombre'] : '';
-    
-    $esAdministrador = $usuarioLogueado && isset($_SESSION['es_admin']) && $_SESSION['es_admin'];
+
+    // Ejecutar controlador
+    $controlador = new ControladorReservas();
+    $mensaje = $controlador->mensaje;
+    $error = $controlador->error;
+    $errorDB = $controlador->errorDB;
+    $usuarioLogueado = $controlador->usuarioLogueado;
+    $nombreUsuario = $controlador->nombreUsuario;
+    $esAdministrador = $controlador->esAdministrador;
+
 ?>
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="multimedia/favicon.ico">
@@ -72,18 +96,19 @@
         
         <?php if (!empty($mensaje)): ?>
             <section>
-                <h3>Sesión cerrada correctamente.</h3>
+                <h3>Información</h3>
                 <p><?php echo htmlspecialchars($mensaje); ?></p>
             </section>
         <?php endif; ?>
         
         <?php if (!empty($error)): ?>
             <section>
+                <h3>Error</h3>
                 <p><?php echo htmlspecialchars($error); ?></p>
             </section>
         <?php endif; ?>
         
-        <?php if(isset($errorDB)): ?>
+        <?php if(!empty($errorDB)): ?>
             <section>
                 <p><strong>Error de Base de Datos:</strong> <?php echo $errorDB; ?></p>
                 <p>Por favor, contacte con el administrador del sistema.</p>
@@ -94,7 +119,8 @@
             <?php if($usuarioLogueado): ?>
                 <h3>Bienvenido/a, <strong><?php echo htmlspecialchars($nombreUsuario); ?></strong></h3>
                 <form action="php/logout.php" method="POST">
-                    <button type="submit">Cerrar sesión</button>
+                    <label for="btn-logout">Botón para cerrar sesión</label>
+                    <button id="btn-logout" type="submit">Cerrar sesión</button>
                 </form>
             <?php else: ?>
                 <h3>Inicia sesión para gestionar tus reservas</h3>

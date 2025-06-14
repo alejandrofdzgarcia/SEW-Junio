@@ -97,17 +97,15 @@ $email = $controlador->email;
             
             <form action="login.php" method="POST">
                 <article>
-                    <legend>Datos de acceso</legend>
+                    <h2>Datos de acceso</h2>
                     <p>
-                        <label>Correo Electrónico:
-                            <input type="email" name="email" required value="<?php echo htmlspecialchars($email); ?>">
-                        </label>
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" required value="<?php echo htmlspecialchars($email); ?>">
                     </p>
                     
                     <p>
-                        <label>Contraseña:
-                            <input type="password" name="password" required>
-                        </label>
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" required>
                     </p>
                     
                     <button type="submit">Iniciar Sesión</button>

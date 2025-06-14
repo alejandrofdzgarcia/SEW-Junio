@@ -39,7 +39,7 @@
             <h3>Importar datos desde CSV</h3>
             <form method="post" enctype="multipart/form-data" action="importar_exportar_csv.php">
                 <label for="csv_file">Seleccionar archivo CSV:</label>
-                <input type="file" name="csv_file" accept=".csv" required>
+                <input type="file" id="csv_file" name="csv_file" accept=".csv" required>
                 <p><small>El archivo debe estar en formato CSV con separador de comas (,). El sistema detectará automáticamente la tabla a partir del contenido del archivo.</small></p>
                 
                 <button type="submit" name="import">Importar datos</button>
@@ -54,14 +54,12 @@
                         $importResults = $dbManager->importFromCSV($tmpFile);
                         
                         if (!empty($importResults)) {
-                            echo '<div>';
                             echo '<p>Datos importados correctamente:</p>';
                             echo '<ul>';
                             foreach ($importResults as $table => $count) {
                                 echo '<li>Tabla <strong>' . htmlspecialchars($table) . '</strong>: ' . $count . ' registros importados</li>';
                             }
                             echo '</ul>';
-                            echo '</div>';
                         } else {
                             echo '<p>No se encontraron datos para importar en el archivo CSV.</p>';
                         }
@@ -79,7 +77,7 @@
             <h3>Exportar datos a CSV</h3>
             <form method="post" action="importar_exportar_csv.php">
                 <label for="export_table">Seleccionar tabla origen:</label>
-                <select name="export_table" required>
+                <select id="export_table" name="export_table" required>
                     <option value="">-- Seleccionar tabla --</option>
                     <option value="todas">Todas las tablas</option>
                     <?php foreach ($tables as $table): ?>

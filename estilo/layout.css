@@ -204,7 +204,7 @@ body > p {
     article.multi-column {
         column-count: 2;
         column-gap: 2rem;
-        column-rule: 1px solid #ddd;
+        column-rule: 0.0625rem solid #ddd;
     }
     
     .grid-container {

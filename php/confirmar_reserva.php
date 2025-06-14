@@ -154,8 +154,8 @@ $error = $controlador->error;
         <?php endif; ?>
         
         <section>
-            <p>Hola, <strong><?php echo htmlspecialchars($nombreUsuario); ?></strong>. 
-            Por favor, revisa los detalles del recurso y genera un presupuesto.</p>
+            <h3>Hola, <?php echo htmlspecialchars($nombreUsuario); ?>. 
+            Por favor, revisa los detalles del recurso y genera un presupuesto.</h3>
             
             <section>
                 <h2><?php echo htmlspecialchars($recurso->getNombre()); ?></h2>
@@ -187,11 +187,11 @@ $error = $controlador->error;
             
             <?php if (!$presupuestoGenerado): ?>
                 <!-- Formulario para generar presupuesto -->
-                <form action="" method="post">
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>?id=<?php echo $recurso->getId(); ?>" method="post">
                     <input type="hidden" name="recurso_id" value="<?php echo $recurso->getId(); ?>">
                     
                     <label for="num_personas">Número de personas:</label>
-                    <input type="number" name="num_personas" min="1" 
+                    <input type="number" id="num_personas" name="num_personas" min="1" 
                            max="<?php echo $recurso->getLimiteOcupacion(); ?>" value="1" required>
                     
                     <p>
@@ -209,9 +209,11 @@ $error = $controlador->error;
                     <p><strong>Precio total:</strong> <?php echo number_format($presupuesto['precio_total'], 2, ',', '.'); ?> €</p>
                 </section>
                 
-                <form action="" method="post">
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>?id=<?php echo $recurso->getId(); ?>" method="post">
                     <input type="hidden" name="recurso_id" value="<?php echo $recurso->getId(); ?>">
+                    
                     <input type="hidden" name="num_personas" value="<?php echo $presupuesto['numero_personas']; ?>">
+                    
                     <input type="hidden" name="precio_total" value="<?php echo $presupuesto['precio_total']; ?>">
                     
                     <p>
@@ -223,9 +225,7 @@ $error = $controlador->error;
             <?php endif; ?>
         </section>
         
-        <section>
-            <p><a href="recursos_turisticos.php">Volver al Catálogo de Recursos</a></p>
-        </section>
+        <p><a href="recursos_turisticos.php">Volver al Catálogo de Recursos</a></p>
     </main>
 
     <footer>

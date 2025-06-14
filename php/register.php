@@ -110,26 +110,22 @@ $email = $controlador->email;
             
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                 <article>
-                    <legend>Datos personales</legend>
+                    <h2>Datos personales</h2>
                     <p>
-                        <label>Nombre:
-                            <input type="text" name="nombre" required value="<?php echo htmlspecialchars($nombre); ?>">
-                        </label>
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required value="<?php echo htmlspecialchars($nombre); ?>">
                     </p>
                     <p>
-                        <label>Email:
-                            <input type="email" name="email" required value="<?php echo htmlspecialchars($email); ?>">
-                        </label>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required value="<?php echo htmlspecialchars($email); ?>">
                     </p>
                     <p>
-                        <label>Contraseña:
-                            <input type="password" name="password" required>
-                        </label>
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" required>
                     </p>
                     <p>
-                        <label>Confirmar contraseña:
-                            <input type="password" name="password_confirm" required>
-                        </label>
+                        <label for="password_confirm">Confirmar contraseña:</label>
+                        <input type="password" id="password_confirm" name="password_confirm" required>
                     </p>
                     
                     <button type="submit">Registrar</button>

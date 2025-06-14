@@ -131,22 +131,36 @@ function crearJuego() {
         legend.textContent = (i + 1) + '. ' + preg.pregunta;
         fieldset.appendChild(legend);
         preg.opciones.forEach(function(opcion, j) {
-            const label = document.createElement('label');
+            const inputId = 'pregunta' + i + '_opcion' + j;
             const input = document.createElement('input');
             input.type = 'radio';
             input.name = 'pregunta' + i;
             input.value = j;
-            label.appendChild(input);
+            input.id = inputId;
+            
+            const label = document.createElement('label');
+            label.htmlFor = inputId;
             label.appendChild(document.createTextNode(' ' + opcion));
+            
+            fieldset.appendChild(input);
             fieldset.appendChild(label);
             fieldset.appendChild(document.createElement('br'));
         });
         form.appendChild(fieldset);
     });
 
+    const botonId = 'btn_enviar';
     const boton = document.createElement('button');
     boton.type = 'submit';
     boton.textContent = 'Enviar respuestas';
+    boton.id = botonId;
+    
+    const botonLabel = document.createElement('label');
+    botonLabel.htmlFor = botonId;
+    botonLabel.hidden = true;
+    botonLabel.textContent = 'Botón para enviar respuestas del cuestionario';
+    
+    form.appendChild(botonLabel);
     form.appendChild(boton);
 
     form.addEventListener('submit', function(e) {

@@ -72,8 +72,8 @@ $errorDB = $controlador->errorDB;
         <?php else: ?>
         
         <section>
-            <p>Descubre todos los recursos turísticos disponibles en Muros del Nalón.</p>
-            
+            <h3>Descubre todos los recursos turísticos disponibles en Muros del Nalón.</h3>
+
             <?php if($usuarioLogueado): ?>
                 <p>Hola, <strong><?php echo htmlspecialchars($nombreUsuario); ?></strong>. 
                 Para hacer una reserva, haz clic en el botón "Reservar" junto al recurso que te interese.</p>
@@ -84,12 +84,13 @@ $errorDB = $controlador->errorDB;
         
         <section>
             <?php if(empty($recursos)): ?>
-                <p>No hay recursos turísticos disponibles en este momento.</p>
+                <h3>No hay recursos turísticos disponibles en este momento.</h3>
             <?php else: ?>
+                <h3>Recursos Disponibles</h3>
                 <?php foreach($recursos as $recurso): ?>
                     <article>
-                        <legend><?php echo htmlspecialchars($recurso->getNombre()); ?></legend>
-                        
+                        <h2><?php echo htmlspecialchars($recurso->getNombre()); ?></h2>
+
                         <p><strong>Descripción:</strong> <?php echo htmlspecialchars($recurso->getDescripcion()); ?></p>
                         
                         <p><strong>Límite de ocupación:</strong> <?php echo htmlspecialchars($recurso->getLimiteOcupacion()); ?> personas</p>
@@ -118,7 +119,7 @@ $errorDB = $controlador->errorDB;
                         
                         <?php if($usuarioLogueado): ?>
                             <p>
-                                <a href="confirmar_reserva.php?id=<?php echo $recurso->getId(); ?>" class="boton-reservar">Reservar</a>
+                                <a href="confirmar_reserva.php?id=<?php echo $recurso->getId(); ?>">Reservar</a>
                             </p>
                         <?php endif; ?>
                     </article>
@@ -128,9 +129,7 @@ $errorDB = $controlador->errorDB;
         </section>
           <?php endif; ?>
         
-        <section>
-            <p><a href="../reservas.php">Volver a la Central de Reservas</a></p>
-        </section>
+        <p><a href="../reservas.php">Volver a la Central de Reservas</a></p>
     </main>
 
     <footer>

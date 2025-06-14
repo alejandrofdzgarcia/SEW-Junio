@@ -107,11 +107,12 @@ class Rutas {
         // Añadir encabezado con el número de rutas encontradas
         $container.append(`<h2>Se han encontrado ${this.rutas.length} rutas</h2>`);
         
-        // Crear selector de rutas
+        // Crear selector de rutas con label asociada
         const selectorHTML = `
             <section>
                 <h3>Seleccionar ruta a visualizar:</h3>
-                <select name="selector-ruta">
+                <label for="selector-ruta">Seleccione una ruta:</label>
+                <select id="selector-ruta" name="selector-ruta">
                     <option value="">Seleccione una ruta</option>
                     ${this.rutas.map((ruta, index) => 
                         `<option value="${index}">${ruta.nombre}</option>`
@@ -125,7 +126,7 @@ class Rutas {
         $container.append(selectorHTML);
         
         // Escuchar cambios en el selector
-        $("[name='selector-ruta']").on("change", (e) => {
+        $("#selector-ruta").on("change", (e) => {
             const selectedIndex = $(e.target).val();
             
             // Si hay un mapa activo, elimínalo
@@ -223,9 +224,6 @@ class Rutas {
             const mapElement = document.querySelector("[name='mapa-figura']");
             
             if (mapElement) {
-                // Make sure container has dimensions using inline styles instead of class
-                mapElement.setAttribute('style', 'width: 100%; height: 400px;');
-                
                 this.mapaActual = this.inicializarMapa(mapElement, kmlUrl);
             }
         }, 300);
@@ -302,18 +300,12 @@ class Rutas {
                 // Asegurarnos de que el SVG se vea correctamente con atributos en línea
                 const svgElement = contenedorSVG.querySelector('svg');
                 if (svgElement) {
-                    svgElement.setAttribute('style', 'max-width: 100%; height: auto; display: block; margin: 0 auto;');
-                    
-                    // Añadir atributos para asegurar que el SVG se escale correctamente
                     if (!svgElement.hasAttribute('viewBox')) {
                         const width = svgElement.getAttribute('width') || '100%';
                         const height = svgElement.getAttribute('height') || '300';
                         svgElement.setAttribute('viewBox', `0 0 ${width} ${height}`);
                     }
                 }
-                
-                // Añadir estilos en línea al contenedor para asegurar visualización correcta
-                contenedorSVG.setAttribute('style', 'width: 100%; overflow-x: auto; margin-bottom: 20px;');
             },
             error: (error) => {
                 console.error('Error al cargar la altimetría:', error);
