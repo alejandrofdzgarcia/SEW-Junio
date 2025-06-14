@@ -154,18 +154,30 @@ if (empty($error) && $reservasManager->getError()) {
                     <legend>Datos de la reserva</legend>
                     
                     <label for="recurso_id">Recurso turístico:</label>
-                    <select name="recurso_id" id="recurso_id" required>
+                    <select name="recurso_id" required>
                         <option value="">Seleccione un recurso</option>
                         <?php foreach ($recursos as $recurso): ?>
                             <option value="<?php echo $recurso['id']; ?>" <?php echo (isset($_POST['recurso_id']) && $_POST['recurso_id'] == $recurso['id']) ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($recurso['nombre']); ?>
                                 (<?php echo $recurso['precio']; ?>€/persona)
+                                - Disponible: 
+                                <?php 
+                                    $fecha_hora_inicio = (isset($recurso['fecha_hora_inicio']) && $recurso['fecha_hora_inicio'] !== null && $recurso['fecha_hora_inicio'] !== '') 
+                                        ? date('d/m/Y H:i', strtotime($recurso['fecha_hora_inicio'])) 
+                                        : 'No disponible'; 
+                                    
+                                    $fecha_hora_fin = (isset($recurso['fecha_hora_fin']) && $recurso['fecha_hora_fin'] !== null && $recurso['fecha_hora_fin'] !== '') 
+                                        ? date('d/m/Y H:i', strtotime($recurso['fecha_hora_fin'])) 
+                                        : 'No disponible';
+                                    
+                                    echo $fecha_hora_inicio . ' a ' . $fecha_hora_fin;
+                                ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
                     
                     <label for="numero_personas">Número de personas:</label>
-                    <input type="number" name="numero_personas" id="numero_personas" required min="1" value="<?php echo isset($_POST['numero_personas']) ? intval($_POST['numero_personas']) : 1; ?>">
+                    <input type="number" name="numero_personas" required min="1" value="<?php echo isset($_POST['numero_personas']) ? intval($_POST['numero_personas']) : 1; ?>">
                     
                     <p>Precio total estimado: <output name="precio_total">0.00€</output></p>
                     

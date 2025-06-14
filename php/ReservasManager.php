@@ -49,7 +49,7 @@ class ReservasManager {
      */
     private function cargarRecursos() {
         try {
-            $query = "SELECT id, nombre, descripcion, precio, limite_ocupacion FROM recursos_turisticos";
+            $query = "SELECT id, nombre, descripcion, precio, limite_ocupacion, fecha_hora_inicio, fecha_hora_fin FROM recursos_turisticos";
             $resultado = $this->db->query($query);
             
             if ($resultado && $resultado->num_rows > 0) {

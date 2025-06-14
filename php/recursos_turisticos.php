@@ -77,11 +77,19 @@ $errorDB = $reservasManager->getError();
                         <p><strong>Límite de ocupación:</strong> <?php echo htmlspecialchars($recurso['limite_ocupacion']); ?> personas</p>
                         
                         <p><strong>Fecha y hora de inicio:</strong> 
-                            <?php echo isset($recurso['fecha_hora_inicio']) ? date('Y/m/d H:i', strtotime($recurso['fecha_hora_inicio'])) : 'No disponible'; ?>
+                            <?php 
+                            echo (isset($recurso['fecha_hora_inicio']) && $recurso['fecha_hora_inicio'] !== null && $recurso['fecha_hora_inicio'] !== '') 
+                                ? date('d/m/Y H:i', strtotime($recurso['fecha_hora_inicio'])) 
+                                : 'No disponible'; 
+                            ?>
                         </p>
                         
                         <p><strong>Fecha y hora de fin:</strong> 
-                            <?php echo isset($recurso['fecha_hora_fin']) ? date('Y/m/d H:i', strtotime($recurso['fecha_hora_fin'])) : 'No disponible'; ?>
+                            <?php 
+                            echo (isset($recurso['fecha_hora_fin']) && $recurso['fecha_hora_fin'] !== null && $recurso['fecha_hora_fin'] !== '') 
+                                ? date('d/m/Y H:i', strtotime($recurso['fecha_hora_fin'])) 
+                                : 'No disponible'; 
+                            ?>
                         </p>
                         
                         <p><strong>Precio:</strong> 
