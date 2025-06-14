@@ -186,7 +186,6 @@ $error = $controlador->error;
             </section>
             
             <?php if (!$presupuestoGenerado): ?>
-                <!-- Formulario para generar presupuesto -->
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>?id=<?php echo $recurso->getId(); ?>" method="post">
                     <input type="hidden" name="recurso_id" value="<?php echo $recurso->getId(); ?>">
                     
@@ -200,7 +199,6 @@ $error = $controlador->error;
                     </p>
                 </form>
             <?php else: ?>
-                <!-- Mostrar presupuesto y formulario para confirmar reserva -->
                 <section>
                     <h3>Presupuesto</h3>
                     <p><strong>Recurso:</strong> <?php echo htmlspecialchars($presupuesto['recurso_nombre']); ?></p>

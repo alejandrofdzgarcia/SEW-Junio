@@ -17,18 +17,14 @@
         {
             session_start();
 
-            // Gestores
             $this->dbManager = new DBManager();
-            new UserManager(); // por si se requiere futura gestión de sesión
+            new UserManager();
 
-            // Mensajes desde otras páginas
             $this->mensaje = $_GET['mensaje'] ?? '';
             $this->error = $_GET['error'] ?? '';
 
-            // Inicializar BD e importar recursos
             $this->inicializarBD();
 
-            // Información del usuario
             $this->usuarioLogueado = isset($_SESSION['usuario_id']);
             $this->nombreUsuario = $this->usuarioLogueado ? $_SESSION['usuario_nombre'] : '';
             $this->esAdministrador = $this->usuarioLogueado && !empty($_SESSION['es_admin']);
@@ -39,11 +35,10 @@
             try {
                 $this->dbManager->createDatabase();
                 $this->dbManager->importFromCSV("php/recursos_turisticos.csv");
-                $conn = $this->dbManager->getConnection(); // probar conexión
+                $conn = $this->dbManager->getConnection();
                 
-                // Verificar si la conexión es válida
                 if ($conn) {
-                    $this->errorDB = ''; // Limpiar error si la conexión es exitosa
+                    $this->errorDB = '';
                 }
             } catch (Exception $e) {
                 $this->errorDB = "Error de conexión a la base de datos: " . $e->getMessage();
@@ -51,7 +46,6 @@
         }
     }
 
-    // Ejecutar controlador
     $controlador = new ControladorReservas();
     $mensaje = $controlador->mensaje;
     $error = $controlador->error;

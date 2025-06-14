@@ -165,14 +165,13 @@ class DBManager {
      * @return bool Éxito de la operación
      */
     private function insertRowIfNotExists($tableName, $headers, $data) {
-        // Obtener columnas válidas de la tabla
+        
         $tableColumns = [];
         $result = $this->db->query("DESCRIBE {$tableName}");
         while ($column = $result->fetch_assoc()) {
             $tableColumns[] = $column['Field'];
         }
         
-        // Filtrar solo columnas que existen en la tabla
         $validColumns = [];
         $validData = [];
         $emailColumnIndex = -1;
@@ -183,7 +182,6 @@ class DBManager {
                 $validColumns[] = $column;
                 $validData[] = $data[$index];
                 
-                // Identificar columna de email
                 if (preg_match('/(email|correo)/i', $column)) {
                     $emailColumnIndex = count($validColumns) - 1;
                     $emailValue = $data[$index];
