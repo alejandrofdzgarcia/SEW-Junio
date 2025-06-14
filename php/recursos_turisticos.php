@@ -1,18 +1,36 @@
 <?php
-session_start();
 
 require_once 'ReservasManager.php';
 
-$usuarioLogueado = isset($_SESSION['usuario_id']);
-$nombreUsuario = $usuarioLogueado ? $_SESSION['usuario_nombre'] : '';
-$usuario_id = $usuarioLogueado ? $_SESSION['usuario_id'] : null;
+class ControladorCatalogo
+{
+    private $reservasManager;
+    public $usuarioLogueado;
+    public $nombreUsuario;
+    public $recursos;
+    public $errorDB;
 
-// Instanciar el ReservasManager con el ID del usuario si está logueado
-$reservasManager = new ReservasManager($usuario_id);
+    public function __construct()
+    {
+        session_start();
 
-// Obtener los recursos turísticos
-$recursos = $reservasManager->getRecursos();
-$errorDB = $reservasManager->getError();
+        $this->usuarioLogueado = isset($_SESSION['usuario_id']);
+        $this->nombreUsuario = $this->usuarioLogueado ? $_SESSION['usuario_nombre'] : '';
+        $usuario_id = $this->usuarioLogueado ? $_SESSION['usuario_id'] : null;
+
+        $this->reservasManager = new ReservasManager($usuario_id);
+        $this->recursos = $this->reservasManager->getRecursos();
+        $this->errorDB = $this->reservasManager->getError();
+    }
+}
+
+// Ejecutar controlador
+$controlador = new ControladorCatalogo();
+$usuarioLogueado = $controlador->usuarioLogueado;
+$nombreUsuario = $controlador->nombreUsuario;
+$recursos = $controlador->recursos;
+$errorDB = $controlador->errorDB;
+
 ?>
 
 <!DOCTYPE html>

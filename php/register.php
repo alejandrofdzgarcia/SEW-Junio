@@ -1,64 +1,76 @@
 <?php
-/**
- * Formulario de registro de usuario
- * Utiliza el paradigma orientado a objetos con UserManager
- * 
- * @author Alejandro Fernández García - UO295813
- * @version 2.0
- */
 
-session_start();
-
-// Incluir la clase UserManager
 require_once 'UserManager.php';
 
-// Crear instancia del gestor de usuarios
-$userManager = new UserManager();
+class ControladorRegistro
+{
+    private $userManager;
+    public $error = '';
+    public $nombre = '';
+    public $email = '';
 
-// Si usuario registrado, redirigir a reservas
-if (isset($_SESSION['usuario_id'])) {
-    header('Location: ../reservas.php');
-    exit;
+    public function __construct()
+    {
+        session_start();
+
+        // Si ya está logueado, redirige
+        if (isset($_SESSION['usuario_id'])) {
+            header('Location: ../reservas.php');
+            exit;
+        }
+
+        $this->userManager = new UserManager();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->procesarFormulario();
+        } else {
+            $this->cargarDatosPrevios();
+        }
+    }
+
+    private function procesarFormulario()
+    {
+        $nombre = $_POST['nombre'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $password_confirm = $_POST['password_confirm'] ?? '';
+
+        if ($this->userManager->registrarUsuario($nombre, $email, $password, $password_confirm)) {
+            $_SESSION['usuario_id'] = $this->userManager->getLastInsertId();
+            $_SESSION['usuario_nombre'] = $nombre;
+            $_SESSION['usuario_email'] = $email;
+
+            header('Location: ../reservas.php');
+            exit;
+        } else {
+            $this->error = $this->userManager->getError();
+            $formData = $this->userManager->getFormData();
+            $this->nombre = $formData['nombre'] ?? '';
+            $this->email = $formData['email'] ?? '';
+        }
+    }
+
+    private function cargarDatosPrevios()
+    {
+        if (isset($_SESSION['error'])) {
+            $this->error = $_SESSION['error'];
+            unset($_SESSION['error']);
+        }
+
+        if (isset($_SESSION['form_data'])) {
+            $this->nombre = $_SESSION['form_data']['nombre'] ?? '';
+            $this->email = $_SESSION['form_data']['email'] ?? '';
+            unset($_SESSION['form_data']);
+        }
+    }
 }
 
-// Procesar el formulario si se ha enviado (POST)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
-    $email = isset($_POST['email']) ? $_POST['email'] : '';
-    $password = isset($_POST['password']) ? $_POST['password'] : '';
-    $password_confirm = isset($_POST['password_confirm']) ? $_POST['password_confirm'] : '';
-    
-    // Intentar registrar al usuario usando el UserManager
-    if ($userManager->registrarUsuario($nombre, $email, $password, $password_confirm)) {
-        // Registro exitoso, guardar información en sesión
-        $_SESSION['usuario_id'] = $userManager->getLastInsertId();
-        $_SESSION['usuario_nombre'] = $nombre;
-        $_SESSION['usuario_email'] = $email;
-        
-        // Redirigir a la página de reservas
-        header('Location: ../reservas.php');
-        exit;
-    } else {
-        // Error en el registro, obtener mensaje de error y datos del formulario
-        $error = $userManager->getError();
-        $formData = $userManager->getFormData();
-        $nombre = isset($formData['nombre']) ? $formData['nombre'] : '';
-        $email = isset($formData['email']) ? $formData['email'] : '';
-    }
-} else {
-    // No es POST, verificar si hay mensajes de error previos
-    $error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
-    if (isset($_SESSION['error'])) {
-        unset($_SESSION['error']);
-    }
+// Ejecutar controlador
+$controlador = new ControladorRegistro();
+$error = $controlador->error;
+$nombre = $controlador->nombre;
+$email = $controlador->email;
 
-    // Verificar si hay datos de formulario previos
-    $nombre = isset($_SESSION['form_data']['nombre']) ? $_SESSION['form_data']['nombre'] : '';
-    $email = isset($_SESSION['form_data']['email']) ? $_SESSION['form_data']['email'] : '';
-    if (isset($_SESSION['form_data'])) {
-        unset($_SESSION['form_data']); // limpiar datos formulario
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">

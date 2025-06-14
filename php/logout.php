@@ -1,5 +1,4 @@
 <?php
-<?php
 class LogoutManager {
     private $userManager;
     private $nombreUsuario;

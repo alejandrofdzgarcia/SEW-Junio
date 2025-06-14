@@ -134,7 +134,7 @@ class ReservasManager {
                 'recurso_id' => $recurso_id,
                 'numero_personas' => $numero_personas,
                 'precio_total' => $precio_total,
-                'estado' => 'confirmada',
+                'estado' => 'confirmada',  // Status is set to "confirmada" here
                 'recurso_nombre' => $recurso->getNombre(),
                 'recurso_descripcion' => $recurso->getDescripcion()
             ];
@@ -145,8 +145,8 @@ class ReservasManager {
             $query = "INSERT INTO reservas (usuario_id, recurso_id, numero_personas, precio_total, estado) 
                      VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
-            $estado = $reserva->getEstado();
-            $stmt->bind_param('iiidd', 
+            $estado = $reserva->getEstado();  // This will be "confirmada"
+            $stmt->bind_param('iiids', 
                 $reserva->getUsuarioId(), 
                 $reserva->getRecursoId(), 
                 $reserva->getNumeroPersonas(), 
@@ -242,15 +242,14 @@ class ReservasManager {
             $estado = $reserva->getEstado();
             $id = $reserva->getId();
             $stmt->bind_param('si', $estado, $id);
-            $stmt->execute();
-
-            if ($stmt->affected_rows === 0) {
+            
+            if ($stmt->execute()) {
+                $this->mensaje = "Reserva cancelada con éxito.";
+                return true;
+            } else {
                 $this->error = "No se pudo cancelar la reserva. Inténtalo de nuevo.";
                 return false;
             }
-
-            $this->mensaje = "Reserva cancelada con éxito.";
-            return true;
         } catch (Exception $e) {
             $this->error = "Error al cancelar la reserva: " . $e->getMessage();
             return false;

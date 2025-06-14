@@ -1,48 +1,64 @@
 <?php
-session_start();
+
 require_once 'UserManager.php';
 
-// Crear instancia del gestor de usuarios
-$userManager = new UserManager();
+class ControladorLogin
+{
+    private $userManager;
+    public $email = '';
+    public $error = '';
 
-// Si ya hay una sesión activa, redirigir a la página de reservas
-if ($userManager->hayUsuarioLogueado()) {
-    header('Location: ../reservas.php');
-    exit;
-}
+    public function __construct()
+    {
+        session_start();
+        $this->userManager = new UserManager();
 
-// Variables para el formulario
-$error = '';
-$email = '';
+        if ($this->userManager->hayUsuarioLogueado()) {
+            header('Location: ../reservas.php');
+            exit;
+        }
 
-// Cargar datos de sesión (si hay error previo)
-if (isset($_SESSION['error'])) {
-    $error = $_SESSION['error'];
-    unset($_SESSION['error']);
-}
+        $this->cargarDatosDeSesion();
+    }
 
-if (isset($_SESSION['form_data'])) {
-    $email = isset($_SESSION['form_data']['email']) ? $_SESSION['form_data']['email'] : '';
-    unset($_SESSION['form_data']);
-}
+    private function cargarDatosDeSesion()
+    {
+        if (isset($_SESSION['error'])) {
+            $this->error = $_SESSION['error'];
+            unset($_SESSION['error']);
+        }
 
-// Procesar formulario de login
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = isset($_POST['email']) ? $_POST['email'] : '';
-    $password = isset($_POST['password']) ? $_POST['password'] : '';
-    
-    if ($userManager->iniciarSesion($email, $password)) {
-        // Login exitoso, redirigir a la página de reservas
-        header('Location: ../reservas.php');
-        exit;
-    } else {
-        // Login fallido, obtener error y datos del formulario
-        $error = $userManager->getError();
-        $formData = $userManager->getFormData();
-        $email = isset($formData['email']) ? $formData['email'] : '';
+        if (isset($_SESSION['form_data'])) {
+            $this->email = $_SESSION['form_data']['email'] ?? '';
+            unset($_SESSION['form_data']);
+        }
+    }
+
+    public function procesarFormulario()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->email = $_POST['email'] ?? '';
+            $password = $_POST['password'] ?? '';
+
+            if ($this->userManager->iniciarSesion($this->email, $password)) {
+                header('Location: ../reservas.php');
+                exit;
+            } else {
+                $this->error = $this->userManager->getError();
+                $formData = $this->userManager->getFormData();
+                $this->email = $formData['email'] ?? '';
+            }
+        }
     }
 }
+
+// Ejecutar controlador
+$controlador = new ControladorLogin();
+$controlador->procesarFormulario();
+$error = $controlador->error;
+$email = $controlador->email;
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -75,14 +91,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <section>
             <h2>Iniciar Sesión</h2>
-              <?php if (!empty($error)): ?>
+            <?php if (!empty($error)): ?>
                 <p><?php echo htmlspecialchars($error); ?></p>
             <?php endif; ?>
             
             <form action="login.php" method="POST">
                 <article>
                     <legend>Datos de acceso</legend>
-                      <p>
+                    <p>
                         <label>Correo Electrónico:
                             <input type="email" name="email" required value="<?php echo htmlspecialchars($email); ?>">
                         </label>
@@ -103,10 +119,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 
     <footer>
-        <p>2025 Turismo de Muros del Nalón</p>  <p>2025 Turismo de Muros del Nalón</p>
-        <p><a href="https://www.uniovi.es">Universidad de Oviedo</a> //www.uniovi.es">Universidad de Oviedo</a> 
-            - <a href="https://www.uniovi.es/estudia/grados/ingenieria/informaticasoftware/-/fof/asignatura/GIISOF01-3-002">Software y Estándares para la Web</a></p>informaticasoftware/-/fof/asignatura/GIISOF01-3-002">Software y Estándares para la Web</a></p>
-        <p><a href="https://github.com/alejandrofdzgarcia">Diseñado por Alejandro Fernández García</a></p>jandro Fernández García</a></p>
+        <p>2025 Turismo de Muros del Nalón</p>
+        <p><a href="https://www.uniovi.es">Universidad de Oviedo</a> - 
+        <a href="https://www.uniovi.es/estudia/grados/ingenieria/informaticasoftware/-/fof/asignatura/GIISOF01-3-002">
+            Software y Estándares para la Web</a></p>
+        <p><a href="https://github.com/alejandrofdzgarcia">Diseñado por Alejandro Fernández García</a></p>
     </footer>
 </body>
 </html>
