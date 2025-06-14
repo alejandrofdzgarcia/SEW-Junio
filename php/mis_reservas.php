@@ -76,11 +76,11 @@ if (empty($error) && $reservasManager->getError()) {
         <h1>Mis Reservas</h1>
         
         <?php if (!empty($mensaje)): ?>
-            <p style="color: green; font-weight: bold;"><?php echo htmlspecialchars($mensaje); ?></p>
+            <p><?php echo htmlspecialchars($mensaje); ?></p>
         <?php endif; ?>
 
         <?php if (!empty($error)): ?>
-            <p style="color: red; font-weight: bold;"><?php echo htmlspecialchars($error); ?></p>
+            <p><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
         
         <section>

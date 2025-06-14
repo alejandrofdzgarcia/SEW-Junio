@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <section>
             <h2>Registro de Usuario</h2>
             <?php if (!empty($error)): ?>
-                <p style="color: red; font-weight: bold;"><?php echo htmlspecialchars($error); ?></p>
+                <p><?php echo htmlspecialchars($error); ?></p>
             <?php endif; ?>
             
             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
