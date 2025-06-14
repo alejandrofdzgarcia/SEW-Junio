@@ -118,8 +118,7 @@ class Rutas {
                     ).join('')}
                 </select>
             </section>
-            <section>
-                <h6>Detalles de la ruta seleccionada:</h6>
+            <section name="ruta-detalle">
             </section>
         `;
         
@@ -145,7 +144,7 @@ class Rutas {
         // Información sobre el XML
         const fileInput = $("input[name='fileInput']")[0];
         const xmlInfo = `
-            <section name="xml-info">
+            <section>
                 <h3>Información del archivo XML</h3>
                 <p>Nombre del archivo: ${fileInput.files[0].name}</p>
                 <p>Tamaño: ${(fileInput.files[0].size / 1024).toFixed(2)} KB</p>
@@ -167,10 +166,11 @@ class Rutas {
         };
         
         const rutaHTML = `
-            <article name="ruta">
+            <h3>Detalles de la ruta seleccionada</h3>
+            <article>
                 <h3>${ruta.nombre}</h3>
                 <section>
-                    <h6>Información básica de la ruta:</h6>
+                    <h4>Información general:</h4>
                     <p>${ruta.descripcion}</p>
                     <p><strong>Tipo:</strong> ${ruta.tipo || 'No especificado'}</p>
                     <p><strong>Transporte:</strong> ${ruta.transporte || 'No especificado'}</p>
@@ -182,17 +182,22 @@ class Rutas {
                     <p><strong>Recomendación:</strong> ${ruta.recomendacion ? ruta.recomendacion + '/10' : 'No disponible'}</p>
                 </section>
                 
-                <section name="punto-inicio">
+                <section>
                     <h4>Punto de inicio:</h4>
                     <p><strong>Lugar:</strong> ${ruta.puntoInicio?.lugar || 'No especificado'}</p>
                     <p><strong>Dirección:</strong> ${ruta.puntoInicio?.direccion || 'No especificada'}</p>
-                    <p><strong>Coordenadas:</strong> ${this.formatearCoordenadas(ruta.puntoInicio?.coordenadas)}</p>
+                    <p>
+                        <strong>Coordenadas:</strong> 
+                        ${this.formatearCoordenadas(ruta.puntoInicio?.coordenadas)}
+                    </p>
                 </section>
                 
                 <section>
+                    <h4>Información gráfica de la Ruta</h4>
                     <section name="contenedorAltimetria">
+                        <h4>Altimetría de la Ruta</h4>
                     </section>
-                    <section>
+                    <section name="mapa-container">
                         <h4>Mapa de la Ruta</h4>
                         <figure name="mapa-figura"></figure>
                     </section>
@@ -268,6 +273,7 @@ class Rutas {
             success: (svgData) => {
                 // Crear contenedor semántico para el SVG
                 const contenedorSVG = document.createElement('figure');
+                contenedorSVG.setAttribute('name', 'svg-container');
                 
                 // Añadir encabezado para el SVG
                 const figcaption = document.createElement('figcaption');
@@ -378,7 +384,7 @@ class Rutas {
                     <h5>${index + 1}. ${hito.nombre}</h5>
                     <p>${hito.descripcion}</p>
                     <section>
-                        <h6>Detalles del hito:</h6>
+                        <h4>Información del Hito:</h4>
                         <p><strong>Coordenadas:</strong> ${this.formatearCoordenadas(hito.coordenadas)}</p>
                         <p><strong>Distancia desde el inicio:</strong> ${hito.distancia} ${hito.unidad || ''}</p>
                     </section>
@@ -394,7 +400,7 @@ class Rutas {
         if (!fotografias || fotografias.length === 0) return '';
         
         let galeriaHTML = '<section>';
-        galeriaHTML += '<h6>Galería de fotografías:</h6>';
+        galeriaHTML += '<h4>Galería de Fotografías:</h4>';
         fotografias.forEach(foto => {
             galeriaHTML += `<img src="${foto}" alt="Fotografía de la ruta" />`;
         });

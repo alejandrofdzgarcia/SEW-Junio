@@ -461,3 +461,89 @@ main > section:nth-of-type(3) > form > button {
 main > section:nth-of-type(3) > form > span {
     margin: 0 0.5rem;
 }
+
+form {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+input, select, button {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+}
+
+@media only screen and (max-width: 576px) {
+    main {
+        padding: 0.5rem;
+    }
+    
+    header nav {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    header nav a {
+        margin: 0.3rem 0;
+        padding: 0.5rem;
+    }
+    
+    form article {
+        padding: 0.8rem;
+    }
+    
+    article img {
+        object-fit: cover;
+        height: auto;
+    }
+}
+
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+    header nav {
+        flex-wrap: wrap;
+    }
+    
+    header nav a {
+        flex: 0 0 45%;
+        margin: 0.2rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    form {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+    }
+    
+    td {
+        border: none;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+        padding-left: 50%;
+    }
+    
+    td:before {
+        position: absolute;
+        left: 6px;
+        content: attr(data-label);
+        font-weight: bold;
+    }
+}
