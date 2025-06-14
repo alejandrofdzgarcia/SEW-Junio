@@ -27,5 +27,5 @@ $nombreUsuario = isset($_SESSION['usuario_nombre']) ? $_SESSION['usuario_nombre'
 $userManager->cerrarSesion();
 
 // Redirigir a la página de reservas con mensaje de confirmación
-header('Location: ../reservas.php?mensaje=Sesión cerrada correctamente. ¡Hasta pronto, ' . urlencode($nombreUsuario) . '!');
+header('Location: ../reservas.php?mensaje=¡Hasta pronto, ' . urlencode($nombreUsuario) . '!');
 exit;

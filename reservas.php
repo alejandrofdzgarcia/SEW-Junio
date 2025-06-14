@@ -72,6 +72,7 @@
         
         <?php if (!empty($mensaje)): ?>
             <section>
+                <h3>Sesión cerrada correctamente.</h3>
                 <p><?php echo htmlspecialchars($mensaje); ?></p>
             </section>
         <?php endif; ?>
@@ -91,12 +92,12 @@
         
         <section>
             <?php if($usuarioLogueado): ?>
-                <p>Bienvenido/a, <strong><?php echo htmlspecialchars($nombreUsuario); ?></strong></p>
+                <h3>Bienvenido/a, <strong><?php echo htmlspecialchars($nombreUsuario); ?></strong></h3>
                 <form action="php/logout.php" method="POST">
                     <button type="submit">Cerrar sesión</button>
                 </form>
             <?php else: ?>
-                <p>Inicia sesión para gestionar tus reservas</p>
+                <h3>Inicia sesión para gestionar tus reservas</h3>
                 <p>
                     <a href="php/login.php">Iniciar sesión</a>
                     <a href="php/register.php">Registrarse</a>
@@ -104,6 +105,7 @@
             <?php endif; ?>
         </section>
         <section>
+            <h4>Servicios disponibles</h4>
             <?php if($usuarioLogueado): ?>
                 
                 <article>
@@ -130,15 +132,17 @@
                     <p><a href="php/importar_exportar_csv.php">Ver importar/exportar CSV</a></p>
                 </article>
             <?php else: ?>
+                <h4>Debes iniciar sesión</h4>
                 <article>
-                    <h2>Información de acceso</h2>
+                    <h4>Información de acceso</h4>
                     <p>Para realizar reservas, consultar o cancelarlas, debes iniciar sesión.</p>
                     <p>Si no tienes una cuenta, regístrate para acceder a todos los servicios.</p>
                 </article>
             <?php endif; ?>
         </section>
         
-        <section>            
+        <section>
+            <h3>Instrucciones de uso</h3>            
             <article>
                 <h2>¿Cómo funciona?</h2>
                 <ol>

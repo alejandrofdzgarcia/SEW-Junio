@@ -88,11 +88,10 @@ if (empty($error) && $reservasManager->getError()) {
             
             <?php if (empty($reservas)): ?>
                 <section>
-                    <p>No tienes reservas activas en este momento.</p>
+                    <h3>No tienes reservas activas en este momento.</h3>
                     <p><a href="realizar_reserva.php">Realizar una reserva</a></p>
                 </section>
             <?php else: ?>
-                <section>
                     <?php foreach ($reservas as $reserva): ?>
                         <article>
                             <h3><?php echo htmlspecialchars($reserva['recurso_nombre']); ?></h3>
@@ -118,9 +117,10 @@ if (empty($error) && $reservasManager->getError()) {
                                 <?php echo htmlspecialchars($reserva['recurso_descripcion']); ?>
                             </p>
                             <section>
+                                <h4>Fecha de Reserva:</h4>
                                 <p>
                                     <span>
-                                        Reservado el: <?php echo date('d/m/Y', strtotime($reserva['fecha_reserva'])); ?>
+                                        <?php echo date('d/m/Y', strtotime($reserva['fecha_reserva'])); ?>
                                     </span>
                                 </p>
                                 <?php if (strtolower($reserva['estado']) !== 'cancelada'): ?>
@@ -131,9 +131,9 @@ if (empty($error) && $reservasManager->getError()) {
                             </section>
                         </article>
                     <?php endforeach; ?>
-                </section>
                 
                 <section>
+                    <h4>Acciones</h4>
                     <p>
                         <a href="realizar_reserva.php">Realizar otra reserva</a>
                         <a href="../reservas.php">Volver a Reservas</a>

@@ -109,7 +109,7 @@ class Rutas {
         
         // Crear selector de rutas
         const selectorHTML = `
-            <section name="selector-rutas">
+            <section>
                 <h3>Seleccionar ruta a visualizar:</h3>
                 <select name="selector-ruta">
                     <option value="">Seleccione una ruta</option>
@@ -118,7 +118,9 @@ class Rutas {
                     ).join('')}
                 </select>
             </section>
-            <section name="ruta-detalle"></section>
+            <section>
+                <h6>Detalles de la ruta seleccionada:</h6>
+            </section>
         `;
         
         $container.append(selectorHTML);
@@ -167,7 +169,8 @@ class Rutas {
         const rutaHTML = `
             <article name="ruta">
                 <h3>${ruta.nombre}</h3>
-                <section name="info-basica">
+                <section>
+                    <h6>Información básica de la ruta:</h6>
                     <p>${ruta.descripcion}</p>
                     <p><strong>Tipo:</strong> ${ruta.tipo || 'No especificado'}</p>
                     <p><strong>Transporte:</strong> ${ruta.transporte || 'No especificado'}</p>
@@ -186,16 +189,16 @@ class Rutas {
                     <p><strong>Coordenadas:</strong> ${this.formatearCoordenadas(ruta.puntoInicio?.coordenadas)}</p>
                 </section>
                 
-                <section name="visualizaciones">
+                <section>
                     <section name="contenedorAltimetria">
                     </section>
-                    <section name="mapa-container">
+                    <section>
                         <h4>Mapa de la Ruta</h4>
                         <figure name="mapa-figura"></figure>
                     </section>
                 </section>
                 
-                <section name="hitos-ruta">
+                <section>
                     ${this.mostrarHitos(ruta.hitos)}
                 </section>
                 
@@ -265,7 +268,6 @@ class Rutas {
             success: (svgData) => {
                 // Crear contenedor semántico para el SVG
                 const contenedorSVG = document.createElement('figure');
-                contenedorSVG.setAttribute('name', 'svg-container');
                 
                 // Añadir encabezado para el SVG
                 const figcaption = document.createElement('figcaption');
@@ -372,10 +374,11 @@ class Rutas {
         
         hitos.forEach((hito, index) => {
             hitosHTML += `
-                <article name="hito">
+                <article>
                     <h5>${index + 1}. ${hito.nombre}</h5>
                     <p>${hito.descripcion}</p>
-                    <section name="hito-detalles">
+                    <section>
+                        <h6>Detalles del hito:</h6>
                         <p><strong>Coordenadas:</strong> ${this.formatearCoordenadas(hito.coordenadas)}</p>
                         <p><strong>Distancia desde el inicio:</strong> ${hito.distancia} ${hito.unidad || ''}</p>
                     </section>
@@ -390,7 +393,8 @@ class Rutas {
     generarGaleriaFotos(fotografias) {
         if (!fotografias || fotografias.length === 0) return '';
         
-        let galeriaHTML = '<section name="galeria-fotos">';
+        let galeriaHTML = '<section>';
+        galeriaHTML += '<h6>Galería de fotografías:</h6>';
         fotografias.forEach(foto => {
             galeriaHTML += `<img src="${foto}" alt="Fotografía de la ruta" />`;
         });
@@ -402,7 +406,7 @@ class Rutas {
     mostrarReferencias(referencias) {
         if (!referencias || referencias.length === 0) return '';
         
-        let refHTML = '<section name="referencias"><h4>Referencias:</h4><ul>';
+        let refHTML = '<section><h4>Referencias:</h4><ul>';
         referencias.forEach(ref => {
             refHTML += `<li><a href="${ref}" target="_blank">${ref}</a></li>`;
         });

@@ -81,7 +81,9 @@ class Meteo {
                 const indice = fila * diasPorFila + col;
                 
                 if (indice >= totalDias) {
-                    break;
+                    // Add empty cells to complete the row
+                    $tr.append($('<td>'));
+                    continue;
                 }
                 
                 const fecha = datos.daily.time[indice];

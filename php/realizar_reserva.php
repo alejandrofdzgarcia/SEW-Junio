@@ -191,6 +191,7 @@ if (empty($error) && $reservasManager->getError()) {
         <section>
             <h2>Presupuesto</h2>
             <article>
+                <h2>Datos de la reserva</h2>
                 <p><strong>Recurso:</strong> <?php echo htmlspecialchars($presupuesto['recurso_nombre']); ?></p>
                 <p><strong>Número de personas:</strong> <?php echo $presupuesto['numero_personas']; ?></p>
                 <p><strong>Precio por persona:</strong> <?php echo $presupuesto['precio_unitario']; ?>€</p>
