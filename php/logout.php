@@ -1,31 +1,43 @@
 <?php
-/**
- * Script para procesar el cierre de sesión utilizando UserManager
- * 
- * @author Alejandro Fernández García - UO295813
- * @version 2.0
- */
-
-session_start();
-
-// Verificar que la petición es POST para mayor seguridad
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../reservas.php');
-    exit;
+<?php
+class LogoutManager {
+    private $userManager;
+    private $nombreUsuario;
+    
+    public function __construct() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        require_once 'UserManager.php';
+        
+        $this->userManager = new UserManager();
+        
+        $this->nombreUsuario = isset($_SESSION['usuario_nombre']) ? $_SESSION['usuario_nombre'] : '';
+    }
+    
+    public function esMetodoPost() {
+        return $_SERVER['REQUEST_METHOD'] === 'POST';
+    }
+    
+    public function procesarLogout() {
+        $this->userManager->cerrarSesion();
+        
+        return '¡Hasta pronto, ' . $this->nombreUsuario . '!';
+    }
+    
+    public function redirigir($mensaje = '') {
+        header('Location: ../reservas.php' . ($mensaje ? '?mensaje=' . urlencode($mensaje) : ''));
+        exit;
+    }
 }
 
-// Incluir la clase UserManager
-require_once 'UserManager.php';
+$logoutManager = new LogoutManager();
 
-// Crear instancia del gestor de usuarios
-$userManager = new UserManager();
+if (!$logoutManager->esMetodoPost()) {
+    $logoutManager->redirigir();
+}
 
-// Almacenar el nombre de usuario para mensaje de despedida
-$nombreUsuario = isset($_SESSION['usuario_nombre']) ? $_SESSION['usuario_nombre'] : '';
+$mensajeDespedida = $logoutManager->procesarLogout();
 
-// Cerrar la sesión usando el método del UserManager
-$userManager->cerrarSesion();
-
-// Redirigir a la página de reservas con mensaje de confirmación
-header('Location: ../reservas.php?mensaje=¡Hasta pronto, ' . urlencode($nombreUsuario) . '!');
-exit;
+$logoutManager->redirigir($mensajeDespedida);

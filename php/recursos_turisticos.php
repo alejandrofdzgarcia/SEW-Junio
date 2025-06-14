@@ -70,35 +70,37 @@ $errorDB = $reservasManager->getError();
             <?php else: ?>
                 <?php foreach($recursos as $recurso): ?>
                     <article>
-                        <legend><?php echo htmlspecialchars($recurso['nombre']); ?></legend>
+                        <legend><?php echo htmlspecialchars($recurso->getNombre()); ?></legend>
                         
-                        <p><strong>Descripción:</strong> <?php echo htmlspecialchars($recurso['descripcion']); ?></p>
+                        <p><strong>Descripción:</strong> <?php echo htmlspecialchars($recurso->getDescripcion()); ?></p>
                         
-                        <p><strong>Límite de ocupación:</strong> <?php echo htmlspecialchars($recurso['limite_ocupacion']); ?> personas</p>
+                        <p><strong>Límite de ocupación:</strong> <?php echo htmlspecialchars($recurso->getLimiteOcupacion()); ?> personas</p>
                         
                         <p><strong>Fecha y hora de inicio:</strong> 
                             <?php 
-                            echo (isset($recurso['fecha_hora_inicio']) && $recurso['fecha_hora_inicio'] !== null && $recurso['fecha_hora_inicio'] !== '') 
-                                ? date('d/m/Y H:i', strtotime($recurso['fecha_hora_inicio'])) 
+                            $fechaInicio = $recurso->getFechaHoraInicio();
+                            echo ($fechaInicio !== null && $fechaInicio !== '') 
+                                ? date('d/m/Y H:i', strtotime($fechaInicio)) 
                                 : 'No disponible'; 
                             ?>
                         </p>
                         
                         <p><strong>Fecha y hora de fin:</strong> 
                             <?php 
-                            echo (isset($recurso['fecha_hora_fin']) && $recurso['fecha_hora_fin'] !== null && $recurso['fecha_hora_fin'] !== '') 
-                                ? date('d/m/Y H:i', strtotime($recurso['fecha_hora_fin'])) 
+                            $fechaFin = $recurso->getFechaHoraFin();
+                            echo ($fechaFin !== null && $fechaFin !== '') 
+                                ? date('d/m/Y H:i', strtotime($fechaFin)) 
                                 : 'No disponible'; 
                             ?>
                         </p>
                         
                         <p><strong>Precio:</strong> 
-                            <?php echo number_format($recurso['precio'], 2, ',', '.'); ?> €
+                            <?php echo number_format($recurso->getPrecio(), 2, ',', '.'); ?> €
                         </p>
                         
                         <?php if($usuarioLogueado): ?>
                             <p>
-                                <a href="realizar_reserva.php?id=<?php echo $recurso['id']; ?>">Reservar</a>
+                                <a href="confirmar_reserva.php?id=<?php echo $recurso->getId(); ?>" class="boton-reservar">Reservar</a>
                             </p>
                         <?php endif; ?>
                     </article>

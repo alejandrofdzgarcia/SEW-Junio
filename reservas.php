@@ -110,14 +110,8 @@
                 
                 <article>
                     <h2>Catálogo de Recursos</h2>
-                    <p>Explora nuestros recursos turísticos disponibles.</p>
+                    <p>Explora nuestros recursos turísticos disponibles y realiza una reserva.</p>
                     <p><a href="php/recursos_turisticos.php">Ver recursos</a></p>
-                </article>
-
-                <article>
-                    <h2>Hacer una Reserva</h2>
-                    <p>Reserva el recurso turístico que más te interese.</p>
-                    <p><a href="php/realizar_reserva.php">Reservar ahora</a></p>
                 </article>
                 
                 <article>

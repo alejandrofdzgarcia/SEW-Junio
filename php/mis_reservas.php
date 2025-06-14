@@ -1,11 +1,4 @@
 <?php
-/**
- * Script para visualizar las reservas del usuario actual
- * utilizando el paradigma orientado a objetos
- * 
- * @author Alejandro Fernández García - UO295813
- * @version 2.1
- */
 
 session_start();
 
@@ -22,7 +15,7 @@ require_once 'ReservasManager.php';
 // Inicializar el gestor de reservas con el ID del usuario actual
 $reservasManager = new ReservasManager($_SESSION['usuario_id']);
 
-// Obtener las reservas del usuario actual
+// Obtener las reservas del usuario actual como objetos Reserva
 $reservas = $reservasManager->obtenerReservasUsuario();
 
 // Obtener mensajes de error o éxito
@@ -92,50 +85,56 @@ if (empty($error) && $reservasManager->getError()) {
                     <p><a href="realizar_reserva.php">Realizar una reserva</a></p>
                 </section>
             <?php else: ?>
-                    <?php foreach ($reservas as $reserva): ?>
-                        <article>
-                            <h3><?php echo htmlspecialchars($reserva['recurso_nombre']); ?></h3>
+                <?php foreach ($reservas as $reserva): ?>
+                    <article>
+                        <h3><?php echo htmlspecialchars($reserva->getRecursoNombre()); ?></h3>
+                        <p>
+                            <strong>Fechas:</strong> 
+                            <?php 
+                                // Obtenemos el recurso asociado a esta reserva para los datos de fechas
+                                $recurso = $reservasManager->getRecursoPorId($reserva->getRecursoId());
+                                echo date('d/m/Y H:i', strtotime($recurso->getFechaHoraInicio())); ?> - 
+                            <?php echo date('d/m/Y H:i', strtotime($recurso->getFechaHoraFin())); ?>
+                        </p>
+                        <p>
+                            <strong>Personas:</strong> 
+                            <?php echo $reserva->getNumeroPersonas(); ?>
+                        </p>
+                        <p>
+                            <strong>Precio Total:</strong> 
+                            <?php echo number_format($reserva->getPrecioTotal(), 2); ?>€
+                        </p>
+                        <p>
+                            <strong>Estado:</strong> 
+                            <?php echo htmlspecialchars($reserva->getEstado()); ?>
+                        </p>
+                        <p>
+                            <strong>Descripción:</strong>
+                            <?php echo htmlspecialchars($reserva->getRecursoDescripcion()); ?>
+                        </p>
+                        <section>
+                            <h4>Fecha de Reserva:</h4>
                             <p>
-                                <strong>Fechas:</strong> 
-                                <?php echo date('d/m/Y H:i', strtotime($reserva['fecha_hora_inicio'])); ?> - 
-                                <?php echo date('d/m/Y H:i', strtotime($reserva['fecha_hora_fin'])); ?>
+                                <span>
+                                    <?php echo date('d/m/Y', strtotime($reserva->getFechaReserva())); ?>
+                                </span>
                             </p>
+                            <?php if (strtolower($reserva->getEstado()) !== 'cancelada'): ?>
                             <p>
-                                <strong>Personas:</strong> 
-                                <?php echo $reserva['numero_personas']; ?>
+                                <a href="cancelar_reserva.php?id=<?php echo $reserva->getId(); ?>" 
+                                   onclick="return confirm('¿Estás seguro de que deseas cancelar esta reserva?');">
+                                   Cancelar reserva
+                                </a>
                             </p>
-                            <p>
-                                <strong>Precio Total:</strong> 
-                                <?php echo number_format($reserva['precio_total'], 2); ?>€
-                            </p>
-                            <p>
-                                <strong>Estado:</strong> 
-                                <?php echo htmlspecialchars($reserva['estado']); ?>
-                            </p>
-                            <p>
-                                <strong>Descripción:</strong>
-                                <?php echo htmlspecialchars($reserva['recurso_descripcion']); ?>
-                            </p>
-                            <section>
-                                <h4>Fecha de Reserva:</h4>
-                                <p>
-                                    <span>
-                                        <?php echo date('d/m/Y', strtotime($reserva['fecha_reserva'])); ?>
-                                    </span>
-                                </p>
-                                <?php if (strtolower($reserva['estado']) !== 'cancelada'): ?>
-                                <p>
-                                    <a href="cancelar_reserva.php?id=<?php echo $reserva['id']; ?>">Cancelar</a>
-                                </p>
-                                <?php endif; ?>
-                            </section>
-                        </article>
-                    <?php endforeach; ?>
+                            <?php endif; ?>
+                        </section>
+                    </article>
+                <?php endforeach; ?>
                 
                 <section>
                     <h4>Acciones</h4>
                     <p>
-                        <a href="realizar_reserva.php">Realizar otra reserva</a>
+                        <a href="recursos_turisticos.php">Realizar otra reserva</a>
                         <a href="../reservas.php">Volver a Reservas</a>
                     </p>
                 </section>

@@ -8,6 +8,8 @@
  */
 
 require_once 'DBManager.php';
+require_once 'Reserva.php';
+require_once 'RecursoTuristico.php';
 
 class ReservasManager {
     private $db;
@@ -54,7 +56,7 @@ class ReservasManager {
             
             if ($resultado && $resultado->num_rows > 0) {
                 while ($fila = $resultado->fetch_assoc()) {
-                    $this->recursos[] = $fila;
+                    $this->recursos[] = new RecursoTuristico($fila);
                 }
             }
         } catch (Exception $e) {
@@ -76,24 +78,24 @@ class ReservasManager {
         }
         
         try {
-            $query = "SELECT nombre, precio, limite_ocupacion FROM recursos_turisticos WHERE id = ?";
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param('i', $recurso_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $recurso = $result->fetch_assoc();
+            $recurso = $this->getRecursoPorId($recurso_id);
             
-            if ($numero_personas > $recurso['limite_ocupacion']) {
-                $this->error = "El número de personas excede el límite de ocupación del recurso (" . $recurso['limite_ocupacion'] . " personas).";
+            if (!$recurso) {
+                $this->error = "No se encontró el recurso solicitado.";
                 return false;
             }
             
-            $precio_total = $recurso['precio'] * $numero_personas;
+            if (!$recurso->tieneCapacidadSuficiente($numero_personas)) {
+                $this->error = "El número de personas excede el límite de ocupación del recurso (" . $recurso->getLimiteOcupacion() . " personas).";
+                return false;
+            }
+            
+            $precio_total = $recurso->calcularPrecioTotal($numero_personas);
             $this->presupuesto = [
                 'recurso_id' => $recurso_id,
-                'recurso_nombre' => $recurso['nombre'],
+                'recurso_nombre' => $recurso->getNombre(),
                 'numero_personas' => $numero_personas,
-                'precio_unitario' => $recurso['precio'],
+                'precio_unitario' => $recurso->getPrecio(),
                 'precio_total' => $precio_total
             ];
             
@@ -119,22 +121,38 @@ class ReservasManager {
         }
         
         try {
-            $query = "SELECT limite_ocupacion FROM recursos_turisticos WHERE id = ?";
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param('i', $recurso_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $recurso = $result->fetch_assoc();
+            $recurso = $this->getRecursoPorId($recurso_id);
             
-            if ($numero_personas > $recurso['limite_ocupacion']) {
+            if (!$recurso || !$recurso->tieneCapacidadSuficiente($numero_personas)) {
                 $this->error = "El número de personas excede el límite de ocupación del recurso.";
                 return false;
             }
             
+            // Crear objeto Reserva
+            $reservaData = [
+                'usuario_id' => $this->usuario_id,
+                'recurso_id' => $recurso_id,
+                'numero_personas' => $numero_personas,
+                'precio_total' => $precio_total,
+                'estado' => 'confirmada',
+                'recurso_nombre' => $recurso->getNombre(),
+                'recurso_descripcion' => $recurso->getDescripcion()
+            ];
+            
+            $reserva = new Reserva($reservaData);
+            
+            // Guardar en la base de datos
             $query = "INSERT INTO reservas (usuario_id, recurso_id, numero_personas, precio_total, estado) 
-                     VALUES (?, ?, ?, ?, 'confirmada')";
+                     VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('iiid', $this->usuario_id, $recurso_id, $numero_personas, $precio_total);
+            $estado = $reserva->getEstado();
+            $stmt->bind_param('iiidd', 
+                $reserva->getUsuarioId(), 
+                $reserva->getRecursoId(), 
+                $reserva->getNumeroPersonas(), 
+                $reserva->getPrecioTotal(),
+                $estado
+            );
             
             if ($stmt->execute()) {
                 $this->mensaje = "¡Reserva realizada con éxito! Precio total: " . $precio_total . "€";
@@ -161,7 +179,8 @@ class ReservasManager {
         }
         
         try {
-            $query = "SELECT r.id, r.fecha_reserva, r.numero_personas, r.precio_total, r.estado,
+            $query = "SELECT r.id, r.usuario_id, r.recurso_id, r.fecha_reserva, r.numero_personas, 
+                           r.precio_total, r.estado,
                            rt.nombre as recurso_nombre, rt.descripcion as recurso_descripcion,
                            rt.fecha_hora_inicio, rt.fecha_hora_fin
                     FROM reservas r
@@ -177,7 +196,7 @@ class ReservasManager {
             $this->reservas = [];
             if ($resultado && $resultado->num_rows > 0) {
                 while ($fila = $resultado->fetch_assoc()) {
-                    $this->reservas[] = $fila;
+                    $this->reservas[] = new Reserva($fila);
                 }
             }
             
@@ -202,21 +221,27 @@ class ReservasManager {
         
         try {
             // Verificar que la reserva pertenece al usuario actual
-            $query = "SELECT id FROM reservas WHERE id = ? AND usuario_id = ?";
-            $stmt = $this->db->prepare($query);
-            $stmt->bind_param('ii', $reserva_id, $this->usuario_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if ($result->num_rows === 0) {
+            if (!$this->esReservaDelUsuario($reserva_id)) {
                 $this->error = "No se encontró la reserva o no tienes permiso para cancelarla.";
                 return false;
             }
 
-            // Cancelar la reserva (actualizar el estado a 'cancelada')
-            $query = "UPDATE reservas SET estado = 'cancelada' WHERE id = ?";
+            // Obtener la reserva
+            $reserva = $this->obtenerDetallesReserva($reserva_id);
+            if (!$reserva) {
+                $this->error = "No se pudo encontrar la reserva.";
+                return false;
+            }
+            
+            // No necesitamos crear un nuevo objeto Reserva, usamos el que ya tenemos
+            $reserva->cancelar();
+
+            // Actualizar en la base de datos
+            $query = "UPDATE reservas SET estado = ? WHERE id = ?";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param('i', $reserva_id);
+            $estado = $reserva->getEstado();
+            $id = $reserva->getId();
+            $stmt->bind_param('si', $estado, $id);
             $stmt->execute();
 
             if ($stmt->affected_rows === 0) {
@@ -257,7 +282,7 @@ class ReservasManager {
      * Obtiene los detalles de una reserva específica
      * 
      * @param int $reserva_id ID de la reserva
-     * @return array|null Detalles de la reserva o null si no se encuentra
+     * @return Reserva|null Objeto Reserva o null si no se encuentra
      */
     public function obtenerDetallesReserva($reserva_id) {
         try {
@@ -271,7 +296,8 @@ class ReservasManager {
             $result = $stmt->get_result();
             
             if ($result->num_rows > 0) {
-                return $result->fetch_assoc();
+                $data = $result->fetch_assoc();
+                return new Reserva($data);
             }
             
             return null;
@@ -281,12 +307,37 @@ class ReservasManager {
         }
     }
     
+    /**
+     * Obtiene un recurso específico por su ID
+     *
+     * @param int $id ID del recurso a obtener
+     * @return RecursoTuristico|null El recurso encontrado o null si no existe
+     */
+    public function getRecursoPorId($id) {
+        try {
+            $query = "SELECT * FROM recursos_turisticos WHERE id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($result && $result->num_rows > 0) {
+                return new RecursoTuristico($result->fetch_assoc());
+            }
+            
+            return null;
+        } catch (Exception $e) {
+            $this->error = "Error al obtener el recurso: " . $e->getMessage();
+            return null;
+        }
+    }
+    
     // Getters
     
     /**
      * Obtiene los recursos turísticos disponibles
      * 
-     * @return array Lista de recursos turísticos
+     * @return array Lista de objetos RecursoTuristico
      */
     public function getRecursos() {
         return $this->recursos;
@@ -322,7 +373,7 @@ class ReservasManager {
     /**
      * Obtiene las reservas del usuario
      * 
-     * @return array Lista de reservas del usuario
+     * @return array Lista de objetos Reserva
      */
     public function getReservas() {
         return $this->reservas;
