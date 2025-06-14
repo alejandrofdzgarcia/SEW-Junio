@@ -3,6 +3,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 header, footer {
@@ -10,11 +12,16 @@ header, footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 1.5rem 0;
+    text-align: center;
 }
 
 img, video, audio {
     display: block;
     margin: 1rem auto;
+    max-width: 100%;
+    height: auto;
+    width: auto;
 }
 
 /* Navegación */
@@ -27,6 +34,15 @@ nav, header nav {
     max-width: 75rem;
     margin-left: auto;
     margin-right: auto;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+}
+
+nav a, header nav a {
+    padding: 0.7rem 1.2rem;
+    margin: 0.2rem 0.3rem;
+    position: relative;
+    display: inline-block;
 }
 
 /* Layout principal */
@@ -38,6 +54,8 @@ main {
     flex-direction: column;
     align-items: center;
     flex: 1;
+    padding: 2rem;
+    box-sizing: border-box;
 }
 
 main.reservas {
@@ -47,10 +65,15 @@ main.reservas {
 main h2 {
     width: 100%;
     align-self: flex-start;
+    padding-left: 1rem;
+    margin-top: 2.5rem;
 }
 
 main h1 {
     width: 100%;
+    text-align: center;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 /* Estructura de elementos del formulario */
@@ -61,6 +84,28 @@ section, main {
     text-align: center;
 }
 
+section {
+    width: 100%;
+    max-width: 75rem;
+    padding: 1.25rem;
+    margin: 0 auto 2.5rem auto;
+}
+
+section:last-of-type {
+    margin-bottom: 0;
+}
+
+section > p, section > a {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+section > figure {
+    width: 100%; 
+    height: 25rem;
+    margin: 1rem auto;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -69,6 +114,7 @@ form {
     max-width: 50rem;
     margin: 0 auto;
     box-sizing: border-box;
+    width: 100%;
 }
 
 form fieldset {
@@ -87,18 +133,29 @@ fieldset {
     box-sizing: border-box; 
     margin-left: auto;
     margin-right: auto;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
 }
 
 fieldset > legend {
     width: 100%;
     text-align: center;
     padding: 0.5rem 0;
-    font-weight: bold;
 }
 
 fieldset ol, fieldset ul {
     align-self: flex-start;
     width: 100%;
+    text-align: left;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    list-style-position: outside;
+}
+
+fieldset li {
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+    padding-left: 0.5rem;
 }
 
 /* Estructura de artículos */
@@ -108,26 +165,47 @@ article {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 article h3 {
     width: 100%;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+article p {
+    margin: 0.8rem 0;
+    line-height: 1.5;
 }
 
 article dl, article ul, article ol {
     align-self: flex-start;
     width: 100%;
+    text-align: left;
+    margin: 1rem 0;
 }
 
 article figure {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 1rem auto;
+    text-align: center;
 }
 
-section {
-    width: 100%;
-    max-width: 75rem;
+article dt {
+    margin-top: 0.5rem;
+}
+
+article dd {
+    margin-left: 0;
+    margin-bottom: 0.5rem;
 }
 
 /* Elementos de información del usuario */
@@ -138,6 +216,80 @@ p:has(a[href="php/logout.php"]) {
 
 body > p {
     width: 100%;
+    padding: 0.6rem 1rem;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+footer {
+    margin-top: 2rem;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+input, select, button {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    max-width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+}
+
+th, td {
+    padding: 0.5rem;
+}
+
+/* Especificaciones para sección de mapa */
+section > h4 + figure {
+    width: 100% !important;
+    height: 20rem !important;
+    min-height: 15rem !important;
+    max-height: 25rem !important;
+    display: block !important;
+    margin: 1rem auto;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Especificaciones para galería de imágenes */
+main > section:nth-of-type(3) > figure {
+    width: 100%;
+    height: 25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+main > section:nth-of-type(3) > figure > img {
+    max-width: 100%;
+    max-height: 25rem;
+    object-fit: contain;
+}
+
+main > section:nth-of-type(3) > form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+main > section:nth-of-type(3) > form > button {
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+main > section:nth-of-type(3) > form > span {
+    margin: 0 0.5rem;
 }
 
 /* Media Queries */
@@ -183,12 +335,180 @@ body > p {
         padding: 1rem;
         width: auto;
     }
+    
+    html {
+        font-size: 95%;
+    }
+    
+    header {
+        padding: 1rem 0;
+    }
+    
+    main {
+        padding: 0.5rem;
+    }
+    
+    section {
+        padding: 0.75rem;
+        margin-bottom: 1.5rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    section > * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    section > h2 {
+        font-size: 1.3rem;
+        margin-bottom: 0.8rem;
+        word-wrap: break-word;
+    }
+    
+    section > p {
+        font-size: 0.9rem;
+        margin: 0.6rem 0;
+        text-align: left;
+    }
+    
+    section > figure {
+        margin: 0.8rem auto;
+        height: auto;
+        max-height: 15rem;
+    }
+    
+    section > figure > img {
+        max-height: 14rem;
+        width: auto;
+        object-fit: contain;
+    }
+    
+    section > form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    section > form > * {
+        width: 100%;
+        margin: 0.3rem 0;
+    }
+    
+    section iframe {
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+    
+    section audio {
+        width: 100%;
+    }
+    
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+    }
+    
+    td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+    }
+    
+    td:before {
+        position: absolute;
+        left: 0.375rem;
+        content: attr(data-label);
+        padding-right: 0.5rem;
+    }
+    
+    section > h4 + figure {
+        height: 15rem !important;
+        min-height: 12rem !important;
+    }
+    
+    section > h4 {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
 }
 
 @media (min-width: 30rem) and (max-width: 48rem) {
     main {
         width: 90%;
         max-width: 45rem;
+    }
+    
+    html {
+        font-size: 97%;
+    }
+    
+    section {
+        padding: 1rem;
+        margin-bottom: 2rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    section > * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    section > h2 {
+        font-size: 1.4rem;
+    }
+    
+    section > p {
+        font-size: 0.95rem;
+    }
+    
+    section > figure {
+        height: auto;
+        max-height: 20rem;
+    }
+    
+    section > figure > img {
+        max-height: 18rem;
+    }
+    
+    section > form {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    section > form > * {
+        flex: 0 0 48%;
+        margin: 0.3rem 1%;
+    }
+    
+    section iframe {
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+    
+    section > h4 + figure {
+        height: 18rem !important;
+    }
+    
+    header nav {
+        flex-wrap: wrap;
+    }
+    
+    header nav a {
+        flex: 0 0 45%;
+        margin: 0.2rem;
     }
 }
 
@@ -200,7 +520,11 @@ body > p {
     main.reservas {
         max-width: 75rem;
     }
-
+    
+    html {
+        font-size: 105%;
+    }
+    
     article.multi-column {
         column-count: 2;
         column-gap: 2rem;
@@ -227,4 +551,87 @@ body > p {
         grid-gap: 2rem;
         width: 100%;
     }
+    
+    section {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1.5rem;
+        box-sizing: border-box;
+    }
+    
+    section > * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    section > div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    section > div > * {
+        flex: 0 0 48%;
+        margin: 0.5rem 0;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+    section {
+        max-width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+    }
+    
+    section > * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    section > figure {
+        height: auto;
+        max-height: 22rem;
+    }
+    
+    section > figure > img {
+        max-height: 20rem;
+    }
+    
+    section > form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    section > form > * {
+        flex: 0 0 31%;
+        margin: 0.5rem 1%;
+    }
+}
+
+@media (max-width: 320px) {
+    section > h4 + figure {
+        height: 12rem !important;
+        min-height: 10rem !important;
+    }
+    
+    section > h4 {
+        font-size: 0.9rem;
+        margin: 0.4rem 0;
+    }
+}
+
+@media (min-width: 992px) {
+    form {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+svg {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
 }
